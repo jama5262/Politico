@@ -10,24 +10,39 @@
   </head>
   <body>
     <div class="main-container">
-      <div class="title-container border">
+      <div class="title-container">
         <h1 style="font-size: 50px; margin: 0" class="text-color-design">Politico</h1>
         <p style="margin: 10px 0">Your vote counts</p>
       </div>
-      <div class="login-container border">
+      <div class="login-container">
         <div style="display: flex; flex-direction: column" class="card-design">
           <input class="input-design" placeholder="Email" type="email" required name="" id="emailLogin">
           <input class="input-design" placeholder="Password" type="password" required name="" id="passwordLogin">
         </div>
       </div>
-      <div class="button-container border">
+      <div class="button-container">
         <button class="button-design">login</button>
+      </div>
+      <div class="link-container">
+        <a href="./auth/signup.html"><p>Don't have an account?<br>Create one</p></a>
       </div>
     </div>
   </body>
 </html>
 
 <style scoped>
+
+  a{
+    color: orange;
+    text-align: center;
+  }
+
+  .link-container{
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
   body{
     height: 80vh;
     display: flex;
