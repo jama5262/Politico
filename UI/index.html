@@ -1,14 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href=".\css\main.css" />
-  <script src=".\js\main.js"></script>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+    <script src="./js/main.js"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="title-container border">
+        <h1 style="font-size: 50px; margin: 0" class="text-color-design">Politico</h1>
+        <p style="margin: 10px 0">Your vote counts</p>
+      </div>
+      <div class="login-container border">
+        <div style="display: flex; flex-direction: column" class="card-design">
+          <input class="input-design" placeholder="Email" type="email" required name="" id="emailLogin">
+          <input class="input-design" placeholder="Password" type="password" required name="" id="passwordLogin">
+        </div>
+      </div>
+      <div class="button-container border">
+        <button class="button-design">login</button>
+      </div>
+    </div>
+  </body>
 </html>
+
+<style scoped>
+  body{
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .main-container{
+    display: flex;
+    flex-direction: column;
+  }
+  .title-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .login-container{
+    margin: 10px 0 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .button-container{
+    display: flex;
+    justify-content: flex-end;
+  }
+</style>
