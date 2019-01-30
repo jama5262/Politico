@@ -18,6 +18,9 @@
         <div style="display: flex; flex-direction: column" class="card-design">
           <input class="input-design" placeholder="Email" type="email" required name="" id="emailLogin">
           <input class="input-design" placeholder="Password" type="password" required name="" id="passwordLogin">
+          <div class="reset-container">
+            <a href="./auth/reset.html">Forgot password?</a>
+          </div>
         </div>
       </div>
       <div class="button-container">
@@ -46,6 +49,7 @@
     justify-content: center;
   }
   .main-container{
+    margin: 30px 0;
     display: flex;
     flex-direction: column;
   }
@@ -62,6 +66,11 @@
   }
   .button-container{
     display: flex;
+    justify-content: flex-end;
+  }
+  .reset-container{
+    display: flex;
+    margin: 20px 0 0 0;
     justify-content: flex-end;
   }
 </style>
