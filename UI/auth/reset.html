@@ -12,16 +12,22 @@
     <div class="main-container">
       <div class="title-container">
         <h1 style="font-size: 50px; margin: 0" class="text-color-design">Reset<br> Password</h1>
-        <p style="margin: 10px 0">Input your email to reset your password</p>
+        <p id="message" style="margin: 10px 0">Input your email to reset your password</p>
       </div>
-      <div class="reset-email-container">
+      <div class="reset-container">
         <div style="display: flex; flex-direction: column" class="card-design">
-          <input class="input-design" placeholder="Email" type="email" required name="" id="emailReset">
+          <div id="email-container">
+            <input class="input-design" placeholder="Email" type="email" required name="" id="emailReset">
+          </div>
+          <div style="display: none; flex-direction: column" id="password-container">
+            <input class="input-design" placeholder="New Password" type="password" required name="" id="nPassWordReset">
+            <input class="input-design" placeholder="Repeat New Password" type="password" required name="" id="rPassWordReset">
+          </div>
         </div>
       </div>
       <div class="button-container">
         <button id="goBack" class="button-design">go back</button>
-        <button class="button-design">send email link</button>
+        <button id="submit" class="button-design">send email link</button>
       </div>
     </div>
   </body>
@@ -43,7 +49,7 @@
     justify-content: center;
   }
   .main-container{
-    margin: 20px 0;
+    margin: 30px 0;
     display: flex;
     flex-direction: column;
   }
@@ -52,7 +58,7 @@
     flex-direction: column;
     justify-content: flex-start;
   }
-  .reset-email-container{
+  .reset-container{
     margin: 10px 0 30px 0;
     display: flex;
     align-items: center;
@@ -66,9 +72,45 @@
 
 <script>
   window.onload = () => {
-    let goBack = document.getElementById("goBack");
-    goBack.addEventListener("click", () => {
+    let goBack = document.getElementById("goBack")
+    .addEventListener("click", () => {
       window.history.back();
-    })
+    });
+
+    let emailContainer = document.getElementById("email-container");
+    let passwordContainer = document.getElementById("password-container");
+    let submit = document.getElementById("submit");
+    let message = document.getElementById("message");
+    let email = document.getElementById("emailReset");
+    let nPassword = document.getElementById("nPassWordReset");
+    let rPassword = document.getElementById("rPassWordReset");
+
+    let resetEmail = false;
+
+    let messageInfo = (text, color) => {
+      message.style.color = color;
+      message.innerHTML = text;
+    }
+
+    submit.addEventListener("click", () => {
+      if (!resetEmail) {
+        if (email.value == "") {
+          messageInfo("Please fill in your email", "red")
+        }else {
+          resetEmail = true;
+          passwordContainer.style.display = "flex";
+          emailContainer.style.display = "none";
+          submit.innerHTML = "reset password";
+          messageInfo("Enter your new password", "black");
+        }
+      }else {
+        if (nPassword.value == "" || rPassword.value == "") {
+          messageInfo("Please fill in both password fields", "red");
+        }else {
+          messageInfo("Your password has been reset", "green");
+          submit.style.display = "none";
+        }
+      }
+    });
   }
 </script>
