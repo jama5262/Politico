@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
+body{
+  background: #FAFAFA;
+}
+
+/* COLOR DESIGN */
+.text-color-design{
+  color: #F57C00;
+}
+
+/* INPUT DESIGN */
+.input-design{
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid #FFB74D;
+  border-radius: 7px;
+  outline-width: 0;
+}
+
+.input-design:focus{
+  border: 2px solid #F57C00;
+}
+
+/* BUTTON DESIGN */
+.button-design{
+  padding: 10px;
+  text-transform: uppercase;
+  width: 100px;
+  background-color: #FFB74D;
+  outline-width: 0;
+  border: 2px solid #FFB74D;
+  border-radius: 7px;
+  color: #FFFFFF;
+}
+
+.button-design:active{
+  border: 2px solid #F57C00;
+  background-color: #F57C00;
+}
+
+/* CARD DESIGN */
+.card-design{
+  padding: 40px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  background: #FFFFFF;
+  border-radius: 7px;
+}
