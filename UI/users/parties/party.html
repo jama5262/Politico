@@ -1,14 +1,175 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <script src="main.js"></script>
-</head>
-<body>
-  <h1>Party Name</h1>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/UI/css/main.css" />
+  </head>
+  <body>
+    <nav class="background-color-design">
+      <div class="text-color-design-secondary">
+        <h1 class="politico-letter">Politico</h1>
+      </div>
+      <div class="link-container-2">
+        <a class="a-tag-nav" href="/UI/users/parties/index.html">Home</a>
+      </div>
+      <div class="link-container-3">
+        <button class="button-design-secondary">vote</button>
+        <img src="/UI/images/profile_image.jpg" alt="" class="profile-image-icon-small">
+      </div>
+    </nav>
+    <div class="main-container">
+      <div style="margin-top: 45px;">
+        <h1 class="text-color-design-primary">Kenya African National Union</h1>
+      </div>
+      <div class="party-info-holder card-design">
+        <div class="party-image-holder"></div>
+        <div class="party-info">
+          <ul>
+            <li><h3>Abbreviation: KANU</h3></li>
+            <li><h3>Chairman: Gideon Moi</32></li>
+            <li><h3>Started: 14 May 1960</h3></li>
+            <li><h3>Members: 34</h3></li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top: 45px;">
+        <h2 class="text-color-design-primary">Party Members</h2>
+      </div>
+      <div class="party-members-holder">
+        <div class="party-member card-design">
+          <div class="party-profile-image-holder"></div>
+          <div class="party-content-holder">
+            <h4>Gideon Moi</h4>
+            <h6>Chairman</h6>
+            <h6>Running for Ministry of Defence</h6>
+          </div>
+        </div>
+        <div class="party-member card-design">
+          <div class="party-profile-image-holder"></div>
+          <div class="party-content-holder">
+            <h4>Gideon Moi</h4>
+            <h6>Chairman</h6>
+            <h6>Running for Ministry of Education</h6>
+          </div>
+        </div>
+        <div class="party-member card-design">
+          <div class="party-profile-image-holder"></div>
+          <div class="party-content-holder">
+            <h4>Gideon Moi</h4>
+            <h6>Chairman</h6>
+            <h6>Running for Ministry of Defence</h6>
+          </div>
+        </div>
+        <div class="party-member card-design">
+          <div class="party-profile-image-holder"></div>
+          <div class="party-content-holder">
+            <h4>Gideon Moi</h4>
+            <h6>Chairman</h6>
+            <h6>Not running for office</h6>
+          </div>
+        </div>
+        <div class="party-member card-design">
+          <div class="party-profile-image-holder"></div>
+          <div class="party-content-holder">
+            <h4>Gideon Moi</h4>
+            <h6>Chairman</h6>
+            <h6>Running for Ministry of Health</h6>
+          </div>
+        </div>
+        <div class="party-member card-design">
+          <div class="party-profile-image-holder"></div>
+          <div class="party-content-holder">
+            <h4>Gideon Moi</h4>
+            <h6>Chairman</h6>
+            <h6>Not running for office</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
+
+<style scoped>
+  nav{
+    display: flex;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    align-items: center;
+  }
+  .politico-letter{
+    margin: 0 25px 0 30px;
+    font-size: 40px;
+  }
+  .link-container-2{
+    padding-left: 10px;
+    flex: 1;
+  }
+  .link-container-3{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+
+  .main-container{
+    max-width: 900px;
+    margin: auto;
+    justify-content: center;
+  }
+  .party-info-holder{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .card-design{
+    padding: 20px;
+  }
+  .party-image-holder{
+    width: 100%;
+    height: 200px;
+    background-image: url("/UI/images/partyImages/kanu.png");
+    background-size: cover;
+    border-radius: 7px;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex: 1;
+  }
+  .party-info{
+    flex: 2;
+  }
+  ul{
+    list-style-type: none;
+  }
+  .party-members-holder{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .party-member{
+    flex: 1 0 20%;
+    margin: 10px;
+    max-width: 150px;
+    min-width: 150px;
+  }
+  .party-profile-image-holder{
+    width: 100%;
+    height:150px;
+    background-image: url("/UI/images/politicians/politician1.jpg");
+    background-size: cover;
+    border-radius: 7px;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex: 1;
+  }
+  .party-content-holder{
+    padding: 10px 0px 0 0px;
+  }
+  h4{
+    margin: 0;
+  }
+  h6{
+    margin: 5px 0;
+  }
+</style>
