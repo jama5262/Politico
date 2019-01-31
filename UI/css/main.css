@@ -47,6 +47,7 @@ body{
   border: 2px solid #FFB74D;
   border-radius: 7px;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 .button-design:active{
@@ -63,6 +64,7 @@ body{
   border: 2px solid #FFFFFF;
   color: #000000;
   border-radius: 7px;
+  cursor: pointer;
 }
 
 .button-design-secondary:active{
