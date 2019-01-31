@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="/UI/css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/main.css" />
   </head>
   <body>
     <nav class="background-color-design">
@@ -13,11 +13,17 @@
         <h1 class="politico-letter">Politico</h1>
       </div>
       <div class="link-container-2">
-        <a class="a-tag-nav" href="/UI/users/parties/index.html">Home</a>
+        <a class="a-tag-nav" href="../parties/index.html">Home</a>
       </div>
       <div class="link-container-3">
-        <a href="/UI/users/vote/index.html"><button class="button-design-secondary">vote</button></a>
-        <img src="/UI/images/profile_image.jpg" alt="" class="profile-image-icon-small">
+        <a href="index.html"><button class="button-design-secondary">vote</button></a>
+        <div class="dropdown">
+          <img src="../.././images/profile_image.jpg" alt="" class="profile-image-icon-small">
+          <div class="dropdown-content">
+            <a href="../myVotes/index.html">My Votes</a>
+            <a href="../../index.html">Logout</a>
+          </div>
+        </div>
       </div>
     </nav>
     <div class="main-container">
@@ -150,27 +156,6 @@
 </html>
 
 <style scoped>
-  nav{
-    display: flex;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    align-items: center;
-  }
-  .politico-letter{
-    margin: 0 25px 0 30px;
-    font-size: 40px;
-  }
-  .link-container-2{
-    padding-left: 10px;
-    flex: 1;
-  }
-  .link-container-3{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 10px;
-  }
-
   .main-container{
     max-width: 900px;
     padding: 10px;
@@ -196,7 +181,7 @@
     width: 60px;
     margin-right: 5px;
     height: 60px;
-    background-image: url("/UI/images/politicians/politician1.jpg");
+    background-image: url("../../images/politicians/politician1.jpg");
     background-size: cover;
     border-radius: 7px;
     background-repeat: no-repeat;
