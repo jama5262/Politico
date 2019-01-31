@@ -17,7 +17,13 @@
       </div>
       <div class="link-container-3">
         <a href="index.html"><button class="button-design-secondary">vote</button></a>
-        <img src="../../images/profile_image.jpg" alt="" class="profile-image-icon-small">
+        <div class="dropdown">
+          <img src="../.././images/profile_image.jpg" alt="" class="profile-image-icon-small">
+          <div class="dropdown-content">
+            <a href="../myVotes/index.html">My Votes</a>
+            <a href="../../index.html">Logout</a>
+          </div>
+        </div>
       </div>
     </nav>
     <div class="main-container">
@@ -150,27 +156,6 @@
 </html>
 
 <style scoped>
-  nav{
-    display: flex;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    align-items: center;
-  }
-  .politico-letter{
-    margin: 0 25px 0 30px;
-    font-size: 40px;
-  }
-  .link-container-2{
-    padding-left: 10px;
-    flex: 1;
-  }
-  .link-container-3{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 10px;
-  }
-
   .main-container{
     max-width: 900px;
     padding: 10px;

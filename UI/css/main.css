@@ -12,6 +12,61 @@ body{
   margin: 0;
 }
 
+/* NAV BAR DESIGN */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  right: 10px;
+  display: none;
+  position: absolute;
+  background-color: #FFB74D;
+  min-width: 160px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #FFFFFF;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #F57C00;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+  
+nav{
+  display: flex;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  align-items: center;
+}
+.politico-letter{
+  margin: 0 25px 0 30px;
+  font-size: 40px;
+}
+.link-container-2{
+  padding-left: 10px;
+  flex: 1;
+}
+.link-container-3{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+}
 
 /* COLOR DESIGN */
 .text-color-design-primary{

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/main.css"/>
+    <script src="../../css/main.css"></script>
+  </head>
+  <body>
+    <nav class="background-color-design">
+      <div class="text-color-design-secondary">
+        <h1 class="politico-letter">Politico</h1>
+      </div>
+      <div class="link-container-2">
+        <a class="a-tag-nav" href="index.html">Home</a>
+      </div>
+      <div class="link-container-3">
+        <a href="../vote/index.html"><button class="button-design-secondary">vote</button></a>
+        <div class="dropdown">
+          <img src="../.././images/profile_image.jpg" alt="" class="profile-image-icon-small">
+          <div class="dropdown-content">
+            <a href="#">My Votes</a>
+            <a href="../../index.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="main-container">
+      <div class=" card-design user-profile-info-holder">
+        <div>
+          <h2 class="text-color-design-primary">Profile Info</h2>
+        </div>
+        <div class="user-profile-info">
+          <p>Names: User Fullname</p>
+          <p>Phone: 984375849375</p>
+          <p>ID Number: 4754398</p>
+          <p>Email: user@gmail.com</p>
+        </div>
+      </div>
+      <div class=" card-design user-votes-holder">
+        <div>
+          <h2 class="text-color-design-primary">Your Votes</h2>
+        </div>
+        <div class="user-votes">
+          <div class="vote">
+            <h4 class="text-color-design-primary">Ministry of defence</h4>
+            <div class="candidate">
+              <div class="candidate">
+                <div class="candidate-profile-image"></div>
+                <div class="candidate-info">
+                  <h4>Gideon Moi</h4>
+                  <h6>KANU</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vote">
+            <h4 class="text-color-design-primary">Ministry of education</h4>
+              <div class="candidate">
+                <div class="candidate">
+                  <div class="candidate-profile-image"></div>
+                  <div class="candidate-info">
+                    <h4>Gideon Moi</h4>
+                    <h6>KANU</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="vote">
+            <h4 class="text-color-design-primary">Ministry of finance</h4>
+            <div class="candidate">
+              <div class="candidate">
+                <div class="candidate-profile-image"></div>
+                <div class="candidate-info">
+                  <h4>Gideon Moi</h4>
+                  <h6>KANU</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  .main-container{
+    /* border: 1px solid black; */
+    max-width: 900px;
+    padding: 10px;
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    align-items: flex-start;
+  }
+  .user-profile-info-holder{
+    /* border: 1px solid black; */
+    flex: 3;
+    margin: 0 5px;
+  }
+  .user-votes-holder{
+    /* border: 1px solid black; */
+    flex: 4;
+    margin: 0 5px;
+  }
+  .candidate{
+    padding: 10px;
+    flex-grow: 0;
+    flex-basis: 222px;
+    flex-shrink: 0;
+    display: flex;
+    /* border: 1px solid grey; */
+  }
+  .candidate-profile-image{
+    width: 60px;
+    margin-right: 5px;
+    height: 60px;
+    background-image: url("../../images/politicians/politician1.jpg");
+    background-size: cover;
+    border-radius: 7px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .candidate-info{
+    flex: 2;
+  }
+  .card-design{
+    padding: 10px 20px;
+  }
+  h4{
+    margin: 0;
+  }
+  h6{
+    margin: 5px 0;
+  }
+</style>
