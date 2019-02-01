@@ -105,9 +105,43 @@ nav{
   cursor: pointer;
 }
 
+.button-design-edit{
+  padding: 10px;
+  text-transform: uppercase;
+  width: 100px;
+  background-color: #FFF176;
+  outline-width: 0;
+  border: 2px solid #FFF176;
+  border-radius: 7px;
+  color: #000000;
+  cursor: pointer;
+}
+
+.button-design-delete{
+  padding: 10px;
+  text-transform: uppercase;
+  width: 100px;
+  background-color: #E57373;
+  outline-width: 0;
+  border: 2px solid #E57373;
+  border-radius: 7px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
 .button-design:active{
   border: 2px solid #F57C00;
   background-color: #F57C00;
+}
+
+.button-design-edit:active{
+  border: 2px solid #FBC02D;
+  background-color: #FBC02D;
+}
+
+.button-design-delete:active{
+  border: 2px solid #D32F2F;
+  background-color: #D32F2F;
 }
 
 .button-design-secondary{
@@ -140,6 +174,7 @@ nav{
 .a-tag-nav{
   text-decoration: none;
   color: #FFFFFF;
+  margin-right: 15px;;
 }
 
 /* PROFILE IMAGE DESIGN */
