@@ -9,6 +9,104 @@
     <script src="../js/main.js"></script>
   </head>
   <body>
-    
+    <nav class="background-color-design">
+      <div class="text-color-design-secondary">
+        <h1 class="politico-letter">Politico</h1>
+      </div>
+      <div class="link-container-2">
+        <a class="a-tag-nav" href="index.html">Home</a>
+        <a class="a-tag-nav" href="">Gov Offices</a>
+      </div>
+      <div class="link-container-3">
+        <a href="index.html"><button class="button-design-secondary">vote</button></a>
+        <div class="dropdown">
+          <img src="../images/profile_image.jpg" alt="" class="profile-image-icon-small">
+          <div class="dropdown-content">
+            <a href="../users/myVotes/index.html">My Votes</a>
+            <a href="../index.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="main-container">
+      <div><h1 class="text-color-design-primary">All Parties</h1></div>
+      <div class="create-party-holder">
+        <a href="./createParty.html"><button class="button-design">Create Party</button></a>
+      </div>
+      <div class="party-table-holder">
+        <table>
+          <thead>
+            <th>Party Image</th>
+            <th>Party Name</th>
+            <th>Abbreviation</th>
+            <th>Email</th>
+            <th>Chairman</th>
+            <th>Started In</th>
+            <th>Total Members</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="party-image"></div>
+              </td>
+              <td>Kenya African National Union</td>
+              <td>KANU</td>
+              <td>kau@gmail.com</td>
+              <td>Gideon Moi</td>
+              <td>14 May 1960</td>
+              <td>34</td>
+              <td>
+                <div style="display: flex">
+                  <button class="button-design-edit">edit</button>
+                  <button class="button-design-delete">delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </body>
 </html>
+
+<style>
+  .main-container{
+    max-width: 900px;
+    padding: 10px;
+    margin: auto;
+    justify-content: center;
+  }
+  .party-image{
+    height: 60px;
+    background-image: url("../images/partyImages/kanu.png");
+    background-size: cover;
+    border-radius: 7px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .button-design{
+    width: 130px;
+    margin-bottom: 20px;
+  }
+  .button-design-edit{
+    margin-right: 7px;
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  thead{
+    background: #FFB74D;
+    color:  #FFFFFF;
+  }
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>
