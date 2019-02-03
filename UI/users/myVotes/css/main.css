@@ -1,0 +1,39 @@
+/* GLOBAL */
+.main-container{
+  max-width: 900px;
+  padding: 10px;
+  margin: auto;
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* INDEX STYLE */
+.user-profile-info-holder-imdex{
+  flex: 3;
+  margin: 0 5px;
+}
+.user-votes-holder-index{
+  flex: 4;
+  margin: 0 5px;
+}
+.candidate-index{
+  padding: 10px;
+  flex-grow: 0;
+  flex-basis: 222px;
+  flex-shrink: 0;
+  display: flex;
+}
+.candidate-profile-image-index{
+  width: 60px;
+  margin-right: 5px;
+  height: 60px;
+  background-image: url("../../../images/politicians/politician1.jpg");
+  background-size: cover;
+  border-radius: 7px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.candidate-info-index{
+  flex: 2;
+}

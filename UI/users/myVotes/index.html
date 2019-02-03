@@ -6,6 +6,7 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/main.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css"/>
     <script src="../../js/main.js"></script>
   </head>
   <body>
@@ -28,7 +29,7 @@
       </div>
     </nav>
     <div class="main-container">
-      <div class=" card-design user-profile-info-holder">
+      <div class=" card-design user-profile-info-holder-imdex">
         <div>
           <h2 class="text-color-design-primary">Profile Info</h2>
         </div>
@@ -39,46 +40,40 @@
           <p>Email: user@gmail.com</p>
         </div>
       </div>
-      <div class=" card-design user-votes-holder">
+      <div class=" card-design user-votes-holder-index">
         <div>
           <h2 class="text-color-design-primary">Your Votes</h2>
         </div>
         <div class="user-votes">
           <div class="vote">
             <h4 class="text-color-design-primary">Ministry of defence</h4>
-            <div class="candidate">
-              <div class="candidate">
-                <div class="candidate-profile-image"></div>
-                <div class="candidate-info">
+            <div class="candidate-index">
+                <div class="candidate-profile-image-index"></div>
+                <div class="candidate-info-index">
                   <h4>Gideon Moi</h4>
                   <h6>KANU</h6>
                 </div>
-              </div>
             </div>
           </div>
           <div class="vote">
             <h4 class="text-color-design-primary">Ministry of education</h4>
-              <div class="candidate">
-                <div class="candidate">
-                  <div class="candidate-profile-image"></div>
-                  <div class="candidate-info">
+                <div class="candidate-index">
+                  <div class="candidate-profile-image-index"></div>
+                  <div class="candidate-info-index">
                     <h4>Gideon Moi</h4>
                     <h6>KANU</h6>
                   </div>
                 </div>
-              </div>
             </div>
             <div class="vote">
             <h4 class="text-color-design-primary">Ministry of finance</h4>
-            <div class="candidate">
-              <div class="candidate">
-                <div class="candidate-profile-image"></div>
-                <div class="candidate-info">
+              <div class="candidate-index">
+                <div class="candidate-profile-image-index"></div>
+                <div class="candidate-info-index">
                   <h4>Gideon Moi</h4>
                   <h6>KANU</h6>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
@@ -87,46 +82,6 @@
 </html>
 
 <style>
-  .main-container{
-    /* border: 1px solid black; */
-    max-width: 900px;
-    padding: 10px;
-    margin: auto;
-    margin-top: 20px;
-    display: flex;
-    align-items: flex-start;
-  }
-  .user-profile-info-holder{
-    /* border: 1px solid black; */
-    flex: 3;
-    margin: 0 5px;
-  }
-  .user-votes-holder{
-    /* border: 1px solid black; */
-    flex: 4;
-    margin: 0 5px;
-  }
-  .candidate{
-    padding: 10px;
-    flex-grow: 0;
-    flex-basis: 222px;
-    flex-shrink: 0;
-    display: flex;
-    /* border: 1px solid grey; */
-  }
-  .candidate-profile-image{
-    width: 60px;
-    margin-right: 5px;
-    height: 60px;
-    background-image: url("../../images/politicians/politician1.jpg");
-    background-size: cover;
-    border-radius: 7px;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .candidate-info{
-    flex: 2;
-  }
   .card-design{
     padding: 10px 20px;
   }
