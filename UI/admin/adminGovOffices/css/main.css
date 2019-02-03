@@ -1,0 +1,39 @@
+/* GLOBAL */
+.main-container{
+  max-width: 900px;
+  padding: 10px;
+  margin: auto;
+  justify-content: center;
+}
+
+/* INDEX STYLE */
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+thead{
+  background: #FFB74D;
+  color:  #FFFFFF;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+/* CREATE AND EDIT STYLE */
+.office-holder{
+  max-width: 400px;
+  margin: auto;
+}
+.button-container{
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
