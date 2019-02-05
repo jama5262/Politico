@@ -12,7 +12,7 @@ def createParty():
 
 @parties.route("/parties", methods=["GET"])
 def getAllParties():
-    return "Your are tring to GET all party"
+    return jsonify(Parties().getAllParties())
 
 
 @parties.route("/parties/<partyID>", methods=["GET"])
