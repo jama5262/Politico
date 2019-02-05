@@ -1,0 +1,25 @@
+{
+  "Parties": {
+    "1": {
+      "id": 2,
+      "name": "Party Name",
+      "abbr": "Party Abbreviation",
+      "logo": "Party URL",
+      "hqAddress": "Party HQ"
+    },
+    "2": {
+      "id": 2,
+      "name": "Party Name",
+      "abbr": "Party Abbreviation",
+      "logo": "Party URL",
+      "hqAddress": "Party HQ"
+    },
+    "10": {
+      "id": "10",
+      "name": "Jama Mohamed",
+      "logoUrl": 33,
+      "hqAddress": 343434
+    }
+  },
+  "Offices": []
+}
