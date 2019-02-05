@@ -16,7 +16,7 @@ class Parties():
             json.dump(dataStore, f, indent=2)
 
     def createParty(self):
-        if validation.checkForParty(self.data) is False:
+        if validation.checkForCreateParty(self.data) is False:
             return {
                 "status": 422,
                 "error": "Please make sure to enter the correct requests"
@@ -31,4 +31,12 @@ class Parties():
 
 
     def getAllParties(self):
-        return self.getFromDataStore()["Parties"]
+        if validation.checkForGetAllParties(self.data) is False:
+            return {
+                "status": 404,
+                "error": "Parties were not found"
+            }
+        return {
+            "status": 200,
+            "data": self.getFromDataStore()["Parties"]
+        }
