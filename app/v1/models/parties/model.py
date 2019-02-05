@@ -4,7 +4,7 @@ from app.v1.validation import validation
 
 
 class Parties():
-    def __init__(self, data):
+    def __init__(self, data="Jama"):
         self.data = data
 
     def getFromDataStore(self):
@@ -18,13 +18,17 @@ class Parties():
     def createParty(self):
         if validation.checkForParty(self.data) is False:
             return {
-              "status": 422,
-              "error": "Please make sure to enter the correct requests"
+                "status": 422,
+                "error": "Please make sure to enter the correct requests"
             }
         dataStore = self.getFromDataStore()
         dataStore["Parties"][self.data["id"]] = self.data
         self.setToDataStore(dataStore)
         return {
-          "status": 200,
-          "data": self.data
+            "status": 200,
+            "data": self.data
         }
+
+
+    def getAllParties(self):
+        return self.getFromDataStore()["Parties"]
