@@ -1,10 +1,16 @@
-def checkForCreateParty(data):
-    if all(x in data for x in ("id", "name", "hqAddress", "logoUrl")):
+def checkPartyProperties(data):
+    if all(x in data for x in ("id", "name", "hqAddress", "logoUrl", "abbr")):
         return True
     return False
 
 
-def checkForGetAllParties(data):
-    if not data:
+def checkIfPartiesExits(data):
+    if not data["Parties"]:
+        return False
+    return True
+
+
+def checkIfPartyExits(data, partyID):
+    if partyID not in data["Parties"]:
         return False
     return True

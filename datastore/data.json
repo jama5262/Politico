@@ -16,9 +16,10 @@
     },
     "10": {
       "id": "10",
-      "name": "Jama Mohamed",
-      "logoUrl": 33,
-      "hqAddress": 343434
+      "name": "Kenya National Party",
+      "logoUrl": "http:logo.com",
+      "hqAddress": "P O BOX 343434",
+      "abbr": "KNP"
     },
     "100": {
       "hqAddress": 343434,
