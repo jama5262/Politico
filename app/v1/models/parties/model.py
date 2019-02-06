@@ -1,6 +1,5 @@
 import json
 from app.v1.validation import validation
-# from datastore import data
 
 
 class Parties():
@@ -29,7 +28,6 @@ class Parties():
             "data": self.data
         }
 
-
     def getAllParties(self):
         dataStore = self.getFromDataStore()
         if validation.checkIfPartiesExits(dataStore) is False:
@@ -41,7 +39,6 @@ class Parties():
             "status": 200,
             "data": self.getFromDataStore()["Parties"]
         }
-
 
     def getSpecificParty(self, partyID):
         dataStore = self.getFromDataStore()
@@ -55,7 +52,6 @@ class Parties():
             "data": dataStore["Parties"][partyID]
         }
 
-    
     def editSpecificParty(self, partyID):
         dataStore = self.getFromDataStore()
         if validation.checkIfPartyExits(dataStore, partyID) is False:

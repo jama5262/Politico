@@ -6,8 +6,7 @@ parties = Blueprint("parties", __name__, url_prefix="/v1")
 
 @parties.route("/parties", methods=["POST"])
 def createParty():
-    obj = Parties(request.get_json(force=True))
-    return jsonify(obj.createParty())
+    return jsonify(Parties(request.get_json(force=True)).createParty())
 
 
 @parties.route("/parties", methods=["GET"])
