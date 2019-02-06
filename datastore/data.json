@@ -22,5 +22,26 @@
       "abbr": "KNP"
     }
   },
-  "Offices": []
+  "Offices": {
+    "1": {
+      "id": 1,
+      "type": "Office type",
+      "name": "Office name"
+    },
+    "2": {
+      "id": 2,
+      "type": "Office type",
+      "name": "Office name"
+    },
+    "3": {
+      "id": 3,
+      "type": "Office type",
+      "name": "Office name"
+    },
+    "4": {
+      "id": 4,
+      "name": "Office Name 4",
+      "type": "Office type 4"
+    }
+  }
 }
