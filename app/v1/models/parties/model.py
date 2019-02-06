@@ -40,3 +40,16 @@ class Parties():
             "status": 200,
             "data": self.getFromDataStore()["Parties"]
         }
+
+
+    def getSpecificParty(self, partyID):
+        dataStore = self.getFromDataStore()
+        if partyID not in dataStore["Parties"]:
+            return {
+                "status": 404,
+                "error": "This party does not exist"
+            }
+        return {
+            "status": 200,
+            "data": dataStore["Parties"][partyID]
+        }
