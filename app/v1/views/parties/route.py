@@ -20,9 +20,9 @@ def getSpecificParty(partyID):
     return jsonify(Parties().getSpecificParty(partyID))
 
 
-@parties.route("/parties/<partyID>", methods=["PUT"])
+@parties.route("/parties/<partyID>", methods=["PATCH"])
 def editSpecificParty(partyID):
-    return "Your are tring to EDIT party with id "+partyID
+    return jsonify(Parties(request.get_json(force=True)).editSpecificParty(partyID))
 
 
 @parties.route("/parties/<partyID>", methods=["DELETE"])
