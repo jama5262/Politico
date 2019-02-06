@@ -17,7 +17,7 @@ def getAllParties():
 
 @parties.route("/parties/<partyID>", methods=["GET"])
 def getSpecificParty(partyID):
-    return "Your are tring to GET party with id "+partyID
+    return jsonify(Parties().getSpecificParty(partyID))
 
 
 @parties.route("/parties/<partyID>", methods=["PUT"])
