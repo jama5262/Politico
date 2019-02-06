@@ -28,3 +28,9 @@ def checkIfOfficesExits(data):
     if not data["Offices"]:
         return False
     return True
+
+
+def checkIfOfficeExits(data, OfficeID):
+    if OfficeID not in data["Offices"]:
+        return False
+    return True

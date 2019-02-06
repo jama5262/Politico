@@ -39,3 +39,15 @@ class Offices:
             "status": 200,
             "data": self.getFromDataStore()["Offices"]
         }
+
+    def getSpecificOffice(self, officeID):
+        dataStore = self.getFromDataStore()
+        if validation.checkIfOfficeExits(dataStore, officeID) is False:
+            return {
+                "status": 404,
+                "error": "This office does not exist"
+            }
+        return {
+            "status": 200,
+            "data": dataStore["Offices"][officeID]
+        }
