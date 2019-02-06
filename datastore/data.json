@@ -20,12 +20,6 @@
       "logoUrl": "http:logo.com",
       "hqAddress": "P O BOX 343434",
       "abbr": "KNP"
-    },
-    "100": {
-      "hqAddress": 343434,
-      "id": "100",
-      "logoUrl": 33,
-      "name": "Jama Mohamed"
     }
   },
   "Offices": []

@@ -78,4 +78,19 @@ class Parties():
             "status": 200,
             "data": self.data
         }
-        
+
+    def deleteSpecificParty(self, partyID):
+        dataStore = self.getFromDataStore()
+        if validation.checkIfPartyExits(dataStore, partyID) is False:
+            return {
+                "status": 404,
+                "error": "This party does not exist"
+            }
+        dataStore["Parties"].pop(partyID)
+        self.setToDataStore(dataStore)
+        return {
+            "status": 200,
+            "data": {
+                "message": "Party deleted"
+            }
+        }

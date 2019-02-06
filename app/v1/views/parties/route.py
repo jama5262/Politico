@@ -27,4 +27,4 @@ def editSpecificParty(partyID):
 
 @parties.route("/parties/<partyID>", methods=["DELETE"])
 def deleteSpecificParty(partyID):
-    return "Your are tring to DELETE party with id "+partyID
+    return jsonify(Parties().deleteSpecificParty(partyID))
