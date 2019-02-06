@@ -22,3 +22,9 @@ def checkOfficeProperties(data):
     if all(x in data for x in ("id", "name", "type")):
         return True
     return False
+
+
+def checkIfOfficesExits(data):
+    if not data["Offices"]:
+        return False
+    return True

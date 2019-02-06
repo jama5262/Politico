@@ -11,7 +11,7 @@ def createOffices():
 
 @offices.route("/offices", methods=["GET"])
 def getAlloffices():
-    return "Your are tring to GET all offices"
+    return jsonify(Offices().getAllOffices())
 
 
 @offices.route("/offices/<officeID>", methods=["GET"])

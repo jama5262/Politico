@@ -27,3 +27,15 @@ class Offices:
             "status": 200,
             "data": self.data
         }
+
+    def getAllOffices(self):
+        dataStore = self.getFromDataStore()
+        if validation.checkIfOfficesExits(dataStore) is False:
+            return {
+                "status": 404,
+                "error": "Offices were not found"
+            }
+        return {
+            "status": 200,
+            "data": self.getFromDataStore()["Offices"]
+        }
