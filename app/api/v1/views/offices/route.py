@@ -6,14 +6,17 @@ offices = Blueprint("offices", __name__, url_prefix="/api/v1")
 
 @offices.route("/offices", methods=["POST"])
 def createOffices():
-    return jsonify(Offices(request.get_json(force=True)).creatOffice())
+    response = Offices(request.get_json(force=True)).creatOffice()
+    return jsonify(response), response["status"]
 
 
 @offices.route("/offices", methods=["GET"])
 def getAlloffices():
-    return jsonify(Offices().getAllOffices())
+    response = Offices().getAllOffices()
+    return jsonify(response), response["status"]
 
 
 @offices.route("/offices/<officeID>", methods=["GET"])
 def getSpecificoffice(officeID):
-    return jsonify(Offices().getSpecificOffice(officeID))
+    response = Offices().getSpecificOffice(officeID)
+    return jsonify(response), response["status"]
