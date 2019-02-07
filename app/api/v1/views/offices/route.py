@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app.api.v1.models.offices.model import Offices
 
-offices = Blueprint("offices", __name__, url_prefix="/v1")
+offices = Blueprint("offices", __name__, url_prefix="/api/v1")
 
 
 @offices.route("/offices", methods=["POST"])
