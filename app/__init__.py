@@ -1,7 +1,7 @@
 from flask import Flask
 from instance.config import appConfig
-from app.v1.views.parties.route import parties
-from app.v1.views.offices.route import offices
+from app.api.v1.views.parties.route import parties
+from app.api.v1.views.offices.route import offices
 
 
 def createApp(configName):
