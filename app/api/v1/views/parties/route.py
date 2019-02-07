@@ -6,24 +6,29 @@ parties = Blueprint("parties", __name__, url_prefix="/api/v1")
 
 @parties.route("/parties", methods=["POST"])
 def createParty():
-    return jsonify(Parties(request.get_json(force=True)).createParty())
+    response = Parties(request.get_json(force=True)).createParty()
+    return jsonify(response), response["status"]
 
 
 @parties.route("/parties", methods=["GET"])
 def getAllParties():
-    return jsonify(Parties().getAllParties())
+    response = Parties().getAllParties()
+    return jsonify(response), response["status"]
 
 
 @parties.route("/parties/<partyID>", methods=["GET"])
 def getSpecificParty(partyID):
-    return jsonify(Parties().getSpecificParty(partyID))
+    response = Parties().getSpecificParty(partyID)
+    return jsonify(response), response["status"]
 
 
 @parties.route("/parties/<partyID>", methods=["PATCH"])
 def editSpecificParty(partyID):
-    return jsonify(Parties(request.get_json(force=True)).editSpecificParty(partyID))
+    response = Parties(request.get_json(force=True)).editSpecificParty(partyID)
+    return jsonify(response), response["status"]
 
 
 @parties.route("/parties/<partyID>", methods=["DELETE"])
 def deleteSpecificParty(partyID):
-    return jsonify(Parties().deleteSpecificParty(partyID))
+    response = Parties().deleteSpecificParty(partyID)
+    return jsonify(response), response["status"]

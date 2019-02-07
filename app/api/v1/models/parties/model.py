@@ -24,7 +24,7 @@ class Parties():
         dataStore["Parties"][self.data["id"]] = self.data
         self.setToDataStore(dataStore)
         return {
-            "status": 200,
+            "status": 201,
             "data": self.data
         }
 
@@ -36,7 +36,7 @@ class Parties():
                 "error": "Parties were not found"
             }
         return {
-            "status": 200,
+            "status": 201,
             "data": self.getFromDataStore()["Parties"]
         }
 
@@ -48,7 +48,7 @@ class Parties():
                 "error": "This party does not exist"
             }
         return {
-            "status": 200,
+            "status": 201,
             "data": dataStore["Parties"][partyID]
         }
 
@@ -71,7 +71,7 @@ class Parties():
         party["hqAddress"] = self.data["hqAddress"]
         self.setToDataStore(dataStore)
         return {
-            "status": 200,
+            "status": 201,
             "data": self.data
         }
 
@@ -85,7 +85,7 @@ class Parties():
         dataStore["Parties"].pop(partyID)
         self.setToDataStore(dataStore)
         return {
-            "status": 200,
+            "status": 201,
             "data": {
                 "message": "Party deleted"
             }

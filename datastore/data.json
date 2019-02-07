@@ -1,85 +1,25 @@
 {
   "Parties": {
     "1": {
-      "id": 2,
+      "id": 1,
       "name": "Party Name",
       "abbr": "Party Abbreviation",
-      "logo": "Party URL",
-      "hqAddress": "Party HQ",
-      "members": {
-        "1": {
-          "id": 1,
-          "firstName": "Fname",
-          "lastName": "Lname",
-          "otherName": "Oname",
-          "email": "Email",
-          "phoneNumber": "PhoneNumber",
-          "passportUrl": "Passport Url"
-        },
-        "2": {
-          "id": 2,
-          "firstName": "Fname",
-          "lastName": "Lname",
-          "otherName": "Oname",
-          "email": "Email",
-          "phoneNumber": "PhoneNumber",
-          "passportUrl": "Passport Url"
-        }
-      }
+      "logoUrl": "Party URL",
+      "hqAddress": "Party HQ"
     },
     "2": {
       "id": 2,
       "name": "Party Name",
       "abbr": "Party Abbreviation",
-      "logo": "Party URL",
-      "hqAddress": "Party HQ",
-      "members": {
-        "1": {
-          "id": 1,
-          "firstName": "Fname",
-          "lastName": "Lname",
-          "otherName": "Oname",
-          "email": "Email",
-          "phoneNumber": "PhoneNumber",
-          "passportUrl": "Passport Url"
-        },
-        "2": {
-          "id": 2,
-          "firstName": "Fname",
-          "lastName": "Lname",
-          "otherName": "Oname",
-          "email": "Email",
-          "phoneNumber": "PhoneNumber",
-          "passportUrl": "Passport Url"
-        }
-      }
+      "logoUrl": "Party URL",
+      "hqAddress": "Party HQ"
     },
-    "10": {
-      "id": "10",
-      "name": "Kenya National Party",
-      "logoUrl": "http:logo.com",
-      "hqAddress": "P O BOX 343434",
-      "abbr": "KNP",
-      "members": {
-        "1": {
-          "id": 1,
-          "firstName": "Fname",
-          "lastName": "Lname",
-          "otherName": "Oname",
-          "email": "Email",
-          "phoneNumber": "PhoneNumber",
-          "passportUrl": "Passport Url"
-        },
-        "2": {
-          "id": 2,
-          "firstName": "Fname",
-          "lastName": "Lname",
-          "otherName": "Oname",
-          "email": "Email",
-          "phoneNumber": "PhoneNumber",
-          "passportUrl": "Passport Url"
-        }
-      }
+    "3": {
+      "id": 3,
+      "name": "Party Name",
+      "abbr": "Party Abbreviation",
+      "logoUrl": "Party URL",
+      "hqAddress": "Party HQ"
     }
   },
   "Offices": {
