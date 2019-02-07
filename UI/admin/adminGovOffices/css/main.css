@@ -37,3 +37,6 @@ tr:nth-child(even) {
   justify-content: space-between;
   margin-top: 20px;
 }
+.input-design{
+  width: 90%;
+}

@@ -86,6 +86,7 @@ nav{
   border: 2px solid #FFB74D;
   border-radius: 5px;
   outline-width: 0;
+  width: 200px;
 }
 
 .input-design:focus{
@@ -164,7 +165,7 @@ nav{
 
 /* CARD DESIGN */
 .card-design{
-  padding: 40px;
+  padding: 20px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   background: #FFFFFF;
   border-radius: 7px;
