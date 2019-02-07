@@ -75,7 +75,6 @@ class Parties():
         party["abbr"] = self.data["abbr"]
         party["logoUrl"] = self.data["logoUrl"]
         party["hqAddress"] = self.data["hqAddress"]
-        # self.setToDataStore(dataStore)
         return {
             "status": 201,
             "data": self.data
