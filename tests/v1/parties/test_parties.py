@@ -7,8 +7,9 @@ class TesParties(unittest.TestCase):
     def setUp(self):
         self.app = createApp("testing")
         self.client = self.app.test_client()
+        self.partyID = 3
         self.data = {
-          "id": 3,
+          "id": self.partyID,
           "name": "Party Name",
           "abbr": "Party Abbreviation",
           "logoUrl": "Party URL",
@@ -26,5 +27,9 @@ class TesParties(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_get_all_parties(self):
-        response = self.post("/api/v1/parties")
+        response = self.get("/api/v1/parties")
+        self.assertEqual(response.status_code, 201)
+
+    def test_get_specific_party(self):
+        response = self.get("/api/v1/parties/" + str(self.partyID))
         self.assertEqual(response.status_code, 201)
