@@ -18,6 +18,13 @@ class TesParties(unittest.TestCase):
     def post(self, path):
         return self.client.post(path=path, data=json.dumps(self.data), content_type='application/json')
 
+    def get(self, path):
+        return self.client.get(path=path, content_type='application/json')
+
     def test_create_party(self):
+        response = self.post("/api/v1/parties")
+        self.assertEqual(response.status_code, 201)
+
+    def test_get_all_parties(self):
         response = self.post("/api/v1/parties")
         self.assertEqual(response.status_code, 201)

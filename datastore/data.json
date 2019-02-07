@@ -20,6 +20,13 @@
       "abbr": "Party Abbreviation",
       "logoUrl": "Party URL",
       "hqAddress": "Party HQ"
+    },
+    "3": {
+      "id": 3,
+      "name": "Party Name",
+      "abbr": "Party Abbreviation",
+      "logoUrl": "Party URL",
+      "hqAddress": "Party HQ"
     }
   },
   "Offices": {
