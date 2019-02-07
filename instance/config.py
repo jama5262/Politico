@@ -1,16 +1,17 @@
 import os
 
+
 class Config:
-  DEBUG = False
+    DEBUG = False
 
 
 class DevelopmentConfig(Config):
-  DEBUG = True
+    DEBUG = True
 
 
 class TestingConfig(Config):
-  TESTING = True
-  DEBUG = True
+    TESTING = True
+    DEBUG = True
 
 
 appConfig = {

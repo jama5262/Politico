@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.v1.models.offices.model import Offices
+from app.api.v1.models.offices.model import Offices
 
 offices = Blueprint("offices", __name__, url_prefix="/v1")
 
