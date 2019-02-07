@@ -37,7 +37,6 @@ class TestParties(unittest.TestCase):
     def test_create_party(self):
         response = self.post("/api/v1/parties")
         self.assertTrue(response.json["data"]["id"])
-        TestParties().partyID = response.json["data"]["id"]
         self.assertEqual(response.status_code, 201)
 
     def test_get_all_parties(self):
