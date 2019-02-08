@@ -1,5 +1,5 @@
 import json
-from app.api.v1.validation.offices import validation
+from app.api.v1.validation import validation
 
 dataStore = {
     "Offices": {
@@ -16,23 +16,24 @@ dataStore = {
     }
 }
 
+tuples = ("id", "name", "type")
 
 class Offices:
     def __init__(self, data=None):
         self.data = data
 
     def creatOffice(self):
-        if validation.checkOfficeProperties(self.data) is False:
+        if validation.checkIfPropertiesExist(self.data, tuples) is False:
             return {
                 "status": 422,
-                "error": "Please make sure to enter the correct requests, which are 'name', 'type' and 'id'"
+                "error": "Please make sure to enter the correct requests, which are " + str(tuples)
             }
-        elif validation.checkIfOfficeValuesAreEmpty(self.data) is False:
+        elif validation.checkIfPropertyValuesAreEmpty(self.data) is False:
             return {
                 "status": 400,
                 "error": "Bad request, please make sure the values are not empty"
             }
-        elif validation.checkIfOfficeExits(dataStore, str(self.data["id"])) is True:
+        elif validation.checkIfDataExists(dataStore["Offices"], str(self.data["id"])) is True:
             return {
                 "status": 403,
                 "error": "The office already exists"
@@ -44,7 +45,7 @@ class Offices:
         }
 
     def getAllOffices(self):
-        if validation.checkIfOfficesExits(dataStore) is False:
+        if validation.checkIfAllDataExists(dataStore["Offices"]) is False:
             return {
                 "status": 404,
                 "error": "Offices were not found"
@@ -55,7 +56,7 @@ class Offices:
         }
 
     def getSpecificOffice(self, officeID):
-        if validation.checkIfOfficeExits(dataStore, officeID) is False:
+        if validation.checkIfDataExists(dataStore["Offices"], officeID) is False:
             return {
                 "status": 404,
                 "error": "This office does not exist"

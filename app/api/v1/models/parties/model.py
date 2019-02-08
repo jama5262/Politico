@@ -1,5 +1,5 @@
 import json
-from app.api.v1.validation.parties import validation
+from app.api.v1.validation import validation
 
 dataStore = {
     "Parties": {
@@ -20,23 +20,24 @@ dataStore = {
     }
 }
 
+tuples = ("id", "name", "hqAddress", "logoUrl", "abbr")
 
 class Parties():
     def __init__(self, data="Jama"):
         self.data = data
 
     def createParty(self):
-        if validation.checkPartyProperties(self.data) is False:
+        if validation.checkIfPropertiesExist(self.data, tuples) is False:
             return {
                 "status": 422,
-                "error": "Please make sure to enter the correct requests, which are 'id', 'name' and 'type'"
+                "error": "Please make sure to enter the correct requests, which are " + str(tuples)
             }
-        elif validation.checkIfPartyValuesAreEmpty(self.data) is False:
+        elif validation.checkIfPropertyValuesAreEmpty(self.data) is False:
             return {
                 "status": 400,
                 "error": "Bad request, please make sure the values are not empty"
             }
-        elif validation.checkIfPartyExits(dataStore, str(self.data["id"])) is True:
+        elif validation.checkIfDataExists(dataStore["Parties"], str(self.data["id"])) is True:
             return {
                 "status": 403,
                 "error": "The party already exists"
@@ -48,7 +49,7 @@ class Parties():
         }
 
     def getAllParties(self):
-        if validation.checkIfPartiesExits(dataStore) is False:
+        if validation.checkIfAllDataExists(dataStore["Parties"]) is False:
             return {
                 "status": 404,
                 "error": "Parties were not found"
@@ -59,7 +60,7 @@ class Parties():
         }
 
     def getSpecificParty(self, partyID):
-        if validation.checkIfPartyExits(dataStore, partyID) is False:
+        if validation.checkIfDataExists(dataStore["Parties"], partyID) is False:
             return {
                 "status": 404,
                 "error": "This party does not exist"
@@ -70,17 +71,17 @@ class Parties():
         }
 
     def editSpecificParty(self, partyID):
-        if validation.checkPartyProperties(self.data) is False:
+        if validation.checkIfPropertiesExist(self.data, tuples) is False:
             return {
                 "status": 422,
                 "error": "Please make sure to enter the correct requests"
             }
-        elif validation.checkIfPartyValuesAreEmpty(self.data) is False:
+        elif validation.checkIfPropertyValuesAreEmpty(self.data) is False:
             return {
                 "status": 400,
                 "error": "Bad request, please make sure the values are not empty"
             }
-        elif validation.checkIfPartyExits(dataStore, partyID) is False:
+        elif validation.checkIfDataExists(dataStore["Parties"], partyID) is False:
             return {
                 "status": 404,
                 "error": "This party does not exist"
@@ -96,7 +97,7 @@ class Parties():
         }
 
     def deleteSpecificParty(self, partyID):
-        if validation.checkIfPartyExits(dataStore, partyID) is False:
+        if validation.checkIfDataExists(dataStore["Parties"], partyID) is False:
             return {
                 "status": 404,
                 "error": "This party does not exist"
