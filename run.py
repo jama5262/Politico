@@ -1,8 +1,8 @@
 import os
 from app import createApp
 
-configMode = os.getenv("APP_SETTINGS")
-app = createApp(configMode)
+# configMode = os.getenv("APP_SETTINGS")
+app = createApp("development")
 
 
 @app.route("/")
