@@ -29,7 +29,7 @@ class Parties():
         if validation.checkPartyProperties(self.data) is False:
             return {
                 "status": 422,
-                "error": "Please make sure to enter the correct requests"
+                "error": "Please make sure to enter the correct requests, which are 'id', 'name' and 'type'"
             }
         elif validation.checkIfPartyValuesAreEmpty(self.data) is False:
             return {

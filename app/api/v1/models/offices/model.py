@@ -25,7 +25,7 @@ class Offices:
         if validation.checkOfficeProperties(self.data) is False:
             return {
                 "status": 422,
-                "error": "Please make sure to enter the correct requests"
+                "error": "Please make sure to enter the correct requests, which are 'name', 'type' and 'id'"
             }
         elif validation.checkIfOfficeValuesAreEmpty(self.data) is False:
             return {
