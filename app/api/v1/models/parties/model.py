@@ -1,5 +1,5 @@
 import json
-from app.api.v1.validation import validation
+from app.api.v1.validation.parties import validation
 
 dataStore = {
     "Parties": {
@@ -31,6 +31,16 @@ class Parties():
                 "status": 422,
                 "error": "Please make sure to enter the correct requests"
             }
+        elif validation.checkIfPartyValuesAreEmpty(self.data) is False:
+            return {
+                "status": 400,
+                "error": "Bad request, please make sure the values are not empty"
+            }
+        elif validation.checkIfPartyExits(dataStore, str(self.data["id"])) is True:
+            return {
+                "status": 403,
+                "error": "The party already exists"
+            }
         dataStore["Parties"][str(self.data["id"])] = self.data
         return {
             "status": 201,
@@ -60,15 +70,20 @@ class Parties():
         }
 
     def editSpecificParty(self, partyID):
-        if validation.checkIfPartyExits(dataStore, partyID) is False:
-            return {
-                "status": 404,
-                "error": "This party does not exist"
-            }
-        elif validation.checkPartyProperties(self.data) is False:
+        if validation.checkPartyProperties(self.data) is False:
             return {
                 "status": 422,
                 "error": "Please make sure to enter the correct requests"
+            }
+        elif validation.checkIfPartyValuesAreEmpty(self.data) is False:
+            return {
+                "status": 400,
+                "error": "Bad request, please make sure the values are not empty"
+            }
+        elif validation.checkIfPartyExits(dataStore, partyID) is False:
+            return {
+                "status": 404,
+                "error": "This party does not exist"
             }
         party = dataStore["Parties"][partyID]
         party["name"] = self.data["name"]

@@ -1,5 +1,5 @@
 import json
-from app.api.v1.validation import validation
+from app.api.v1.validation.offices import validation
 
 dataStore = {
     "Offices": {
@@ -26,6 +26,16 @@ class Offices:
             return {
                 "status": 422,
                 "error": "Please make sure to enter the correct requests"
+            }
+        elif validation.checkIfOfficeValuesAreEmpty(self.data) is False:
+            return {
+                "status": 400,
+                "error": "Bad request, please make sure the values are not empty"
+            }
+        elif validation.checkIfOfficeExits(dataStore, str(self.data["id"])) is True:
+            return {
+                "status": 403,
+                "error": "The office already exists"
             }
         dataStore["Offices"][str(self.data["id"])] = self.data
         return {

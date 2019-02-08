@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from app.api.v1.models.parties.model import Parties
 
-parties = Blueprint("parties", __name__, url_prefix="/api/v1")
+parties = Blueprint("parties", __name__)
 
 
 @parties.route("/parties", methods=["POST"])
