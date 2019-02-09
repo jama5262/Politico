@@ -50,7 +50,7 @@ class TestOffice(unittest.TestCase):
 
     def test_with_empty_values(self):
         response = self.post("/api/v1/offices", self.dataEmptyValues)
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 422)
 
     def test_with_no_name_property(self):
         response = self.post("/api/v1/offices", self.dataNoNameProperty)
