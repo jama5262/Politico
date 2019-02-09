@@ -16,20 +16,20 @@ class TestParties(unittest.TestCase):
           "hqAddress": "Party HQ",
         }
         self.dataUpdate = {
-          "id": None,
+          "id": self.partyID,
           "name": "Updated Party Name",
           "abbr": "Updated Party Abbreviation",
           "logoUrl": "Updated Party URL",
           "hqAddress": "Updated Party HQ",
         }
         self.dataNoNameProperty = {
-          "id": None,
+          "id": self.partyID,
           "abbr": "Updated Party Abbreviation",
           "logoUrl": "Updated Party URL",
           "hqAddress": "Updated Party HQ",
         }
         self.dataEmptyValues = {
-          "id": None,
+          "id": self.partyID,
           "name": "",
           "abbr": "",
           "logoUrl": "",
@@ -73,9 +73,9 @@ class TestParties(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_with_empty_values(self):
-        response = self.post("/api/v1/offices", self.dataEmptyValues)
+        response = self.post("/api/v1/parties", self.dataEmptyValues)
         self.assertEqual(response.status_code, 422)
 
     def test_with_no_name_property(self):
-        response = self.post("/api/v1/offices", self.dataNoNameProperty)
+        response = self.post("/api/v1/parties", self.dataNoNameProperty)
         self.assertEqual(response.status_code, 422)
