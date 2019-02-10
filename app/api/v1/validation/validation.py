@@ -1,5 +1,14 @@
-def checkIfPropertiesExist(data, tuple):
-    if all(x in data for x in tuple):
+tableList = ["parties", "offices"]
+
+
+def checkIfTableExitst(tableName):
+    if tableName not in tableList:
+        return False
+    return True
+
+
+def checkIfPropertiesExist(data, tupleData):
+    if all(x in data for x in tupleData):
         return True
     return False
 

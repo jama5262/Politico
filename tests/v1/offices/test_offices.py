@@ -8,6 +8,7 @@ class TestOffice(unittest.TestCase):
         self.app = createApp("testing")
         self.client = self.app.test_client()
         self.officeID = 3
+        self.endpoint = "/api/v1/offices"
         self.data = {
           "id": 3,
           "type": "Office type",
@@ -36,22 +37,22 @@ class TestOffice(unittest.TestCase):
         return self.client.get(path=path, content_type='application/json')
 
     def test_create_party(self):
-        response = self.post("/api/v1/offices", self.data)
+        response = self.post(self.endpoint, self.data)
         self.assertTrue(response.json["data"]["id"])
         self.assertEqual(response.status_code, 201)
 
     def test_get_all_parties(self):
-        response = self.get("/api/v1/offices")
+        response = self.get(self.endpoint)
         self.assertEqual(response.status_code, 201)
 
     def test_get_specific_party(self):
-        response = self.get("/api/v1/offices/" + str(self.officeID))
+        response = self.get(self.endpoint + "/" + str(self.officeID))
         self.assertEqual(response.status_code, 201)
 
     def test_with_empty_values(self):
-        response = self.post("/api/v1/offices", self.dataEmptyValues)
+        response = self.post(self.endpoint, self.dataEmptyValues)
         self.assertEqual(response.status_code, 422)
 
     def test_with_no_name_property(self):
-        response = self.post("/api/v1/offices", self.dataNoNameProperty)
+        response = self.post(self.endpoint, self.dataNoNameProperty)
         self.assertEqual(response.status_code, 422)
