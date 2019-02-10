@@ -7,6 +7,7 @@ class TestParties(unittest.TestCase):
     def setUp(self):
         self.app = createApp("testing")
         self.client = self.app.test_client()
+        self.endpoint = "/api/v1/parties"
         self.partyID = 3
         self.data = {
           "id": 3,
@@ -49,33 +50,33 @@ class TestParties(unittest.TestCase):
         return self.client.delete(path=path, content_type='application/json')
 
     def test_create_party(self):
-        response = self.post("/api/v1/parties", self.data)
+        response = self.post(self.endpoint, self.data)
         self.assertTrue(response.json["data"]["id"])
         self.assertEqual(response.status_code, 201)
 
     def test_get_all_parties(self):
-        response = self.get("/api/v1/parties")
+        response = self.get(self.endpoint)
         self.assertEqual(response.status_code, 201)
 
     def test_get_specific_party(self):
-        response = self.get("/api/v1/parties/" + str(self.partyID))
+        response = self.get(self.endpoint + "/" + str(self.partyID))
         self.assertEqual(response.status_code, 201)
 
     def test_edit_specific_party(self):
-        postParty = self.post("/api/v1/parties", self.data)
+        postParty = self.post(self.endpoint, self.data)
         self.dataUpdate["id"] = self.partyID
-        response = self.patch("/api/v1/parties/" + str(self.partyID))
+        response = self.patch(self.endpoint + "/" + str(self.partyID))
         self.assertEqual(response.status_code, 201)
 
     def test_delete_specific_party(self):
-        postParty = self.post("/api/v1/parties", self.data)
-        response = self.delete("/api/v1/parties/" + str(self.partyID))
+        postParty = self.post(self.endpoint, self.data)
+        response = self.delete(self.endpoint + "/" + str(self.partyID))
         self.assertEqual(response.status_code, 201)
 
     def test_with_empty_values(self):
-        response = self.post("/api/v1/parties", self.dataEmptyValues)
+        response = self.post(self.endpoint, self.dataEmptyValues)
         self.assertEqual(response.status_code, 422)
 
     def test_with_no_name_property(self):
-        response = self.post("/api/v1/parties", self.dataNoNameProperty)
+        response = self.post(self.endpoint, self.dataNoNameProperty)
         self.assertEqual(response.status_code, 422)
