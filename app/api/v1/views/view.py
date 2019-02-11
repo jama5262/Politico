@@ -16,19 +16,16 @@ def getAllData(tableName):
     return jsonify(response), response["status"]
 
 
-@view.route("/<tableName>/<id>", methods=["GET"])
+@view.route("/<tableName>/<id>", methods=["GET", "DELETE"])
 def getSpecificData(tableName, id):
-    response = Models(tableName, None).getSpecificData(id)
+    if request.method == "GET":
+        response = Models(tableName, None).getSpecificData(id)
+    else:
+        response = Models(tableName, None).deleteSpecificData(id)
     return jsonify(response), response["status"]
 
 
 @view.route("/<tableName>/<id>", methods=["PATCH"])
 def editSpecificData(tableName, id):
     response = Models(tableName, request.get_json(force=True)).editSpecificData(id)
-    return jsonify(response), response["status"]
-
-
-@view.route("/<tableName>/<id>", methods=["DELETE"])
-def deleteSpecificParty(tableName, id):
-    response = Models(tableName, None).deleteSpecificData(id)
     return jsonify(response), response["status"]
