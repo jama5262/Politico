@@ -3,6 +3,7 @@ from instance.config import appConfig
 from app.api.v1.views.view import view
 from app.api.v2.views.offices.offices_view import office_view
 from app.api.v2.views.parties.parties_view import party_view
+from app.api.v2.views.auth.auth_view import auth_view
 
 
 def pageNotFound(error):
@@ -35,5 +36,6 @@ def createApp(configName):
     app.register_blueprint(view, url_prefix="/api/v1")
     app.register_blueprint(office_view, url_prefix="/api/v2/offices")
     app.register_blueprint(party_view, url_prefix="/api/v2/parties")
+    app.register_blueprint(auth_view, url_prefix="/api/v2/auth")
     app.config.from_pyfile('config.py')
     return app

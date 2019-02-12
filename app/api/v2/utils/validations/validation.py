@@ -1,19 +1,12 @@
 tableList = ["parties", "offices"]
 propertyData = {
   "parties": ("id", "name", "hqAddress", "logoUrl", "abbr"),
-  "offices": ("id", "name", "type")
+  "offices": ("id", "name", "type"),
+  "users": ("id", "firstname", "lastname", "othername", "email", "phoneNumber", "passportUrl", "isAdmin")
 }
 
 
 def validate(dataStore, tableName, operation, data=None, id=None):
-    if checkIfTableExists(tableName) is False:
-        return {
-            "isValid": False,
-            "data": {
-                "status": 404,
-                "error": "404 (Not Found), The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again."
-            }
-        }
     if data is not None or id is not None:
         if checkIfDataExists(dataStore[tableName], id) is False and operation != "c":
             return {
