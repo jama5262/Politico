@@ -1,6 +1,8 @@
 from flask import Flask, jsonify
 from instance.config import appConfig
 from app.api.v1.views.view import view
+from app.api.v2.views.offices.offices_view import office_view
+from app.api.v2.views.parties.parties_view import party_view
 
 
 def pageNotFound(error):
@@ -27,9 +29,11 @@ def serverError(error):
 def createApp(configName):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(appConfig[configName])
-    app.register_blueprint(view, url_prefix="/api/v1")
     app.register_error_handler(404, pageNotFound)
     app.register_error_handler(405, methodNotAllowed)
     app.register_error_handler(500, serverError)
+    app.register_blueprint(view, url_prefix="/api/v1")
+    app.register_blueprint(office_view, url_prefix="/api/v2/offices")
+    app.register_blueprint(party_view, url_prefix="/api/v2/parties")
     app.config.from_pyfile('config.py')
     return app
