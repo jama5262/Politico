@@ -1,60 +1,31 @@
-tableList = ["parties", "offices"]
+from app.api.v2.utils.returnMessages.returnMessages import error
+
 propertyData = {
   "parties": ("id", "name", "hqAddress", "logoUrl", "abbr"),
   "offices": ("id", "name", "type"),
-  "users": ("id", "firstname", "lastname", "othername", "email", "phoneNumber", "passportUrl", "isAdmin")
+  "usersRegister": ("id", "firstname", "lastname", "othername", "email", "phoneNumber", "passportUrl", "isAdmin"),
+  "userLogin": ("email", "password")
 }
 
 
-def validate(dataStore, tableName, operation, data=None, id=None):
-    if data is not None or id is not None:
-        if checkIfDataExists(dataStore[tableName], id) is False and operation != "c":
-            return {
-                "isValid": False,
-                "data": {
-                    "status": 404,
-                    "error": "404 (Not Found), The " + tableName + " you are looking for does not exist"
-                }
-            }
-        if operation == "c" or operation == "u":
-            if checkIfPropertiesExists(data, propertyData[tableName]) is False:
-               return {
-                    "isValid": False,
-                    "data": {
-                        "status": 422,
-                        "error": "422 (Unprocessable Entity), Please make sure to enter the correct requests, which are " + str(propertyData[tableName])
-                    }
-                }
-            elif checkIfPropertyValuesAreEmpty(data) is False:
-                return {
-                    "isValid": False,
-                    "data": {
-                        "status": 422,
-                        "error": "422 (Unprocessable Entity), Please make sure the values are not empty, and that you have valid syntax"
-                    }
-                }
-    else:
-        if checkIfAllDataExists(dataStore[tableName]) is False:
-            return {
-                "isValid": False,
-                "data": {
-                    "status": 404,
-                    "error": "404 (Not Found), " + tableName + " data were not found"
-                }
-            }
+def validate(propertyName, data):
+    if checkIfPropertiesExists(propertyName, data) is False:
+        return {
+            "isValid": False,
+            "data": error(422, "422 (Unprocessable Entity), Please make sure to enter the correct requests, which are " + str(propertyData[propertyName]))
+        }
+    if checkIfPropertyValuesAreEmpty(data) is False:
+        return {
+            "isValid": False,
+            "data": error(422, "422 (Unprocessable Entity), Please make sure the values are not empty, and that you have valid syntax")
+        }
     return {
         "isValid": True
     }
 
 
-def checkIfTableExists(tableName):
-    if tableName not in tableList:
-        return False
-    return True
-
-
-def checkIfPropertiesExists(data, tupleData):
-    if all(x in data for x in tupleData):
+def checkIfPropertiesExists(propertyName, data):
+    if all(x in data for x in propertyData[propertyName]):
         return True
     return False
 
@@ -63,16 +34,4 @@ def checkIfPropertyValuesAreEmpty(data):
     for x in data:
         if not data[x]:
             return False
-    return True
-
-
-def checkIfDataExists(data, id):
-    if id not in data:
-        return False
-    return True
-
-
-def checkIfAllDataExists(data):
-    if not data:
-        return False
     return True

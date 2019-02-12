@@ -1,5 +1,5 @@
 from app.api.v2.utils.validations.validation import validate
-from app.api.v2.utils.returnMessages import returnMessages
+from app.api.v2.utils.returnMessages.returnMessages import success
 
 dataStore = {
   "offices": {
@@ -19,39 +19,30 @@ dataStore = {
 
 class OfficeModel():
     def __init__(self, data=None, id=None):
-        self.tableName = "offices"
+        self.propertyName = "offices"
         self.data = data
         self.id = id
 
     def createOffice(self):
-        valid = validate(dataStore, self.tableName, "c", self.data, self.id)
+        valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        dataStore[self.tableName][str(self.data["id"])] = self.data
-        return returnMessages.success(201, self.data)
+        dataStore[self.propertyName][str(self.data["id"])] = self.data
+        return success(201, self.data)
 
     def getAllOffices(self):
-        valid = validate(dataStore, self.tableName, "r")
-        if valid["isValid"] is False:
-            return valid["data"]
-        return returnMessages.success(201, dataStore[self.tableName])
+        return success(201, dataStore[self.propertyName])
 
     def getSpecificOffice(self):
-        valid = validate(dataStore, self.tableName, "rs", None, self.id)
-        if valid["isValid"] is False:
-            return valid["data"]
-        return returnMessages.success(201, dataStore[self.tableName][str(self.id)])
+        return success(201, dataStore[self.propertyName][str(self.id)])
 
     def editSpecificOffice(self):
-        valid = validate(dataStore, self.tableName, "r", self.data, self.id)
+        valid = validate(propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        dataStore[self.tableName][self.id]["name"] = self.data["name"]
-        return returnMessages.success(201, dataStore[self.tableName][self.id])
+        dataStore[self.propertyName][self.id]["name"] = self.data["name"]
+        return success(201, dataStore[self.propertyName][self.id])
 
     def deleteSpecificOffice(self):
-        valid = validate(dataStore, self.tableName, "d", None, self.id)
-        if valid["isValid"] is False:
-            return valid["data"]
-        dataStore[self.tableName].pop(self.id)
-        return returnMessages.success(201, {"message": "Delete successful"})
+        dataStore[self.propertyName].pop(self.id)
+        return success(201, {"message": "Delete successful"})

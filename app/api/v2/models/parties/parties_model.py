@@ -1,5 +1,5 @@
 from app.api.v2.utils.validations.validation import validate
-from app.api.v2.utils.returnMessages import returnMessages
+from app.api.v2.utils.returnMessages.returnMessages import success
 
 dataStore = {
   "parties": {
@@ -22,39 +22,29 @@ dataStore = {
 
 class PartyModel():
     def __init__(self, data=None, id=None):
-        self.tableName = "parties"
+        self.propertyName = "parties"
         self.data = data
         self.id = id
 
     def createParty(self):
-        valid = validate(dataStore, self.tableName, "c", self.data, self.id)
+        valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        dataStore[self.tableName][str(self.data["id"])] = self.data
-        return returnMessages.success(201, self.data)
+        dataStore[self.propertyName][str(self.data["id"])] = self.data
+        return success(201, self.data)
 
     def getAllParties(self):
-        valid = validate(dataStore, self.tableName, "r")
-        if valid["isValid"] is False:
-            return valid["data"]
-        return returnMessages.success(201, dataStore[self.tableName])
+        return success(201, dataStore[self.propertyName])
 
     def getSpecificParty(self):
-        valid = validate(dataStore, self.tableName, "rs", None, self.id)
-        if valid["isValid"] is False:
-            return valid["data"]
-        return returnMessages.success(201, dataStore[self.tableName][str(self.id)])
+        return success(201, dataStore[self.propertyName][str(self.id)])
 
     def editSpecificParty(self):
-        valid = validate(dataStore, self.tableName, "r", self.data, self.id)
+        valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        dataStore[self.tableName][self.id]["name"] = self.data["name"]
-        return returnMessages.success(201, dataStore[self.tableName][self.id])
+        dataStore[self.propertyName][self.id]["name"] = self.data["name"]
+        return success(201, dataStore[self.propertyName][self.id])
 
     def deleteSpecificParty(self):
-        valid = validate(dataStore, self.tableName, "d", None, self.id)
-        if valid["isValid"] is False:
-            return valid["data"]
-        dataStore[self.tableName].pop(self.id)
-        return returnMessages.success(201, {"message": "Delete successful"})
+        return success(201, {"message": "Delete successful"})
