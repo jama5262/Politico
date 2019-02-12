@@ -12,7 +12,7 @@ Title | Endpoint | Method | Description
 Create a party | /v1/parties | POST | An admin creates a party
 Get all party | /v1/parties | GET | Get get all parties
 Get specific party | /v1/parties/partyID | GET | Get a specific party
-Edit specific party | /v1/parties/partyID | PUT | Edit a specific party
+Edit specific party | /v1/parties/partyID | PATCH | Edit a specific party
 Delete specific party | /v1/parties/partyID | DELETE | Delete a specific party
 Create an office | /v1/offices | POST | An admin creates an office
 Get all offices | /v1/offices/ | GET | Get all offices
