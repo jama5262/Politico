@@ -8,7 +8,7 @@ class TestOffice(unittest.TestCase):
         self.app = createApp("testing")
         self.client = self.app.test_client()
         self.officeID = 3
-        self.endpoint = "/api/v1/offices"
+        self.endpoint = "/api/v2/offices"
         self.data = {
           "id": 3,
           "type": "Office type",

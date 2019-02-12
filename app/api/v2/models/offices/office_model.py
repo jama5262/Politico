@@ -1,23 +1,7 @@
-from api.v2.utils.validations.validation import validate
+from app.api.v2.utils.validations.validation import validate
 from app.api.v2.utils.returnMessages import returnMessages
 
 dataStore = {
-  "parties": {
-    "1": {
-        "id": 1,
-        "name": "Party Name",
-        "abbr": "Party Abbreviation",
-        "logoUrl": "Party URL",
-        "hqAddress": "Party HQ"
-    },
-    "2": {
-        "id": 2,
-        "name": "Party Name",
-        "abbr": "Party Abbreviation",
-        "logoUrl": "Party URL",
-        "hqAddress": "Party HQ"
-    }
-  },
   "offices": {
       "1": {
           "id": 1,
@@ -34,9 +18,9 @@ dataStore = {
 
 
 class OfficeModel():
-    def __init__(self, tableName, data, id):
-        self.tableName = tableName
-        sel.data = data
+    def __init__(self, data=None, id=None):
+        self.tableName = "offices"
+        self.data = data
         self.id = id
 
     def createOffice(self):
@@ -52,20 +36,20 @@ class OfficeModel():
             return valid["data"]
         return returnMessages.success(201, dataStore[self.tableName])
 
-    def getSpecificOffice(parameter_list):
+    def getSpecificOffice(self):
         valid = validate(dataStore, self.tableName, "rs", None, self.id)
         if valid["isValid"] is False:
             return valid["data"]
         return returnMessages.success(201, dataStore[self.tableName][str(self.id)])
 
-    def editSpecificOffice(self, id):
+    def editSpecificOffice(self):
         valid = validate(dataStore, self.tableName, "r", self.data, self.id)
         if valid["isValid"] is False:
             return valid["data"]
         dataStore[self.tableName][self.id]["name"] = self.data["name"]
         return returnMessages.success(201, dataStore[self.tableName][self.id])
 
-    def deleteSpecificOffice(self, id):
+    def deleteSpecificOffice(self):
         valid = validate(dataStore, self.tableName, "d", None, self.id)
         if valid["isValid"] is False:
             return valid["data"]
