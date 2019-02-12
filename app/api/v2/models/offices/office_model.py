@@ -1,5 +1,5 @@
 from app.api.v2.utils.validations.validation import validate
-from app.api.v2.utils.returnMessages.returnMessages import success
+from app.api.v2.utils.returnMessages import returnMessages
 
 dataStore = {
   "offices": {
@@ -12,6 +12,12 @@ dataStore = {
           "id": 2,
           "type": "Office type 2",
           "name": "Office name 2"
+      }
+  },
+  "officeMembers": {
+      "1": {
+          "officeID": 1,
+          "userID": 2
       }
   }
 }
@@ -28,21 +34,29 @@ class OfficeModel():
         if valid["isValid"] is False:
             return valid["data"]
         dataStore[self.propertyName][str(self.data["id"])] = self.data
-        return success(201, self.data)
+        return returnMessages.success(201, self.data)
 
     def getAllOffices(self):
-        return success(201, dataStore[self.propertyName])
+        return returnMessages.success(201, dataStore[self.propertyName])
 
     def getSpecificOffice(self):
-        return success(201, dataStore[self.propertyName][str(self.id)])
+        return returnMessages.success(201, dataStore[self.propertyName][str(self.id)])
 
     def editSpecificOffice(self):
         valid = validate(propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
         dataStore[self.propertyName][self.id]["name"] = self.data["name"]
-        return success(201, dataStore[self.propertyName][self.id])
+        return returnMessages.success(201, dataStore[self.propertyName][self.id])
 
     def deleteSpecificOffice(self):
         dataStore[self.propertyName].pop(self.id)
-        return success(201, {"message": "Delete successful"})
+        return returnMessages.success(201, {"message": "Delete successful"})
+
+    def userRegisterToOffice(self):
+        if self.id not in dataStore["offices"]:
+            return returnMessages.error(404, "(Not Found), The office does not exist")
+        officeid = len(dataStore["officeMembers"]) + 1
+        self.data["officeID"] = self.id
+        dataStore["officeMembers"][str(officeid)] = self.data
+        return returnMessages.success(201, self.data)
