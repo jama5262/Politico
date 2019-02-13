@@ -3,9 +3,10 @@ from app.api.v2.utils.returnMessages.returnMessages import error
 propertyData = {
   "parties": ("id", "name", "hqAddress", "logoUrl", "abbr"),
   "offices": ("id", "name", "type"),
-  "officeMembers": ("userID"),
+  "officeMembers": ("user"),
   "usersRegister": ("id", "firstname", "lastname", "othername", "email", "phoneNumber", "passportUrl", "isAdmin"),
-  "userLogin": ("email", "password")
+  "userLogin": ("email", "password"),
+  "votes": ("office", "candidate", "voter")
 }
 
 

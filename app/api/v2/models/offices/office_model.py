@@ -16,8 +16,8 @@ dataStore = {
   },
   "officeMembers": {
       "1": {
-          "officeID": 1,
-          "userID": 2
+          "office": 1,
+          "user": 2
       }
   }
 }
@@ -57,6 +57,6 @@ class OfficeModel():
         if self.id not in dataStore["offices"]:
             return returnMessages.error(404, "(Not Found), The office does not exist")
         officeid = len(dataStore["officeMembers"]) + 1
-        self.data["officeID"] = self.id
+        self.data["office"] = self.id
         dataStore["officeMembers"][str(officeid)] = self.data
         return returnMessages.success(201, self.data)
