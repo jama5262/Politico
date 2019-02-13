@@ -16,7 +16,7 @@ def getAllOffices():
     return jsonify(response), response["status"]
 
 
-@office_view.route("/<id>", methods=["GET", "DELETE"])
+@office_view.route("/<id>", methods=["GET"])
 def getSpecificOffice(id):
     response = OfficeModel(None, id).getSpecificOffice()
     return jsonify(response), response["status"]
@@ -28,7 +28,7 @@ def editSpecificOffice(id):
     return jsonify(response), response["status"]
 
 
-@office_view.route("/<id>", methods=["PATCH"])
+@office_view.route("/<id>", methods=["DELETE"])
 def deleteSpecificOffice(id):
     response = PartyModel(None, id).deleteSpecificOffice()
     return jsonify(response), response["status"]
@@ -37,4 +37,10 @@ def deleteSpecificOffice(id):
 @office_view.route("/<id>/register", methods=["POST"])
 def userRegisterToOffice(id):
     response = OfficeModel(request.get_json(force=True), id).userRegisterToOffice()
+    return jsonify(response), response["status"]
+
+
+@office_view.route("/<id>/result", methods=["GET"])
+def officeResults(id):
+    response = OfficeModel(None, id).officeResults()
     return jsonify(response), response["status"]
