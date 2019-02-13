@@ -24,6 +24,17 @@ dataStore = {
           "passportUrl": "Passport URL",
           "password": "pass2",
           "isAdmin": True
+      },
+      "3": {
+          "id": 3,
+          "firstname": "FirstName",
+          "lastname": "LastName",
+          "othername": "OtherName",
+          "email": "Email 3",
+          "phoneNumber": "PhoneNumber",
+          "passportUrl": "Passport URL",
+          "password": "pass3",
+          "isAdmin": True
       }
   }
 }
@@ -40,7 +51,7 @@ class AuthModel():
         if valid["isValid"] is False:
             return valid["data"]
         dataStore[self.tableName][str(self.data["id"])] = self.data
-        return returnMessages.success(201, self.data)
+        return returnMessages.success(200, self.data)
 
     def loginUser(self):
         valid = validate("userLogin", self.data)

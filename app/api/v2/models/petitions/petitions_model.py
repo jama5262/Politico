@@ -31,7 +31,7 @@ class PetitionModel():
         if valid["isValid"] is False:
             return valid["data"]
         dataStore[self.propertyName][str(self.data["id"])] = self.data
-        return returnMessages.success(201, self.data)
+        return returnMessages.success(200, self.data)
 
     def getAllPetitions(self):
-        return returnMessages.success(201, dataStore[self.propertyName])
+        return returnMessages.success(200, dataStore[self.propertyName])
