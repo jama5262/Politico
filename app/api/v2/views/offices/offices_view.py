@@ -32,3 +32,9 @@ def editSpecificOffice(id):
 def deleteSpecificOffice(id):
     response = PartyModel(None, id).deleteSpecificOffice()
     return jsonify(response), response["status"]
+
+
+@office_view.route("/<id>/register", methods=["POST"])
+def userRegisterToOffice(id):
+    response = OfficeModel(request.get_json(force=True), id).userRegisterToOffice()
+    return jsonify(response), response["status"]
