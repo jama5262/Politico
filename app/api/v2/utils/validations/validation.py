@@ -6,7 +6,8 @@ propertyData = {
   "officeMembers": ("user"),
   "usersRegister": ("id", "firstname", "lastname", "othername", "email", "phoneNumber", "passportUrl", "isAdmin"),
   "userLogin": ("email", "password"),
-  "votes": ("office", "candidate", "voter")
+  "votes": ("office", "candidate", "voter"),
+  "petitions": ("id", "office", "createBy", "text", "evidence")
 }
 
 
