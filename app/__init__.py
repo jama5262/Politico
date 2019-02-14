@@ -32,6 +32,7 @@ def serverError(error):
 def createApp(configName):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(appConfig[configName])
+    app.config.from_pyfile('config.py')
     app.register_error_handler(404, pageNotFound)
     app.register_error_handler(405, methodNotAllowed)
     app.register_error_handler(500, serverError)
@@ -41,5 +42,4 @@ def createApp(configName):
     app.register_blueprint(auth_view, url_prefix="/api/v2/auth")
     app.register_blueprint(user_votes_view, url_prefix="/api/v2/votes")
     app.register_blueprint(petition_view, url_prefix="/api/v2/petitions")
-    app.config.from_pyfile('config.py')
     return app

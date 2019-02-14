@@ -4,7 +4,7 @@ from app.api.database.migrations.migrations import migrate
 
 # configMode = os.getenv("APP_SETTINGS")
 app = createApp("development")
-print(migrate())
+migrate()
 
 
 @app.route("/")
