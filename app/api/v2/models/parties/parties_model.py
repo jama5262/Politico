@@ -1,5 +1,6 @@
 from app.api.v2.utils.validations.validation import validate
 from app.api.v2.utils.returnMessages.returnMessages import success
+from app.api.v2.utils.returnMessages.returnMessages import error
 from app.api.database.schemaGenerator.schemaGenerator import SchemaGenerator
 from app.api.database.database import Database
 
@@ -64,6 +65,8 @@ class PartyModel():
                 "status": db["status"],
                 "error": db["error"]
             }
+        if db["data"] < 1:
+            return error(404, "404 (Not Found) The party was not found")
         return success(200, self.data)
 
     def deleteSpecificParty(self):
@@ -75,6 +78,8 @@ class PartyModel():
                 "status": db["status"],
                 "error": db["error"]
             }
+        if db["data"] < 1:
+            return error(404, "404 (Not Found) The party was not found")
         return success(200, {
             "message": "data deleted"
         })
