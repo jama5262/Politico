@@ -64,6 +64,8 @@ class OfficeModel():
                 "status": db["status"],
                 "error": db["error"]
             }
+        if db["data"] < 1:
+            return returnMessages.error(404, "404 (Not Found) The party was not found")
         return returnMessages.success(200, self.data)
 
     def deleteSpecificOffice(self):
@@ -75,6 +77,8 @@ class OfficeModel():
                 "status": db["status"],
                 "error": db["error"]
             }
+        if db["data"] < 1:
+            return returnMessages.error(404, "404 (Not Found) The party was not found")
         return returnMessages.success(200, {
             "message": "data deleted"
         })

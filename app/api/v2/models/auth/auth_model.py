@@ -29,7 +29,6 @@ class AuthModel():
             return valid["data"]
         schema = SchemaGenerator(self.tableName, self.data).userLogin()
         db = Database(schema, True).executeQuery()
-        print(schema)
         if db["status"] == 500:
             return {
                 "status": db["status"],
@@ -40,4 +39,7 @@ class AuthModel():
                 "status": 401,
                 "error": "401 (Unauthorized), Wrong login credentials"
             }
-        return returnMessages.success(200, db["data"])
+        return returnMessages.success(200, {
+            "token": "sometokenhere",
+            "user": db["data"]
+        })

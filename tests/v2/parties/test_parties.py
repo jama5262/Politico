@@ -14,24 +14,24 @@ class TestParties(unittest.TestCase):
           "name": "Party Name",
           "abbr": "Party Abbreviation",
           "logo_url": "Party URL",
-          "hq_address": "Party HQ",
+          "hq_address": "Party HQ"
         }
         self.dataUpdate = {
           "name": "Updated Party Name",
           "abbr": "Updated Party Abbreviation",
           "logo_url": "Updated Party URL",
-          "hq_address": "Updated Party HQ",
+          "hq_address": "Updated Party HQ"
         }
         self.dataNoNameProperty = {
           "abbr": "Updated Party Abbreviation",
           "logo_url": "Updated Party URL",
-          "hq_address": "Updated Party HQ",
+          "hq_address": "Updated Party HQ"
         }
         self.dataEmptyValues = {
           "name": "",
           "abbr": "",
           "logo_url": "",
-          "hq_address": "",
+          "hq_address": ""
         }
 
     def tearDown(self):

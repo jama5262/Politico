@@ -7,7 +7,7 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - pytest --cov=app/v1 tests/v1
+  - pytest --cov=app/v2 tests/v2
 
 after_success:
   - coveralls
