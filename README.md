@@ -13,17 +13,17 @@ Sign up user | /api/v2/auth/signup | POST | User can sign up
 Login User | /api/v2/auth/login | POST |User can login
 Create a party | /api/v2/parties | POST | An admin creates a party
 Get all party | /api/v2/parties | GET | Get get all parties
-Get specific party | /api/v2/parties/<partyID> | GET | Get a specific party
-Edit specific party | /api/v2/parties/<partyID> | PATCH | Edit a specific party
-Delete specific party | /api/v2/parties/<partyID> | DELETE | Delete a specific party
+Get specific party | /api/v2/parties/partyID | GET | Get a specific party
+Edit specific party | /api/v2/parties/partyID | PATCH | Edit a specific party
+Delete specific party | /api/v2/parties/partyID | DELETE | Delete a specific party
 Create an office | /api/v2/offices | POST | An admin creates an office
 Get all offices | /api/v2/offices/ | GET | Get all offices
-Get specific office | /api/v2/offices/<officeID> | GET | Get a specific office
-Edit specific office | /api/v2/offices/<officeID> | PATCH | Edit a specific office
-Delete specific office | /api/v2/offices/<officeID> | DELETE | Delete a specific office
-Register candidate | /api/v2/offices/<officeID>/register | POST | A politician can register as a candidate
+Get specific office | /api/v2/offices/officeID | GET | Get a specific office
+Edit specific office | /api/v2/offices/officeID | PATCH | Edit a specific office
+Delete specific office | /api/v2/offices/officeID | DELETE | Delete a specific office
+Register candidate | /api/v2/offices/officeID/register | POST | A politician can register as a candidate
 Vote | /api/v2/votes | POST | A user can vote for the candidate
-Get specific office results | /api/v2/offices/<officeID>/result | GET | Get a specific office results after election
+Get specific office results | /api/v2/offices/officeID/result | GET | Get a specific office results after election
 Create a petition | /api/v2/petitions | POST | Create a petition for a concluded election
 Get all petitions | /api/v2/parties | GET | Get get all petitions
 
