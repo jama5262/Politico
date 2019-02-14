@@ -1,6 +1,7 @@
 import unittest
 import json
 from app import createApp
+from app.api.database.migrations.migrations import migrate
 
 
 class TestPetition(unittest.TestCase):
@@ -21,6 +22,9 @@ class TestPetition(unittest.TestCase):
         self.dataNoProperty = {
           "text": "Reason for petition",
         }
+
+    def tearDown(self):
+        migrate()
 
     def post(self, path, data):
         return self.client.post(path=path, data=json.dumps(data), content_type='application/json')
