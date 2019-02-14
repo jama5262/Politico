@@ -25,7 +25,7 @@ Register candidate | /api/v2/offices/officeID/register | POST | A politician can
 Vote | /api/v2/votes | POST | A user can vote for the candidate
 Get specific office results | /api/v2/offices/officeID/result | GET | Get a specific office results after election
 Create a petition | /api/v2/petitions | POST | Create a petition for a concluded election
-Get all petitions | /api/v2/parties | GET | Get get all petitions
+Get all petitions | /api/v2/petitions | GET | Get get all petitions
 
 
 ## Installation
@@ -49,7 +49,11 @@ For mac key in
 ```
 $ source venv/bin/activate
 ```
-
+## Installing packages
+To install packages run the following
+```
+pip install -r requirements.txt
+```
 ## Running the app
 
 To run the app, simply key in the following
@@ -61,7 +65,7 @@ flask run
 To test the app, run the following
 
 ```
-pytest
+pytest -v
 ```
 
 ## Usage
