@@ -1,6 +1,7 @@
 import unittest
 import json
 from app import createApp
+from app.api.database.migrations.migrations import migrate
 
 
 class TestParties(unittest.TestCase):
@@ -10,32 +11,31 @@ class TestParties(unittest.TestCase):
         self.endpoint = "/api/v2/parties"
         self.partyID = 3
         self.data = {
-          "id": 3,
           "name": "Party Name",
           "abbr": "Party Abbreviation",
-          "logoUrl": "Party URL",
-          "hqAddress": "Party HQ",
+          "logo_url": "Party URL",
+          "hq_address": "Party HQ",
         }
         self.dataUpdate = {
-          "id": self.partyID,
           "name": "Updated Party Name",
           "abbr": "Updated Party Abbreviation",
-          "logoUrl": "Updated Party URL",
-          "hqAddress": "Updated Party HQ",
+          "logo_url": "Updated Party URL",
+          "hq_address": "Updated Party HQ",
         }
         self.dataNoNameProperty = {
-          "id": self.partyID,
           "abbr": "Updated Party Abbreviation",
-          "logoUrl": "Updated Party URL",
-          "hqAddress": "Updated Party HQ",
+          "logo_url": "Updated Party URL",
+          "hq_address": "Updated Party HQ",
         }
         self.dataEmptyValues = {
-          "id": self.partyID,
           "name": "",
           "abbr": "",
-          "logoUrl": "",
-          "hqAddress": "",
+          "logo_url": "",
+          "hq_address": "",
         }
+
+    def tearDown(self):
+        migrate()
 
     def post(self, path, data):
         return self.client.post(path=path, data=json.dumps(data), content_type='application/json')
@@ -43,29 +43,28 @@ class TestParties(unittest.TestCase):
     def get(self, path):
         return self.client.get(path=path, content_type='application/json')
 
-    def patch(self, path):
-        return self.client.patch(path=path, data=json.dumps(self.dataUpdate), content_type='application/json')
+    def patch(self, path, data):
+        return self.client.patch(path=path, data=json.dumps(data), content_type='application/json')
 
     def delete(self, path):
         return self.client.delete(path=path, content_type='application/json')
 
     def test_create_party(self):
         response = self.post(self.endpoint, self.data)
-        self.assertTrue(response.json["data"]["id"])
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response)
 
     def test_get_all_parties(self):
         response = self.get(self.endpoint)
         self.assertEqual(response.status_code, 200)
 
     def test_get_specific_party(self):
+        postParty = self.post(self.endpoint, self.data)
         response = self.get(self.endpoint + "/" + str(self.partyID))
         self.assertEqual(response.status_code, 200)
 
     def test_edit_specific_party(self):
         postParty = self.post(self.endpoint, self.data)
-        self.dataUpdate["id"] = self.partyID
-        response = self.patch(self.endpoint + "/" + str(self.partyID))
+        response = self.patch(self.endpoint + "/" + str(self.partyID), self.dataUpdate)
         self.assertEqual(response.status_code, 200)
 
     def test_delete_specific_party(self):
