@@ -21,7 +21,7 @@ class PartyModel():
                 "status": db["status"],
                 "error": db["error"]
             }
-        return success(201, self.data)
+        return success(200, self.data)
         
     def getAllParties(self):
         schema = SchemaGenerator(self.propertyName).selectAll()
@@ -30,6 +30,11 @@ class PartyModel():
             return {
                 "status": db["status"],
                 "error": db["error"]
+            }
+        if not db["data"]:
+            return {
+                "status": 404,
+                "error": "404 (NotFound), Parties where not found"
             }
         return success(200, db["data"])
 
@@ -40,6 +45,11 @@ class PartyModel():
             return {
                 "status": db["status"],
                 "error": db["error"]
+            }
+        if not db["data"]:
+            return {
+                "status": 404,
+                "error": "404 (NotFound), The party you are lookng for does not exist"
             }
         return success(200, db["data"])
 

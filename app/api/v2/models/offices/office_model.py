@@ -1,5 +1,7 @@
 from app.api.v2.utils.validations.validation import validate
 from app.api.v2.utils.returnMessages import returnMessages
+from app.api.database.schemaGenerator.schemaGenerator import SchemaGenerator
+from app.api.database.database import Database
 
 dataStore = {
   "offices": {
@@ -69,34 +71,82 @@ class OfficeModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        dataStore[self.propertyName][str(self.data["id"])] = self.data
-        return returnMessages.success(201, self.data)
+        schema = SchemaGenerator(self.propertyName, self.data).insterInto()
+        db = Database(schema).executeQuery()
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        return returnMessages.success(200, self.data)
 
     def getAllOffices(self):
-        return returnMessages.success(201, dataStore[self.propertyName])
+        schema = SchemaGenerator(self.propertyName).selectAll()
+        db = Database(schema, True).executeQuery()
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        if not db["data"]:
+            return {
+                "status": 404,
+                "error": "404 (NotFound), Offices where not found"
+            }
+        return returnMessages.success(200, db["data"])
 
     def getSpecificOffice(self):
-        if self.id not in dataStore["offices"]:
-            return returnMessages.error(404, "404 (Not Found), The office you are looking for does not exist")
-        return returnMessages.success(201, dataStore[self.propertyName][str(self.id)])
+        schema = SchemaGenerator(self.propertyName, None, self.id).selectSpecific()
+        db = Database(schema, True).executeQuery()
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        if not db["data"]:
+            return {
+                "status": 404,
+                "error": "404 (NotFound), The office does not exist"
+            }
+        return returnMessages.success(200, db["data"])
 
     def editSpecificOffice(self):
-        valid = validate(propertyName, self.data)
+        valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        dataStore[self.propertyName][self.id]["name"] = self.data["name"]
-        return returnMessages.success(201, dataStore[self.propertyName][self.id])
+        schema = SchemaGenerator(self.propertyName, self.data, self.id).updateSpecific()
+        db = Database(schema).executeQuery()
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        return returnMessages.success(200, self.data)
 
     def deleteSpecificOffice(self):
-        dataStore[self.propertyName].pop(self.id)
-        return returnMessages.success(201, {"message": "Delete successful"})
+        schema = SchemaGenerator(self.propertyName, None, self.id).deleteSpecific()
+        print(schema)
+        db = Database(schema).executeQuery()
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        return returnMessages.success(200, {
+            "message": "data deleted"
+        })
 
     def userRegisterToOffice(self):
-        if self.id not in dataStore["offices"]:
-            return returnMessages.error(404, "(Not Found), The office does not exist")
-        officeid = len(dataStore["officeMembers"]) + 1
-        self.data["office"] = self.id
-        dataStore["officeMembers"][str(officeid)] = self.data
+        valid = validate("candidates", self.data)
+        if valid["isValid"] is False:
+            return valid["data"]
+        schema = SchemaGenerator("candidates", self.data).insterInto()
+        db = Database(schema).executeQuery()
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
         return returnMessages.success(201, self.data)
 
     def officeResults(self):

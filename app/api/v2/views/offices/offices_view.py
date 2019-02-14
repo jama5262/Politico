@@ -24,13 +24,13 @@ def getSpecificOffice(id):
 
 @office_view.route("/<id>", methods=["PATCH"])
 def editSpecificOffice(id):
-    response = OfficeModel(request.get_json(force=True)).editSpecificData(id)
+    response = OfficeModel(request.get_json(force=True), id).editSpecificOffice()
     return jsonify(response), response["status"]
 
 
 @office_view.route("/<id>", methods=["DELETE"])
 def deleteSpecificOffice(id):
-    response = PartyModel(None, id).deleteSpecificOffice()
+    response = OfficeModel(None, id).deleteSpecificOffice()
     return jsonify(response), response["status"]
 
 

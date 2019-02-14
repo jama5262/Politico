@@ -44,3 +44,8 @@ class SchemaGenerator():
         return """
             DELETE FROM """ + self.tableName + """ WHERE id = """ + self.id + """
         """
+
+    def userLogin(self):
+        return """
+            SELECT * FROM """ + self.tableName + """ WHERE email = '""" + self.data["email"] + """' AND password = '""" + self.data["password"] + """'
+        """

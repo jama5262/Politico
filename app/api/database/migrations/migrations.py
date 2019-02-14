@@ -21,9 +21,9 @@ tables = """
     firstname VARCHAR (100) NOT NULL,
     lastname VARCHAR (100) NOT NULL,
     othername VARCHAR (100) NOT NULL,
-    email VARCHAR (100) NOT NULL,
+    email VARCHAR (100) UNIQUE NOT NULL,
     password VARCHAR (100) NOT NULL,
-    phoneNumber VARCHAR (100) NOT NULL,
+    phoneNumber VARCHAR (100) UNIQUE NOT NULL,
     passportUrl VARCHAR (100) NOT NULL,
     isAdmin BOOLEAN NOT NULL
   );
@@ -32,15 +32,22 @@ tables = """
     id serial PRIMARY KEY,
     office INTEGER REFERENCES offices(id),
     party INTEGER REFERENCES parties(id),
-    candidate INTEGER REFERENCES users(id)
+    candidate INTEGER UNIQUE REFERENCES users(id)
   );
 
   CREATE TABLE IF NOT EXISTS votes(
     id serial PRIMARY KEY,
-    createdOn TIMESTAMP NOT NULL,
+    createdOn DATE NOT NULL DEFAULT now(),
     createdBy INTEGER REFERENCES users(id),
     office INTEGER REFERENCES offices(id),
     candidate INTEGER REFERENCES candidates(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS office_results(
+    id serial PRIMARY KEY,
+    candidate INTEGER UNIQUE REFERENCES candidates(id),
+    office INTEGER REFERENCES offices(id),
+    result INTEGER NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS petitions(

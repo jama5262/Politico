@@ -1,5 +1,7 @@
 from app.api.v2.utils.validations.validation import validate
 from app.api.v2.utils.returnMessages import returnMessages
+from app.api.database.schemaGenerator.schemaGenerator import SchemaGenerator
+from app.api.database.database import Database
 
 dataStore = {
   "users": {
@@ -47,25 +49,33 @@ class AuthModel():
         self.id = id
 
     def registerUser(self):
-        valid = validate("usersRegister", self.data)
+        valid = validate(self.tableName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        dataStore[self.tableName][str(self.data["id"])] = self.data
+        schema = SchemaGenerator(self.tableName, self.data).insterInto()
+        db = Database(schema).executeQuery()
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
         return returnMessages.success(200, self.data)
 
     def loginUser(self):
         valid = validate("userLogin", self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        for user in dataStore["users"]:
-            if dataStore["users"][user]["email"] == self.data["email"]:
-                if dataStore["users"][user]["password"] == self.data["password"]:
-                    return returnMessages.success(200, {
-                        "token": "some_token_here",
-                        "user": dataStore["users"][user]
-                    })
-                else:
-                    return returnMessages.error(401, "401 (Unauthorized), Wrong credentials")
-                break
-            else:
-                return returnMessages.error(404, "404 (NotFound), The user does not exist")
+        schema = SchemaGenerator(self.tableName, self.data).userLogin()
+        db = Database(schema, True).executeQuery()
+        print(schema)
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        if not db["data"]:
+            return {
+                "status": 404,
+                "error": "404 (NotFound), The user does not exist"
+            }
+        return returnMessages.success(200, db["data"])
