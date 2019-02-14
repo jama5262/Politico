@@ -39,15 +39,15 @@ class TestOffice(unittest.TestCase):
     def test_create_office(self):
         response = self.post(self.endpoint, self.data)
         self.assertTrue(response.json["data"]["id"])
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_get_all_office(self):
         response = self.get(self.endpoint)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_get_specific_office(self):
         response = self.get(self.endpoint + "/" + str(self.officeID))
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_with_empty_values(self):
         response = self.post(self.endpoint, self.dataEmptyValues)

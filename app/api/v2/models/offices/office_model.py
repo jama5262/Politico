@@ -3,63 +3,6 @@ from app.api.v2.utils.returnMessages import returnMessages
 from app.api.database.schemaGenerator.schemaGenerator import SchemaGenerator
 from app.api.database.database import Database
 
-dataStore = {
-  "offices": {
-      "1": {
-          "id": 1,
-          "type": "Office type 1",
-          "name": "Office name 1"
-      },
-      "2": {
-          "id": 2,
-          "type": "Office type 2",
-          "name": "Office name 2"
-      }
-  },
-  "officeMembers": {
-      "1": {
-          "office": 1,
-          "user": 2
-      }
-  },
-  "officeResults": {
-      "1": [
-          {
-            "office": 1,
-            "candidate": 2,
-            "result": 300
-          },
-          {
-            "office": 1,
-            "candidate": 2,
-            "result": 300
-          },
-          {
-            "office": 1,
-            "candidate": 2,
-            "result": 300
-          },
-      ],
-      "2": [
-          {
-            "office": 1,
-            "candidate": 2,
-            "result": 300
-          },
-          {
-            "office": 1,
-            "candidate": 2,
-            "result": 300
-          },
-          {
-            "office": 1,
-            "candidate": 2,
-            "result": 300
-          },
-      ]
-  }
-}
-
 
 class OfficeModel():
     def __init__(self, data=None, id=None):
@@ -147,7 +90,7 @@ class OfficeModel():
                 "status": db["status"],
                 "error": db["error"]
             }
-        return returnMessages.success(201, self.data)
+        return returnMessages.success(200, self.data)
 
     def officeResults(self):
         schema = SchemaGenerator("office_results", None, self.id).selectSpecificOfficeResult()

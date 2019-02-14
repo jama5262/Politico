@@ -52,26 +52,26 @@ class TestParties(unittest.TestCase):
     def test_create_party(self):
         response = self.post(self.endpoint, self.data)
         self.assertTrue(response.json["data"]["id"])
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_get_all_parties(self):
         response = self.get(self.endpoint)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_get_specific_party(self):
         response = self.get(self.endpoint + "/" + str(self.partyID))
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_edit_specific_party(self):
         postParty = self.post(self.endpoint, self.data)
         self.dataUpdate["id"] = self.partyID
         response = self.patch(self.endpoint + "/" + str(self.partyID))
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_delete_specific_party(self):
         postParty = self.post(self.endpoint, self.data)
         response = self.delete(self.endpoint + "/" + str(self.partyID))
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_with_empty_values(self):
         response = self.post(self.endpoint, self.dataEmptyValues)
