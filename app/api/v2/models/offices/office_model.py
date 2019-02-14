@@ -150,6 +150,16 @@ class OfficeModel():
         return returnMessages.success(201, self.data)
 
     def officeResults(self):
-        if self.id not in dataStore["officeResults"]:
-            return returnMessages.error(404, "404 (Not Found), The office you are looking for does not exist")
-        return returnMessages.success(200, dataStore["officeResults"][self.id])
+        schema = SchemaGenerator("office_results", None, self.id).selectSpecificOfficeResult()
+        db = Database(schema, True).executeQuery()
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        if not db["data"]:
+            return {
+                "status": 404,
+                "error": "404 (NotFound), The party you are lookng for does not exist"
+            }
+        return returnMessages.success(200, db["data"])

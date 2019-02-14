@@ -20,6 +20,11 @@ class SchemaGenerator():
             SELECT * FROM """ + self.tableName + """ WHERE id = """ + self.id + """
         """
 
+    def selectSpecificOfficeResult(self):
+        return """
+            SELECT * FROM """ + self.tableName + """ WHERE office = """ + self.id + """
+        """
+
     def selectAll(self):
         return """
             SELECT * FROM """ + self.tableName + """
