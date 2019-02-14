@@ -16,9 +16,9 @@ def getAllOffices():
     return jsonify(response), response["status"]
 
 
-@party_view.route("/<id>", methods=["GET", "DELETE"])
+@party_view.route("/<id>", methods=["GET"])
 def getSpecificParty(id):
-    response = PartyModel(None, id).getAllParties()
+    response = PartyModel(None, id).getSpecificParty()
     return jsonify(response), response["status"]
 
 
@@ -28,7 +28,7 @@ def editSpecificParty(id):
     return jsonify(response), response["status"]
 
 
-@party_view.route("/<id>", methods=["PATCH"])
+@party_view.route("/<id>", methods=["DELETE"])
 def deleteSpecificParty(id):
     response = PartyModel(None, id).deleteSpecificParty()
     return jsonify(response), response["status"]

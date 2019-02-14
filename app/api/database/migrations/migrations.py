@@ -4,6 +4,7 @@ from app.api.database.database import Database
 tables = """
   CREATE TABLE IF NOT EXISTS parties(
     id serial PRIMARY KEY,
+    abbr VARCHAR (100) NOT NULL,
     name VARCHAR (100) UNIQUE NOT NULL,
     hqAddress VARCHAR (100) NOT NULL,
     logoUrl VARCHAR (100) NOT NULL
@@ -12,7 +13,7 @@ tables = """
   CREATE TABLE IF NOT EXISTS offices(
     id serial PRIMARY KEY,
     type VARCHAR (100) NOT NULL,
-    name VARCHAR (100) NOT NULL
+    name VARCHAR (100) UNIQUE NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS users(
