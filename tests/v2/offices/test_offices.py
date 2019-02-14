@@ -1,34 +1,29 @@
 import unittest
 import json
 from app import createApp
+from app.api.database.migrations.migrations import migrate
 
 
 class TestOffice(unittest.TestCase):
     def setUp(self):
         self.app = createApp("testing")
         self.client = self.app.test_client()
-        self.officeID = 3
+        self.officeID = 1
         self.endpoint = "/api/v2/offices"
         self.data = {
-          "id": 3,
           "type": "Office type",
           "name": "Office name"
         }
         self.dataNoNameProperty = {
-            "id": 3,
             "type": "Office type",
         }
         self.dataEmptyValues = {
-          "id": 3,
           "type": "",
           "name": ""
         }
 
     def tearDown(self):
-        self.app = None
-        self.client = None
-        self.data = {}
-        self.dataUpdate = {}
+        migrate()
 
     def post(self, path, data):
         return self.client.post(path=path, data=json.dumps(data), content_type='application/json')
@@ -38,7 +33,6 @@ class TestOffice(unittest.TestCase):
 
     def test_create_office(self):
         response = self.post(self.endpoint, self.data)
-        self.assertTrue(response.json["data"]["id"])
         self.assertEqual(response.status_code, 200)
 
     def test_get_all_office(self):
