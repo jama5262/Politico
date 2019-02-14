@@ -1,7 +1,7 @@
 # Politico
 [![Build Status](https://travis-ci.org/jama5262/Politico.svg?branch=develop)](https://travis-ci.org/jama5262/Politico)
 [![Coverage Status](https://coveralls.io/repos/github/jama5262/Politico/badge.svg?branch=develop)](https://coveralls.io/github/jama5262/Politico?branch=develop)
-[![Maintainability](https://api.codeclimate.com/v1/badges/02b9aee071a0230097e2/maintainability)](https://codeclimate.com/github/jama5262/Politico/maintainability)
+[![Maintainability](https://api.codeclimate.com/v2/badges/02b9aee071a0230097e2/maintainability)](https://codeclimate.com/github/jama5262/Politico/maintainability)
 
 Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
@@ -9,14 +9,24 @@ Politico enables citizens give their mandate to politicians running for differen
 
 Title | Endpoint | Method | Description
 --- | --- | --- | ---
-Create a party | /v1/parties | POST | An admin creates a party
-Get all party | /v1/parties | GET | Get get all parties
-Get specific party | /v1/parties/partyID | GET | Get a specific party
-Edit specific party | /v1/parties/partyID | PATCH | Edit a specific party
-Delete specific party | /v1/parties/partyID | DELETE | Delete a specific party
-Create an office | /v1/offices | POST | An admin creates an office
-Get all offices | /v1/offices/ | GET | Get all offices
-Get specific office | /v1/parties/officeID | GET | Get a specific office
+Sign up user | /api/v2/auth/signup | POST | User can sign up
+Login User | /api/v2/auth/login | POST |User can login
+Create a party | /api/v2/parties | POST | An admin creates a party
+Get all party | /api/v2/parties | GET | Get get all parties
+Get specific party | /api/v2/parties/<partyID> | GET | Get a specific party
+Edit specific party | /api/v2/parties/<partyID> | PATCH | Edit a specific party
+Delete specific party | /api/v2/parties/<partyID> | DELETE | Delete a specific party
+Create an office | /api/v2/offices | POST | An admin creates an office
+Get all offices | /api/v2/offices/ | GET | Get all offices
+Get specific office | /api/v2/offices/<officeID> | GET | Get a specific office
+Edit specific office | /api/v2/offices/<officeID> | PATCH | Edit a specific office
+Delete specific office | /api/v2/offices/<officeID> | DELETE | Delete a specific office
+Register candidate | /api/v2/offices/<officeID>/register | POST | A politician can register as a candidate
+Vote | /api/v2/votes | POST | A user can vote for the candidate
+Get specific office results | /api/v2/offices/<officeID>/result | GET | Get a specific office results after election
+Create a petition | /api/v2/petitions | POST | Create a petition for a concluded election
+Get all petitions | /api/v2/parties | GET | Get get all petitions
+
 
 ## Installation
 
@@ -61,20 +71,65 @@ It is recommended to use postman to send requests to the above detailed endpoint
 For this endpoint, minimum data required are as follows
 ```
 {
-  "id": 1,
-  "name": "Party Name",
-  "abbr": "Party Abbreviation",
-  "logoUrl": "Party Image URL",
-  "hqAddress": "Party HQ"
+  “id” : Integer,
+  “name” : String,
+  “hq_address” : String,
+  “logo_url” : String,
 }
 ```
 ### Office Endpoints
 For this endpoint, minimum data required are as follows
 ```
 {
-  "id": 1,
-  "type": "Office type",
-  "name": "Office name"
+  “id” : Integer,
+  “type” : String, // federal, legislative, state, or local government
+  “name” : String,
+}
+```
+### User Endpoints
+For this endpoint, minimum data required are as follows
+```
+{
+  “id” : Integer,
+  “first_name” : String,
+  “last_name” : String,
+  “other_name” : String,
+  “email” : String,
+  ”phone_number” : String,
+  “passport_url” : String,
+  “is_admin” : Boolean,
+}
+```
+### Candidates Endpoints
+For this endpoint, minimum data required are as follows
+```
+{
+  “id” : Integer,
+  “office” : Integer, // represents the office’s id
+  “party” : Integer, // represents the party’s id
+  “candidate” : Integer,
+}
+```
+### Votes Endpoints
+For this endpoint, minimum data required are as follows
+```
+{
+  “id” : Integer,
+  “created_on” : Date,
+  “created_by” : Integer, // represents the voter’s id
+  “office” : Integer, // represents the office being voted for
+  “candidate” : Integer,
+}
+```
+### Petition Endpoints
+For this endpoint, minimum data required are as follows
+```
+{
+  “id” : Integer,
+  “created_n” : Date,
+  “created_y” : Integer, // represents the citizen who created the petition
+  “office” : Integer, // represents the office which election held for
+  “text” : String,
 }
 ```
 ## Contributing
