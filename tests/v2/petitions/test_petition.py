@@ -1,6 +1,7 @@
 import unittest
 import json
 from app import createApp
+from app.api.database.migrations.migrations import migrate
 
 
 class TestPetition(unittest.TestCase):
@@ -9,24 +10,21 @@ class TestPetition(unittest.TestCase):
         self.client = self.app.test_client()
         self.endpoint = "/api/v2/petitions"
         self.data = {
-          "id": 3,
           "office": 1,
-          "createdBy": 1,
+          "created_by": 1,
           "text": "Reason for petition",
-          "evidence": "Petition evidence"
         }
         self.dataEmpty = {
-          "id": 3,
           "office": 1,
-          "createdBy": 1,
+          "created_by": 1,
           "text": "",
-          "evidence": "Petition evidence"
         }
         self.dataNoProperty = {
-          "id": 3,
           "text": "Reason for petition",
-          "evidence": "Petition evidence"
         }
+
+    def tearDown(self):
+        migrate()
 
     def post(self, path, data):
         return self.client.post(path=path, data=json.dumps(data), content_type='application/json')
@@ -36,7 +34,6 @@ class TestPetition(unittest.TestCase):
 
     def test_create_petition(self):
         response = self.post(self.endpoint, self.data)
-        self.assertTrue(response.json["data"]["id"])
         self.assertEqual(response.status_code, 200)
 
     def test_get_all_petitions(self):

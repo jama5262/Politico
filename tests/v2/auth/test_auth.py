@@ -1,6 +1,7 @@
 import unittest
 import json
 from app import createApp
+from app.api.database.migrations.migrations import migrate
 
 
 class TestAuth(unittest.TestCase):
@@ -9,36 +10,33 @@ class TestAuth(unittest.TestCase):
         self.client = self.app.test_client()
         self.endpoint = "/api/v2/auth"
         self.signupData = {
-          "id": 3,
-          "firstname": "FirstName",
-          "lastname": "LastName",
-          "othername": "OtherName",
-          "email": "Email 2",
-          "phoneNumber": "PhoneNumber",
-          "passportUrl": "Passport URL",
+          "first_name": "FirstName",
+          "last_name": "LastName",
+          "other_name": "OtherName",
+          "email": "email3@gmail.com",
+          "phone_number": "PhoneNumber",
+          "passport_url": "Passport URL",
           "password": "pass3",
-          "isAdmin": True
+          "is_admin": "yes"
         }
         self.signupDataEmpty = {
-          "id": 3,
-          "firstname": "",
-          "lastname": "",
-          "othername": "",
+          "first_name": "",
+          "last_name": "",
+          "other_name": "",
           "email": "",
-          "phoneNumber": "",
-          "passportUrl": "",
+          "phone_number": "",
+          "passport_url": "",
           "password": "",
-          "isAdmin": True
+          "is_admin": "yes"
         }
         self.signupDataNoProperty = {
-          "id": 3,
-          "firstname": "FirstName",
-          "lastname": "LastName",
+          "first_name": "FirstName",
+          "last_name": "LastName",
           "password": "pass3",
-          "isAdmin": True
+          "is_admin": "no"
         }
         self.loginData = {
-          "email": "Email 1",
+          "email": "email1@gmail.com",
           "password": "pass1"
         }
         self.loginDataEmpty = {
@@ -53,12 +51,14 @@ class TestAuth(unittest.TestCase):
           "password": "pass2"
         }
 
+    def tearDown(self):
+        migrate()
+
     def post(self, path, data):
         return self.client.post(path=path, data=json.dumps(data), content_type='application/json')
 
     def test_register_user(self):
         response = self.post(self.endpoint + "/signup", self.signupData)
-        self.assertTrue(response.json["data"]["id"])
         self.assertEqual(response.status_code, 200)
 
     def test_login(self):
