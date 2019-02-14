@@ -1,13 +1,13 @@
 from app.api.v2.utils.returnMessages.returnMessages import error
 
 propertyData = {
-  "parties": ("id", "name", "hqAddress", "logoUrl", "abbr"),
-  "offices": ("id", "name", "type"),
-  "officeMembers": ("user"),
-  "usersRegister": ("id", "firstname", "lastname", "othername", "email", "phoneNumber", "passportUrl", "isAdmin"),
+  "parties": ("name", "hqAddress", "logoUrl", "abbr"),
+  "offices": ("name", "type"),
+  "candidates": ("candidate", "office", "party"),
+  "users": ("firstname", "lastname", "othername", "email", "phoneNumber", "passportUrl", "isAdmin"),
   "userLogin": ("email", "password"),
-  "votes": ("office", "candidate", "voter"),
-  "petitions": ("id", "office", "createdBy", "text", "evidence")
+  "votes": ("office", "candidate", "createdby"),
+  "petitions": ("office", "created_By", "text")
 }
 
 

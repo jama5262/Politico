@@ -1,20 +1,7 @@
 from app.api.v2.utils.validations.validation import validate
 from app.api.v2.utils.returnMessages.returnMessages import success
-
-dataStore = {
-  "votes": {
-    "1": {
-      "office": 1,
-      "candidate": 1,
-      "voter": 1
-    },
-    "2": {
-      "office": 2,
-      "candidate": 3,
-      "voter": 2
-    }
-  }
-}
+from app.api.database.schemaGenerator.schemaGenerator import SchemaGenerator
+from app.api.database.database import Database
 
 
 class VoteModel():
@@ -26,6 +13,11 @@ class VoteModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        voterID = len(dataStore["votes"]) + 1
-        dataStore["votes"][voterID] = self.data
+        schema = SchemaGenerator(self.propertyName, self.data).insterInto()
+        db = Database(schema).executeQuery()
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
         return success(200, self.data)

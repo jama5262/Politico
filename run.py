@@ -1,8 +1,10 @@
 import os
 from app import createApp
+from app.api.database.migrations.migrations import migrate
 
 # configMode = os.getenv("APP_SETTINGS")
 app = createApp("development")
+print(migrate())
 
 
 @app.route("/")

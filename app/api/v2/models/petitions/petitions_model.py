@@ -1,24 +1,7 @@
 from app.api.v2.utils.validations.validation import validate
 from app.api.v2.utils.returnMessages import returnMessages
-
-dataStore = {
-  "petitions": {
-    "1": {
-      "id": 1,
-      "office": 1,
-      "createdBy": 1,
-      "text": "Reason for petition",
-      "evidence": "Petition evidence"
-    },
-    "2": {
-      "id": 2,
-      "office": 1,
-      "createdBy": 1,
-      "text": "Reason for petition",
-      "evidence": "Petition evidence"
-    }
-  }
-}
+from app.api.database.schemaGenerator.schemaGenerator import SchemaGenerator
+from app.api.database.database import Database
 
 
 class PetitionModel():
@@ -30,8 +13,26 @@ class PetitionModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        dataStore[self.propertyName][str(self.data["id"])] = self.data
+        schema = SchemaGenerator(self.propertyName, self.data).insterInto()
+        db = Database(schema).executeQuery()
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
         return returnMessages.success(200, self.data)
 
     def getAllPetitions(self):
-        return returnMessages.success(200, dataStore[self.propertyName])
+        schema = SchemaGenerator(self.propertyName).selectAll()
+        db = Database(schema, True).executeQuery()
+        if db["status"] == 500:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        if not db["data"]:
+            return {
+                "status": 404,
+                "error": "404 (NotFound), petitions where not found"
+            }
+        return returnMessages.success(200, db["data"])
