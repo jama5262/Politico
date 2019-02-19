@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_jwt_extended import JWTManager
 from instance.config import appConfig
 from app.api.v1.views.view import view
 from app.api.v2.views.offices.offices_view import office_view
@@ -40,6 +41,8 @@ def createApp(configName):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(appConfig[configName])
     app.config.from_pyfile('config.py')
+    app.config['JWT_SECRET_KEY'] = 'secret_key'
+    jwt = JWTManager(app)
     app.register_error_handler(404, pageNotFound)
     app.register_error_handler(405, methodNotAllowed)
     app.register_error_handler(400, badRequest)

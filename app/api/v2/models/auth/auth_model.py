@@ -22,7 +22,9 @@ class AuthModel():
                 "status": db["status"],
                 "error": db["error"]
             }
-        return returnMessages.success(200, self.data)
+        return returnMessages.success(200, {
+            "user": self.data
+        })
 
     def loginUser(self):
         valid = validate("userLogin", self.data)
@@ -41,6 +43,5 @@ class AuthModel():
                 "error": "401 (Unauthorized), Wrong login credentials"
             }
         return returnMessages.success(200, {
-            "token": "sometokenhere",
-            "user": db["data"]
+            "user": self.data
         })
