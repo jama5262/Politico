@@ -15,6 +15,13 @@ def pageNotFound(error):
     }), 404
 
 
+def badRequest(error):
+    return jsonify({
+        "status": 400,
+        "error": "400 (Bad Request), Please make sure you have valida syntax"
+    }), 400
+
+
 def methodNotAllowed(error):
     return jsonify({
       "status": 405,
@@ -35,6 +42,7 @@ def createApp(configName):
     app.config.from_pyfile('config.py')
     app.register_error_handler(404, pageNotFound)
     app.register_error_handler(405, methodNotAllowed)
+    app.register_error_handler(400, badRequest)
     app.register_error_handler(500, serverError)
     app.register_blueprint(view, url_prefix="/api/v1")
     app.register_blueprint(office_view, url_prefix="/api/v2/offices")

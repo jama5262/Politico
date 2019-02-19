@@ -22,6 +22,11 @@ def validate(propertyName, data):
             "isValid": False,
             "data": error(422, "422 (Unprocessable Entity), Please make sure the values are not empty, and that you have valid syntax")
         }
+    if checkIfUneededPropertiesExists(propertyName, data) is False:
+        return {
+            "isValid": False,
+            "data": error(422, "422 (Unprocessable Entity), Please make sure to enter the correct requests, which are " + str(propertyData[propertyName]))
+        }
     return {
         "isValid": True
     }
@@ -38,3 +43,11 @@ def checkIfPropertyValuesAreEmpty(data):
         if not data[x]:
             return False
     return True
+
+
+def checkIfUneededPropertiesExists(propertyName, data):
+    for x in data:
+        if x not in propertyData[propertyName]:
+            return False
+    else:
+        return True
