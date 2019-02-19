@@ -1,4 +1,5 @@
 import psycopg2
+from app.api.v2.utils.validations.dbValidation import validation
 
 
 class Database():
@@ -32,10 +33,7 @@ class Database():
               "data": cursor.rowcount
             }
         except (Exception, psycopg2.DatabaseError) as error:
-            return {
-              "status": 500,
-              "error": "Database error => " + str(error)
-            }
+            return validation(error.pgcode)
         finally:
             if(conn):
                 cursor.close()
