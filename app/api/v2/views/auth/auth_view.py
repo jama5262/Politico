@@ -8,14 +8,16 @@ auth_view = Blueprint("auth_view", __name__)
 @auth_view.route("/signup", methods=["POST"])
 def registerUser():
     response = AuthModel(request.get_json(force=True)).registerUser()
-    token = create_access_token(identity=response["data"]["user"]["email"])
-    response["data"]["token"] = token
+    if "data" in response:
+        token = create_access_token(identity=response["data"]["user"]["email"])
+        response["data"]["token"] = token
     return jsonify(response), response["status"]
 
 
 @auth_view.route("/login", methods=["POST"])
 def loginUser():
     response = AuthModel(request.get_json(force=True)).loginUser()
-    token = create_access_token(identity=response["data"]["user"]["email"])
-    response["data"]["token"] = token
+    if "data" in response:
+        token = create_access_token(identity=response["data"]["user"]["email"])
+        response["data"]["token"] = token
     return jsonify(response), response["status"]
