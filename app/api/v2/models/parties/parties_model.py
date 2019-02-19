@@ -1,4 +1,5 @@
 from app.api.v2.utils.validations.validation import validate
+from app.api.v2.utils.validations.validation import checkIfValuesHaveFirstLetterUpperCase
 from app.api.v2.utils.returnMessages.returnMessages import success
 from app.api.v2.utils.returnMessages.returnMessages import error
 from app.api.database.schemaGenerator.schemaGenerator import SchemaGenerator
@@ -15,7 +16,7 @@ class PartyModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.propertyName, self.data).insterInto()
+        schema = SchemaGenerator(self.propertyName, checkIfValuesHaveFirstLetterUpperCase(self.data)).insterInto()
         db = Database(schema).executeQuery()
         if db["status"] == 500:
             return {
@@ -58,7 +59,7 @@ class PartyModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.propertyName, self.data, self.id).updateSpecific()
+        schema = SchemaGenerator(self.propertyName, checkIfValuesHaveFirstLetterUpperCase(self.data), self.id).updateSpecific()
         db = Database(schema).executeQuery()
         if db["status"] == 500:
             return {
