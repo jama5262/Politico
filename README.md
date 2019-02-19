@@ -54,6 +54,12 @@ To install packages run the following
 ```
 pip install -r requirements.txt
 ```
+## Create .env file and add the following
+```
+export FLASK_APP="run.py"
+export FLASK_ENV="development"
+export APP_SETTINGS="development"
+```
 ## Running the app
 
 To run the app, simply key in the following
