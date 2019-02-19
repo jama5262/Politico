@@ -5,13 +5,13 @@ party_view = Blueprint("party_view", __name__)
 
 
 @party_view.route("", methods=["POST"])
-def createOffice():
+def createParty():
     response = PartyModel(request.get_json(force=True)).createParty()
     return jsonify(response), response["status"]
 
 
 @party_view.route("", methods=["GET"])
-def getAllOffices():
+def getAllParties():
     response = PartyModel(None).getAllParties()
     return jsonify(response), response["status"]
 
