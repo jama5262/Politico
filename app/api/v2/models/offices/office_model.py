@@ -8,14 +8,16 @@ from app.api.database.database import Database
 class OfficeModel():
     def __init__(self, data=None, id=None):
         self.propertyName = "offices"
-        self.data = data
+        if data is not None:
+            self.data = checkIfValuesHaveFirstLetterUpperCase(data)
         self.id = id
 
     def createOffice(self):
+        print(self.data)
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.propertyName, checkIfValuesHaveFirstLetterUpperCase(self.data)).insterInto()
+        schema = SchemaGenerator(self.propertyName, self.data).insterInto()
         db = Database(schema).executeQuery()
         if db["status"] == 500:
             return {
@@ -58,7 +60,7 @@ class OfficeModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.propertyName, checkIfValuesHaveFirstLetterUpperCase(self.data), self.id).updateSpecific()
+        schema = SchemaGenerator(self.propertyName, self.data, self.id).updateSpecific()
         db = Database(schema).executeQuery()
         if db["status"] == 500:
             return {
@@ -88,7 +90,7 @@ class OfficeModel():
         valid = validate("candidates", self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator("candidates", checkIfValuesHaveFirstLetterUpperCase(self.data)).insterInto()
+        schema = SchemaGenerator("candidates", self.data).insterInto()
         db = Database(schema).executeQuery()
         if db["status"] == 500:
             return {

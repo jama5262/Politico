@@ -9,14 +9,15 @@ from app.api.database.database import Database
 class PartyModel():
     def __init__(self, data=None, id=None):
         self.propertyName = "parties"
-        self.data = data
+        if data is not None:
+            self.data = checkIfValuesHaveFirstLetterUpperCase(data)
         self.id = id
 
     def createParty(self):
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.propertyName, checkIfValuesHaveFirstLetterUpperCase(self.data)).insterInto()
+        schema = SchemaGenerator(self.propertyName, self.data).insterInto()
         db = Database(schema).executeQuery()
         if db["status"] == 500:
             return {
@@ -59,7 +60,7 @@ class PartyModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.propertyName, checkIfValuesHaveFirstLetterUpperCase(self.data), self.id).updateSpecific()
+        schema = SchemaGenerator(self.propertyName, self.data, self.id).updateSpecific()
         db = Database(schema).executeQuery()
         if db["status"] == 500:
             return {

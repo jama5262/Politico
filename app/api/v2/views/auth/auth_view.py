@@ -18,6 +18,9 @@ def registerUser():
 def loginUser():
     response = AuthModel(request.get_json(force=True)).loginUser()
     if "data" in response:
-        token = create_access_token(identity=response["data"]["user"]["email"])
+        token = create_access_token(identity={
+            "email": response["data"]["user"]["email"],
+            "role": response["data"]["user"]["is_admin"]
+        })
         response["data"]["token"] = token
     return jsonify(response), response["status"]

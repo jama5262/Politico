@@ -11,23 +11,23 @@ class TestOffice(unittest.TestCase):
         self.officeID = 3
         self.endpoint = "/api/v2/offices"
         self.data = {
-          "type": "Office type",
-          "name": "Office name"
+          "type": "Legislative",
+          "name": "Office Name 22"
         }
         self.dataNoNameProperty = {
-            "type": "Office type",
+            "type": "Legislative",
         }
         self.dataEmptyValues = {
           "type": "",
           "name": ""
         }
         self.dataUpdate = {
-          "type": "Updated",
+          "type": "Legislative",
           "name": "Updated"
         }
         self.loginData = {
           "email": "email1@gmail.com",
-          "password": "pass1"
+          "password": "password1"
         }
 
     def tearDown(self):
@@ -77,8 +77,8 @@ class TestOffice(unittest.TestCase):
 
     def test_with_empty_values(self):
         response = self.post(self.endpoint, self.dataEmptyValues)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 403)
 
     def test_with_no_name_property(self):
         response = self.post(self.endpoint, self.dataNoNameProperty)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 403)

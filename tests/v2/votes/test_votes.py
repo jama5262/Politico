@@ -30,7 +30,7 @@ class TestVotes(unittest.TestCase):
         }
         self.loginData = {
           "email": "email1@gmail.com",
-          "password": "pass1"
+          "password": "password1"
         }
       
     def tearDown(self):
@@ -56,8 +56,8 @@ class TestVotes(unittest.TestCase):
 
     def test_with_empty_values_vote(self):
         response = self.post(self.endpoint, self.dataEmpty)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 403)
 
     def test_with_no_name_property_vote(self):
         response = self.post(self.endpoint, self.dataNoProperties)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 403)

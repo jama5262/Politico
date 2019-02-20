@@ -13,18 +13,18 @@ class TestParties(unittest.TestCase):
         self.data = {
           "name": "Party Name",
           "abbr": "Party Abbreviation",
-          "logo_url": "Party URL",
+          "logo_url": "http://logo/url",
           "hq_address": "Party HQ"
         }
         self.dataUpdate = {
           "name": "Updated Party Name",
           "abbr": "Updated Party Abbreviation",
-          "logo_url": "Updated Party URL",
+          "logo_url": "http://logo/url",
           "hq_address": "Updated Party HQ"
         }
         self.dataNoNameProperty = {
           "abbr": "Updated Party Abbreviation",
-          "logo_url": "Updated Party URL",
+          "logo_url": "http://logo/url",
           "hq_address": "Updated Party HQ"
         }
         self.dataEmptyValues = {
@@ -35,7 +35,7 @@ class TestParties(unittest.TestCase):
         }
         self.loginData = {
           "email": "email1@gmail.com",
-          "password": "pass1"
+          "password": "password1"
         }
 
     def tearDown(self):
@@ -85,8 +85,8 @@ class TestParties(unittest.TestCase):
 
     def test_with_empty_values(self):
         response = self.post(self.endpoint, self.dataEmptyValues)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 403)
 
     def test_with_no_name_property(self):
         response = self.post(self.endpoint, self.dataNoNameProperty)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 403)

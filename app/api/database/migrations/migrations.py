@@ -34,7 +34,7 @@ schema = """
     password VARCHAR (100) NOT NULL,
     phone_Number VARCHAR (100) UNIQUE NOT NULL,
     passport_Url VARCHAR (100) NOT NULL,
-    is_Admin BOOLEAN NOT NULL
+    is_Admin BOOLEAN DEFAULT 'no'
   );
 
   CREATE TABLE IF NOT EXISTS candidates(
@@ -78,9 +78,9 @@ schema = """
   VALUES ('Office Name 2', 'Type2');
   
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname1', 'Lname1', 'Oname1', 'email1@gmail.com', 'pass1', 'phone1', 'passport_url1', 'no');
+  VALUES ('Fname1', 'Lname1', 'Oname1', 'email1@gmail.com', 'password1', 'phone1', 'passport_url1', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname2', 'Lname2', 'Oname2', 'email2@gmail.com', 'pass2', 'phone2', 'passport_url2', 'yes');
+  VALUES ('Fname2', 'Lname2', 'Oname2', 'email2@gmail.com', 'password2', 'phone2', 'passport_url2', 'yes');
 
   INSERT INTO candidates (office, party, candidate)
   VALUES (1, 2, 2);
