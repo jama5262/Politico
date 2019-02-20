@@ -25,21 +25,32 @@ class TestOffice(unittest.TestCase):
           "type": "Updated",
           "name": "Updated"
         }
+        self.loginData = {
+          "email": "email1@gmail.com",
+          "password": "pass1"
+        }
 
     def tearDown(self):
         migrate()
 
+    def loginUser(self):
+        response = self.client.post(path="/api/v2/auth/login", data=json.dumps(self.loginData), content_type='application/json')
+        token = response.json["data"]["token"]
+        return {
+            "Authorization": "Bearer " + token
+        }
+
     def post(self, path, data):
-        return self.client.post(path=path, data=json.dumps(data), content_type='application/json')
+        return self.client.post(path=path, data=json.dumps(data), content_type='application/json', headers=self.loginUser())
 
     def get(self, path):
-        return self.client.get(path=path, content_type='application/json')
+        return self.client.get(path=path, content_type='application/json', headers=self.loginUser())
 
     def patch(self, path, data):
-        return self.client.patch(path=path, data=json.dumps(data), content_type='application/json')
+        return self.client.patch(path=path, data=json.dumps(data), content_type='application/json', headers=self.loginUser())
 
     def delete(self, path):
-        return self.client.delete(path=path, content_type='application/json')
+        return self.client.delete(path=path, content_type='application/json', headers=self.loginUser())
 
     def test_create_office(self):
         response = self.post(self.endpoint, self.data)

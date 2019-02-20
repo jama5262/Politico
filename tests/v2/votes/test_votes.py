@@ -28,12 +28,23 @@ class TestVotes(unittest.TestCase):
           "office": 1,
           "created_by": 1
         }
+        self.loginData = {
+          "email": "email1@gmail.com",
+          "password": "pass1"
+        }
       
     def tearDown(self):
         migrate()
 
+    def loginUser(self):
+        response = self.client.post(path="/api/v2/auth/login", data=json.dumps(self.loginData), content_type='application/json')
+        token = response.json["data"]["token"]
+        return {
+            "Authorization": "Bearer " + token
+        }
+
     def post(self, path, data):
-        return self.client.post(path=path, data=json.dumps(data), content_type='application/json')
+        return self.client.post(path=path, data=json.dumps(data), content_type='application/json', headers=self.loginUser())
 
     def test_create_vote(self):
         response = self.post(self.endpoint, self.data)
