@@ -19,7 +19,7 @@ def pageNotFound(error):
 def badRequest(error):
     return jsonify({
         "status": 400,
-        "error": "400 (Bad Request), Please make sure you have valida syntax"
+        "error": "400 (Bad Request), Please make sure you have valid syntax"
     }), 400
 
 
