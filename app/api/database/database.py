@@ -28,7 +28,7 @@ class Database():
             }
         except (Exception, psycopg2.DatabaseError) as error:
             return {
-                "error": "Error, " + re.match(r"[^[]*\[([^]]*)\]", str(error).replace("DETAIL:  Key ", "[").replace("\n", "]").replace('\"', "").replace(')', "").replace('(', "")).groups()[0],
+                "error": "Error, " + re.match(r"[^[]*\[([^]]*)\]", str(error).replace("DETAIL:  Key ", "[").replace("\n", "]").replace('\"', "").replace(')', "").replace('(', "").replace(" in table users", "")).groups()[0],
                 "status": 500
             }
         finally:
