@@ -8,16 +8,17 @@ from app.api.database.database import Database
 class AuthModel():
     def __init__(self, data=None, id=None):
         self.tableName = "users"
-        self.data = data
+        if data is not None:
+            self.data = checkIfValuesHaveFirstLetterUpperCase(data)
         self.id = id
 
     def registerUser(self):
         valid = validate(self.tableName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.tableName, checkIfValuesHaveFirstLetterUpperCase(self.data)).insterInto()
+        schema = SchemaGenerator(self.tableName, self.data).insterInto()
         db = Database(schema).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -32,7 +33,7 @@ class AuthModel():
             return valid["data"]
         schema = SchemaGenerator(self.tableName, self.data).userLogin()
         db = Database(schema, True).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -42,6 +43,7 @@ class AuthModel():
                 "status": 401,
                 "error": "401 (Unauthorized), Wrong login credentials"
             }
+        db["data"][0].pop("password")
         return returnMessages.success(200, {
-            "user": self.data
+            "user": db["data"][0]
         })

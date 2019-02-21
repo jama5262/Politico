@@ -15,8 +15,8 @@ class TestVotes(unittest.TestCase):
           "created_by": 2
         }
         self.dataDuplicate = {
-          "office": 1,
-          "candidate": 1,
+          "office": 2,
+          "candidate": 2,
           "created_by": 1
         }
         self.dataEmpty = {
@@ -29,8 +29,8 @@ class TestVotes(unittest.TestCase):
           "created_by": 1
         }
         self.loginData = {
-          "email": "email1@gmail.com",
-          "password": "pass1"
+          "email": "admin@gmail.com",
+          "password": "adminpass"
         }
       
     def tearDown(self):
@@ -52,12 +52,12 @@ class TestVotes(unittest.TestCase):
 
     def test_create_duplicate_vote(self):
         response = self.post(self.endpoint, self.dataDuplicate)
-        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_empty_values_vote(self):
         response = self.post(self.endpoint, self.dataEmpty)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_no_name_property_vote(self):
         response = self.post(self.endpoint, self.dataNoProperties)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 400)

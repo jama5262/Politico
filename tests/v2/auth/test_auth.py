@@ -10,14 +10,13 @@ class TestAuth(unittest.TestCase):
         self.client = self.app.test_client()
         self.endpoint = "/api/v2/auth"
         self.signupData = {
-          "first_name": "FirstName",
-          "last_name": "LastName",
-          "other_name": "OtherName",
-          "email": "email3@gmail.com",
-          "phone_number": "PhoneNumber",
-          "passport_url": "Passport URL",
-          "password": "pass3",
-          "is_admin": "yes"
+          "first_name": "FirstName4",
+          "last_name": "LastName4",
+          "other_name": "OtherName4",
+          "email": "email4@gmail.com",
+          "phone_number": "0711111114",
+          "passport_url": "http://passport/url",
+          "password": "password3",
         }
         self.signupDataEmpty = {
           "first_name": "",
@@ -27,28 +26,27 @@ class TestAuth(unittest.TestCase):
           "phone_number": "",
           "passport_url": "",
           "password": "",
-          "is_admin": "yes"
         }
         self.signupDataNoProperty = {
           "first_name": "FirstName",
           "last_name": "LastName",
-          "password": "pass3",
-          "is_admin": "no"
+          "password": "password3",
+          "email": "email1@gmail.com"
         }
         self.loginData = {
           "email": "email1@gmail.com",
-          "password": "pass1"
+          "password": "password1"
         }
         self.loginDataEmpty = {
           "email": "",
           "password": ""
         }
         self.loginDataNoProperty = {
-          "email": "Email 1",
+          "email": "email1@gmail.com",
         }
         self.wrongLoginData = {
-          "email": "Email 1",
-          "password": "pass2"
+          "email": "email1@gmail.com",
+          "password": "password2"
         }
 
     def tearDown(self):
@@ -71,16 +69,16 @@ class TestAuth(unittest.TestCase):
 
     def test_with_empty_values_signup(self):
         response = self.post(self.endpoint + "/signup", self.signupDataEmpty)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_no_name_property_signup(self):
         response = self.post(self.endpoint + "/signup", self.signupDataNoProperty)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_empty_values_login(self):
         response = self.post(self.endpoint + "/login", self.loginDataEmpty)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_no_name_property_login(self):
         response = self.post(self.endpoint + "/login", self.loginDataNoProperty)
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(response.status_code, 400)
