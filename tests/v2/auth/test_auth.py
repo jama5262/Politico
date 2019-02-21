@@ -10,11 +10,11 @@ class TestAuth(unittest.TestCase):
         self.client = self.app.test_client()
         self.endpoint = "/api/v2/auth"
         self.signupData = {
-          "first_name": "FirstName",
-          "last_name": "LastName",
-          "other_name": "OtherName",
-          "email": "email3@gmail.com",
-          "phone_number": "0754321234",
+          "first_name": "FirstName4",
+          "last_name": "LastName4",
+          "other_name": "OtherName4",
+          "email": "email4@gmail.com",
+          "phone_number": "0711111114",
           "passport_url": "http://passport/url",
           "password": "password3",
         }
@@ -69,16 +69,16 @@ class TestAuth(unittest.TestCase):
 
     def test_with_empty_values_signup(self):
         response = self.post(self.endpoint + "/signup", self.signupDataEmpty)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_no_name_property_signup(self):
         response = self.post(self.endpoint + "/signup", self.signupDataNoProperty)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_empty_values_login(self):
         response = self.post(self.endpoint + "/login", self.loginDataEmpty)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_no_name_property_login(self):
         response = self.post(self.endpoint + "/login", self.loginDataNoProperty)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 400)

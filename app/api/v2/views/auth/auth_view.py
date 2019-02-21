@@ -5,11 +5,18 @@ from flask_jwt_extended import create_access_token, jwt_required
 auth_view = Blueprint("auth_view", __name__)
 
 
+def createToken(email, isAdmin="False"):
+    return create_access_token(identity={
+        "email": email,
+        "role": isAdmin
+    })
+
+
 @auth_view.route("/signup", methods=["POST"])
 def registerUser():
     response = AuthModel(request.get_json(force=True)).registerUser()
     if "data" in response:
-        token = create_access_token(identity=response["data"]["user"]["email"])
+        token = createToken(response["data"]["user"]["email"])
         response["data"]["token"] = token
     return jsonify(response), response["status"]
 
@@ -18,9 +25,7 @@ def registerUser():
 def loginUser():
     response = AuthModel(request.get_json(force=True)).loginUser()
     if "data" in response:
-        token = create_access_token(identity={
-            "email": response["data"]["user"]["email"],
-            "role": response["data"]["user"]["is_admin"]
-        })
+        token = createToken(response["data"]["user"]["email"], str(response["data"]["user"]["is_admin"]))
         response["data"]["token"] = token
+        print(response["data"]["user"]["is_admin"])
     return jsonify(response), response["status"]

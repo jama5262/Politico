@@ -43,6 +43,7 @@ class AuthModel():
                 "status": 401,
                 "error": "401 (Unauthorized), Wrong login credentials"
             }
+        db["data"][0].pop("password")
         return returnMessages.success(200, {
             "user": db["data"][0]
         })

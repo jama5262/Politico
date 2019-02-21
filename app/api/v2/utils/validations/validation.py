@@ -99,47 +99,47 @@ def validate(propertyName, data):
     if checkIfPropertiesExists(propertyName, data) is False:
         return {
             "isValid": False,
-            "data": error(403, "Please make sure to enter the correct requests, which are " + str(propertyData[propertyName]))
+            "data": error(400, "Please make sure to enter the correct requests, which are " + str(propertyData[propertyName]))
         }
     if checkIfUneededPropertiesExists(propertyName, data) is False:
         return {
             "isValid": False,
-            "data": error(403, "Please make sure to enter the correct requests, which are " + str(propertyData[propertyName]))
+            "data": error(400, "Please make sure to enter the correct requests, which are " + str(propertyData[propertyName]))
         }
     if checkIfPropertyValuesAreEmpty(data) is False:
         return {
             "isValid": False,
-            "data": error(403, "Please make sure the values are not empty, and that you have valid syntax")
+            "data": error(400, "Please make sure the values are not empty, and that you have valid syntax")
         }
     if checkIfOnlyHasSpace(data) is True:
         return {
             "isValid": False,
-            "data": error(403, "Please make sure the values do not have whitespaces")
+            "data": error(400, "Please make sure the values do not have whitespaces")
         }
     if checkIfValidEmail(data) is False:
         return {
             "isValid": False,
-            "data": error(403, "Please make sure you have a valid email syntax")
+            "data": error(400, "Please make sure you have a valid email syntax")
         }
     if checkIfValidPassword(data) is False:
         return {
             "isValid": False,
-            "data": error(403, "Please make sure the password is more than 6 characters")
+            "data": error(400, "Please make sure the password is more than 6 characters")
         }
     if checkIfValidPhoneNumber(data) is False:
         return{
             "isValid": False,
-            "data": error(403, "Please make sure you have a valid phone number syntax")
+            "data": error(400, "Please make sure you have a valid phone number syntax")
         }
     if checkIfValidOfficeType(data) is False:
         return{
             "isValid": False,
-            "data": error(403, "Please make sure you have the correct office type which are,  " + str(officeTypes))
+            "data": error(400, "Please make sure you have the correct office type which are,  " + str(officeTypes))
         }
     if checkIfValidUrl(data) is False:
         return{
             "isValid": False,
-            "data": error(403, "Please make sure you have a valid url syntax")
+            "data": error(400, "Please make sure you have a valid url syntax")
         }
     return {
         "isValid": True

@@ -34,8 +34,8 @@ class TestParties(unittest.TestCase):
           "hq_address": ""
         }
         self.loginData = {
-          "email": "email1@gmail.com",
-          "password": "password1"
+          "email": "admin@gmail.com",
+          "password": "adminpass"
         }
 
     def tearDown(self):
@@ -85,8 +85,8 @@ class TestParties(unittest.TestCase):
 
     def test_with_empty_values(self):
         response = self.post(self.endpoint, self.dataEmptyValues)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_no_name_property(self):
         response = self.post(self.endpoint, self.dataNoNameProperty)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 400)

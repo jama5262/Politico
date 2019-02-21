@@ -36,8 +36,8 @@ class OfficeModel():
             }
         if not db["data"]:
             return {
-                "status": 404,
-                "error": "404 (NotFound), Offices where not found"
+                "status": 400,
+                "error": "400 (NotFound), Offices where not found"
             }
         return returnMessages.success(200, db["data"])
 
@@ -51,8 +51,8 @@ class OfficeModel():
             }
         if not db["data"]:
             return {
-                "status": 404,
-                "error": "404 (NotFound), The office does not exist"
+                "status": 400,
+                "error": "400 (NotFound), The office does not exist"
             }
         return returnMessages.success(200, db["data"])
 
@@ -68,7 +68,7 @@ class OfficeModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return returnMessages.error(404, "404 (Not Found) The party was not found")
+            return returnMessages.error(400, "400 (Not Found) The party was not found")
         return returnMessages.success(200, self.data)
 
     def deleteSpecificOffice(self):
@@ -81,7 +81,7 @@ class OfficeModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return returnMessages.error(404, "404 (Not Found) The party was not found")
+            return returnMessages.error(400, "400 (Not Found) The party was not found")
         return returnMessages.success(200, {
             "message": "data deleted"
         })
@@ -100,7 +100,7 @@ class OfficeModel():
         return returnMessages.success(200, self.data)
 
     def officeResults(self):
-        schema = SchemaGenerator("office_results", None, self.id).selectSpecificOfficeResult()
+        schema = SchemaGenerator("votes", None, self.id).selectSpecificOfficeResult()
         db = Database(schema, True).executeQuery()
         if db["status"] == 500:
             return {
@@ -109,7 +109,22 @@ class OfficeModel():
             }
         if not db["data"]:
             return {
-                "status": 404,
-                "error": "404 (NotFound), The party you are lookng for does not exist"
+                "status": 400,
+                "error": "400 (NotFound), The office you are lookng for does not exist"
             }
-        return returnMessages.success(200, db["data"])
+        candSet = set()
+        officeResults = []
+        for candidate in db["data"]:
+            candSet.add(candidate["candidate"])
+
+        for aSet in candSet:
+            result = 0
+            for candidate in db["data"]:
+                if aSet == candidate["candidate"]:
+                    result += 1
+            officeResults.append({
+                "office": self.id,
+                "candidate": aSet,
+                "result": result
+            })
+        return returnMessages.success(200, officeResults)

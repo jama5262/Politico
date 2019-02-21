@@ -3,13 +3,12 @@ from app.api.database.database import Database
 
 schema = """
 
-  DROP TABLE IF EXISTS petitions;
-  DROP TABLE IF EXISTS office_results;
-  DROP TABLE IF EXISTS votes;
-  DROP TABLE IF EXISTS candidates;
-  DROP TABLE IF EXISTS users;
-  DROP TABLE IF EXISTS offices;
-  DROP TABLE IF EXISTS parties;
+  DROP TABLE IF EXISTS petitions CASCADE;
+  DROP TABLE IF EXISTS votes CASCADE;
+  DROP TABLE IF EXISTS candidates CASCADE;
+  DROP TABLE IF EXISTS users CASCADE;
+  DROP TABLE IF EXISTS offices CASCADE;
+  DROP TABLE IF EXISTS parties CASCADE;
 
   CREATE TABLE IF NOT EXISTS parties(
     id serial PRIMARY KEY,
@@ -52,13 +51,6 @@ schema = """
     PRIMARY KEY (office, created_By)
   );
 
-  CREATE TABLE IF NOT EXISTS office_results(
-    id serial PRIMARY KEY,
-    candidate INTEGER REFERENCES candidates(id),
-    office INTEGER REFERENCES offices(id),
-    result INTEGER NOT NULL
-  );
-
   CREATE TABLE IF NOT EXISTS petitions(
     id serial PRIMARY KEY,
     created_By INTEGER REFERENCES users(id),
@@ -78,9 +70,13 @@ schema = """
   VALUES ('Office Name 2', 'Type2');
   
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname1', 'Lname1', 'Oname1', 'email1@gmail.com', 'password1', 'phone1', 'passport_url1', 'no');
+  VALUES ('Admin', 'Admin', 'Admin', 'admin@gmail.com', 'adminpass', '0700000000', 'https://passport/url', 'yes');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname2', 'Lname2', 'Oname2', 'email2@gmail.com', 'password2', 'phone2', 'passport_url2', 'yes');
+  VALUES ('Fname1', 'Lname1', 'Oname1', 'email1@gmail.com', 'password1', '0711111111', 'https://passport/url', 'no');
+  INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
+  VALUES ('Fname2', 'Lname2', 'Oname2', 'email2@gmail.com', 'password1', '0711111112', 'https://passport/url', 'no');
+  INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
+  VALUES ('Fname3', 'Lname3', 'Oname3', 'email3@gmail.com', 'password1', '0711111113', 'https://passport/url', 'no');
 
   INSERT INTO candidates (office, party, candidate)
   VALUES (1, 2, 2);

@@ -53,8 +53,8 @@ class TestPetition(unittest.TestCase):
 
     def test_with_empty_values(self):
         response = self.post(self.endpoint, self.dataEmpty)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_no_name_property(self):
         response = self.post(self.endpoint, self.dataNoProperty)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 400)
