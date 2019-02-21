@@ -24,7 +24,8 @@ class AuthModel():
                 "error": db["error"]
             }
         return returnMessages.success(200, {
-            "user": self.data
+            "user": self.data,
+            "msg": "Signup successfull"
         })
 
     def loginUser(self):
@@ -45,5 +46,6 @@ class AuthModel():
             }
         db["data"][0].pop("password")
         return returnMessages.success(200, {
-            "user": db["data"][0]
+            "user": db["data"][0],
+            "msg": "Login successfull"
         })

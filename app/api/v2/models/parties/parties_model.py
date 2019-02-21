@@ -24,7 +24,10 @@ class PartyModel():
                 "status": db["status"],
                 "error": db["error"]
             }
-        return success(200, self.data)
+        return success(200, {
+            "data": self.data,
+            "msg": "Party created successfully"
+        })
         
     def getAllParties(self):
         schema = SchemaGenerator(self.propertyName).selectAll()
@@ -39,7 +42,10 @@ class PartyModel():
                 "status": 404,
                 "error": "Parties where not found"
             }
-        return success(200, db["data"])
+        return success(200, {
+            "data": db["data"],
+            "msg": "All parties retrieved successfully"
+        })
 
     def getSpecificParty(self):
         schema = SchemaGenerator(self.propertyName, None, self.id).selectSpecific()
@@ -54,7 +60,10 @@ class PartyModel():
                 "status": 404,
                 "error": "The party you are lookng for does not exist"
             }
-        return success(200, db["data"])
+        return success(200, {
+            "data": db["data"],
+            "msg": "Office retrieved successfully"
+        })
 
     def editSpecificParty(self):
         valid = validate(self.propertyName, self.data)
@@ -69,7 +78,10 @@ class PartyModel():
             }
         if db["data"] < 1:
             return error(404, "The party was not found")
-        return success(200, self.data)
+        return success(200, {
+            "data": self.data,
+            "msg": "Party edited successfully"
+        })
 
     def deleteSpecificParty(self):
         schema = SchemaGenerator(self.propertyName, None, self.id).deleteSpecific()
@@ -83,5 +95,5 @@ class PartyModel():
         if db["data"] < 1:
             return error(404, "The party was not found")
         return success(200, {
-            "message": "data deleted"
+            "msg": "Party deleted successfully"
         })

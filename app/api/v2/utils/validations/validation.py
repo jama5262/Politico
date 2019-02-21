@@ -73,6 +73,8 @@ def checkIfValidPhoneNumber(data):
         phone_number = data["phone_number"]
         if not phone_number.startswith("07"):
             return False
+        if not phone_number.isdigit():
+            return False
         if len(phone_number) != 10:
             return False
     return True

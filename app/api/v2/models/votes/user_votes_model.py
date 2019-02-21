@@ -20,4 +20,7 @@ class VoteModel():
                 "status": db["status"],
                 "error": db["error"]
             }
-        return success(200, self.data)
+        return success(200, {
+            "data": self.data,
+            "msg": "Vote created successfully"
+        })

@@ -20,7 +20,10 @@ class PetitionModel():
                 "status": db["status"],
                 "error": db["error"]
             }
-        return returnMessages.success(200, self.data)
+        return returnMessages.success(200, {
+            "data": self.data,
+            "msg": "Petition created successfully"
+        })
 
     def getAllPetitions(self):
         schema = SchemaGenerator(self.propertyName).selectAll()
@@ -35,4 +38,7 @@ class PetitionModel():
                 "status": 404,
                 "error": "Petitions where not found"
             }
-        return returnMessages.success(200, db["data"])
+        return returnMessages.success(200, {
+            "data": db["data"],
+            "msg": "All petitions retrieved successfully"
+        })
