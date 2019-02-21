@@ -16,7 +16,7 @@ class TestAuth(unittest.TestCase):
           "email": "email4@gmail.com",
           "phone_number": "0711111114",
           "passport_url": "http://passport/url",
-          "password": "password3",
+          "password": "password3"
         }
         self.signupDataEmpty = {
           "first_name": "",
@@ -48,6 +48,32 @@ class TestAuth(unittest.TestCase):
           "email": "email1@gmail.com",
           "password": "password2"
         }
+        self.dataInvalidEmailAddressLogin = {
+          "email": "email1gmailcom",
+          "password": "password2"
+        }
+        self.dataInvalidPasswordLogin = {
+          "email": "email1@gmail.com",
+          "password": "pass"
+        }
+        self.datainvalidPhoneNumberSignup = {
+          "first_name": "FirstName4",
+          "last_name": "LastName4",
+          "other_name": "OtherName4",
+          "email": "email4@gmail.com",
+          "phone_number": "0711111",
+          "passport_url": "http://passport/url",
+          "password": "password3"
+        }
+        self.datainvalidPassportUrlSignup = {
+          "first_name": "FirstName4",
+          "last_name": "LastName4",
+          "other_name": "OtherName4",
+          "email": "email4@gmail.com",
+          "phone_number": "0755555555",
+          "passport_url": "passport/url",
+          "password": "password3"
+        }
 
     def tearDown(self):
         migrate()
@@ -59,6 +85,14 @@ class TestAuth(unittest.TestCase):
         response = self.post(self.endpoint + "/signup", self.signupData)
         self.assertEqual(response.status_code, 200)
 
+    def test_invalid_phone_number_signup(self):
+        response = self.post(self.endpoint + "/signup", self.datainvalidPhoneNumberSignup)
+        self.assertEqual(response.status_code, 400)
+
+    def test_invalid_passport_url_signup(self):
+        response = self.post(self.endpoint + "/signup", self.datainvalidPassportUrlSignup)
+        self.assertEqual(response.status_code, 400)
+
     def test_login(self):
         response = self.post(self.endpoint + "/login", self.loginData)
         self.assertEqual(response.status_code, 200)
@@ -66,6 +100,14 @@ class TestAuth(unittest.TestCase):
     def test_wrong_login(self):
         response = self.post(self.endpoint + "/login", self.wrongLoginData)
         self.assertEqual(response.status_code, 401)
+
+    def test_invalid_email_address_login(self):
+        response = self.post(self.endpoint + "/login", self.dataInvalidEmailAddressLogin)
+        self.assertEqual(response.status_code, 400)
+
+    def test_invalid_password_login(self):
+        response = self.post(self.endpoint + "/login", self.dataInvalidPasswordLogin)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_empty_values_signup(self):
         response = self.post(self.endpoint + "/signup", self.signupDataEmpty)

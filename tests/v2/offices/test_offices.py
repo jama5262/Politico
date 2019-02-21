@@ -18,8 +18,13 @@ class TestOffice(unittest.TestCase):
             "type": "Legislative",
         }
         self.dataEmptyValues = {
-          "type": "",
-          "name": ""
+            "type": "",
+            "name": ""
+        }
+        self.dataRegisterCandidate = {
+            "candidate": 4,
+            "office": 2,
+            "party": 2
         }
         self.dataUpdate = {
           "type": "Legislative",
@@ -65,15 +70,39 @@ class TestOffice(unittest.TestCase):
         response = self.patch(self.endpoint + "/" + str(self.officeID), self.dataUpdate)
         self.assertEqual(response.status_code, 200)
 
+    def test_edit_specific_office_not_found(self):
+        response = self.patch(self.endpoint + "/2000", self.dataUpdate)
+        self.assertEqual(response.status_code, 400)
+
     def test_delete_specific_office(self):
         postOffice = self.post(self.endpoint, self.data)
         response = self.delete(self.endpoint + "/" + str(self.officeID))
         self.assertEqual(response.status_code, 200)
 
+    def test_delete_specific_office_not_found(self):
+        response = self.delete(self.endpoint + "/2000")
+        self.assertEqual(response.status_code, 400)
+
     def test_get_specific_office(self):
         postOffice = self.post(self.endpoint, self.data)
         response = self.get(self.endpoint + "/" + str(self.officeID))
         self.assertEqual(response.status_code, 200)
+
+    def test_get_specific_specific_office_not_found(self):
+        response = self.get(self.endpoint + "/2000")
+        self.assertEqual(response.status_code, 400)
+
+    def test_register_candidate_to_office(self):
+        response = self.post(self.endpoint + "/register", self.dataRegisterCandidate)
+        self.assertEqual(response.status_code, 200)
+
+    def test_specific_office_results(self):
+        response = self.get(self.endpoint + "/2/result")
+        self.assertEqual(response.status_code, 200)
+
+    def test_specific_office_results_not_found(self):
+        response = self.get(self.endpoint + "/2000/result")
+        self.assertEqual(response.status_code, 400)
 
     def test_with_empty_values(self):
         response = self.post(self.endpoint, self.dataEmptyValues)

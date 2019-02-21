@@ -68,7 +68,7 @@ class OfficeModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return returnMessages.error(400, "400 (Not Found) The party was not found")
+            return returnMessages.error(400, "400 (Not Found) The office was not found")
         return returnMessages.success(200, self.data)
 
     def deleteSpecificOffice(self):
@@ -81,7 +81,7 @@ class OfficeModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return returnMessages.error(400, "400 (Not Found) The party was not found")
+            return returnMessages.error(400, "400 (Not Found) The office was not found")
         return returnMessages.success(200, {
             "message": "data deleted"
         })
