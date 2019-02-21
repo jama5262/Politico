@@ -24,7 +24,10 @@ class PartyModel():
                 "status": db["status"],
                 "error": db["error"]
             }
-        return success(200, self.data)
+        return success(200, {
+            "data": self.data,
+            "msg": "Party created successfully"
+        })
         
     def getAllParties(self):
         schema = SchemaGenerator(self.propertyName).selectAll()
@@ -37,9 +40,12 @@ class PartyModel():
         if not db["data"]:
             return {
                 "status": 404,
-                "error": "404 (NotFound), Parties where not found"
+                "error": "Parties where not found"
             }
-        return success(200, db["data"])
+        return success(200, {
+            "data": db["data"],
+            "msg": "All parties retrieved successfully"
+        })
 
     def getSpecificParty(self):
         schema = SchemaGenerator(self.propertyName, None, self.id).selectSpecific()
@@ -52,9 +58,12 @@ class PartyModel():
         if not db["data"]:
             return {
                 "status": 404,
-                "error": "404 (NotFound), The party you are lookng for does not exist"
+                "error": "The party you are lookng for does not exist"
             }
-        return success(200, db["data"])
+        return success(200, {
+            "data": db["data"],
+            "msg": "Office retrieved successfully"
+        })
 
     def editSpecificParty(self):
         valid = validate(self.propertyName, self.data)
@@ -68,8 +77,11 @@ class PartyModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return error(404, "404 (Not Found) The party was not found")
-        return success(200, self.data)
+            return error(404, "The party was not found")
+        return success(200, {
+            "data": self.data,
+            "msg": "Party edited successfully"
+        })
 
     def deleteSpecificParty(self):
         schema = SchemaGenerator(self.propertyName, None, self.id).deleteSpecific()
@@ -81,7 +93,7 @@ class PartyModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return error(404, "404 (Not Found) The party was not found")
+            return error(404, "The party was not found")
         return success(200, {
-            "message": "data deleted"
+            "msg": "Party deleted successfully"
         })

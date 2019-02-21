@@ -24,7 +24,8 @@ class AuthModel():
                 "error": db["error"]
             }
         return returnMessages.success(200, {
-            "user": self.data
+            "user": self.data,
+            "msg": "Signup successfull"
         })
 
     def loginUser(self):
@@ -41,9 +42,10 @@ class AuthModel():
         if not db["data"]:
             return {
                 "status": 401,
-                "error": "401 (Unauthorized), Wrong login credentials"
+                "error": "Wrong login credentials"
             }
         db["data"][0].pop("password")
         return returnMessages.success(200, {
-            "user": db["data"][0]
+            "user": db["data"][0],
+            "msg": "Login successfull"
         })

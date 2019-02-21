@@ -62,15 +62,15 @@ def deleteSpecificOffice(id):
     return jsonify(response), response["status"]
 
 
-@office_view.route("/<id>/register", methods=["POST"])
+@office_view.route("/register", methods=["POST"])
 @jwt_required
-def userRegisterToOffice(id):
+def userRegisterToOffice():
     if checkIfAuthorized() is False:
         return jsonify({
             "error": "You are not authorized to register a user to office",
             "status": 403
         }), 403
-    response = OfficeModel(request.get_json(force=True), id).userRegisterToOffice()
+    response = OfficeModel(request.get_json(force=True)).userRegisterToOffice()
     return jsonify(response), response["status"]
 
 

@@ -24,7 +24,10 @@ class OfficeModel():
                 "status": db["status"],
                 "error": db["error"]
             }
-        return returnMessages.success(200, self.data)
+        return returnMessages.success(200, {
+            "data": self.data,
+            "msg": "Office created successfully"
+        })
 
     def getAllOffices(self):
         schema = SchemaGenerator(self.propertyName).selectAll()
@@ -36,10 +39,13 @@ class OfficeModel():
             }
         if not db["data"]:
             return {
-                "status": 400,
-                "error": "400 (NotFound), Offices where not found"
+                "status": 404,
+                "error": "Offices where not found"
             }
-        return returnMessages.success(200, db["data"])
+        return returnMessages.success(200, {
+            "data": db["data"],
+            "msg": "All offices retrieved successfully"
+        })
 
     def getSpecificOffice(self):
         schema = SchemaGenerator(self.propertyName, None, self.id).selectSpecific()
@@ -51,10 +57,13 @@ class OfficeModel():
             }
         if not db["data"]:
             return {
-                "status": 400,
-                "error": "400 (NotFound), The office does not exist"
+                "status": 404,
+                "error": "The office was not found"
             }
-        return returnMessages.success(200, db["data"])
+        return returnMessages.success(200, {
+            "data": db["data"],
+            "msg": "Office retrieved successfully"
+        })
 
     def editSpecificOffice(self):
         valid = validate(self.propertyName, self.data)
@@ -68,8 +77,11 @@ class OfficeModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return returnMessages.error(400, "400 (Not Found) The party was not found")
-        return returnMessages.success(200, self.data)
+            return returnMessages.error(404, "The office was not found")
+        return returnMessages.success(200, {
+            "data": self.data,
+            "msg": "Office edited successfully"
+        })
 
     def deleteSpecificOffice(self):
         schema = SchemaGenerator(self.propertyName, None, self.id).deleteSpecific()
@@ -81,9 +93,9 @@ class OfficeModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return returnMessages.error(400, "400 (Not Found) The party was not found")
+            return returnMessages.error(404, "The office was not found")
         return returnMessages.success(200, {
-            "message": "data deleted"
+            "msg": "Office deleted successfully"
         })
 
     def userRegisterToOffice(self):
@@ -97,7 +109,10 @@ class OfficeModel():
                 "status": db["status"],
                 "error": db["error"]
             }
-        return returnMessages.success(200, self.data)
+        return returnMessages.success(200, {
+            "data": self.data,
+            "msg": "User registered successfully as a candidate"
+        })
 
     def officeResults(self):
         schema = SchemaGenerator("votes", None, self.id).selectSpecificOfficeResult()
@@ -109,8 +124,8 @@ class OfficeModel():
             }
         if not db["data"]:
             return {
-                "status": 400,
-                "error": "400 (NotFound), The office you are lookng for does not exist"
+                "status": 404,
+                "error": "The office you are lookng for does not exist"
             }
         candSet = set()
         officeResults = []
@@ -127,4 +142,7 @@ class OfficeModel():
                 "candidate": aSet,
                 "result": result
             })
-        return returnMessages.success(200, officeResults)
+        return returnMessages.success(200, {
+            "data": officeResults,
+            "msg": "Office results retrieved successfully"
+        })
