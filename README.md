@@ -5,6 +5,9 @@
 
 Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
+## API Documentation
+[API Documentation Link](https://documenter.getpostman.com/view/572556/S11Ex16o)
+
 ## Run in postman
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/bccd4c976a5efc9dbbad)
 
