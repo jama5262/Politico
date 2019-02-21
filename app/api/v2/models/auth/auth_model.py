@@ -18,7 +18,7 @@ class AuthModel():
             return valid["data"]
         schema = SchemaGenerator(self.tableName, self.data).insterInto()
         db = Database(schema).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -33,7 +33,7 @@ class AuthModel():
             return valid["data"]
         schema = SchemaGenerator(self.tableName, self.data).userLogin()
         db = Database(schema, True).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]

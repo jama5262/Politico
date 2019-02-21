@@ -19,7 +19,7 @@ class PartyModel():
             return valid["data"]
         schema = SchemaGenerator(self.propertyName, self.data).insterInto()
         db = Database(schema).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -29,7 +29,7 @@ class PartyModel():
     def getAllParties(self):
         schema = SchemaGenerator(self.propertyName).selectAll()
         db = Database(schema, True).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -44,7 +44,7 @@ class PartyModel():
     def getSpecificParty(self):
         schema = SchemaGenerator(self.propertyName, None, self.id).selectSpecific()
         db = Database(schema, True).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -62,7 +62,7 @@ class PartyModel():
             return valid["data"]
         schema = SchemaGenerator(self.propertyName, self.data, self.id).updateSpecific()
         db = Database(schema).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -75,7 +75,7 @@ class PartyModel():
         schema = SchemaGenerator(self.propertyName, None, self.id).deleteSpecific()
         print(schema)
         db = Database(schema).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]

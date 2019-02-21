@@ -19,7 +19,7 @@ class OfficeModel():
             return valid["data"]
         schema = SchemaGenerator(self.propertyName, self.data).insterInto()
         db = Database(schema).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -29,7 +29,7 @@ class OfficeModel():
     def getAllOffices(self):
         schema = SchemaGenerator(self.propertyName).selectAll()
         db = Database(schema, True).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -44,7 +44,7 @@ class OfficeModel():
     def getSpecificOffice(self):
         schema = SchemaGenerator(self.propertyName, None, self.id).selectSpecific()
         db = Database(schema, True).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -62,7 +62,7 @@ class OfficeModel():
             return valid["data"]
         schema = SchemaGenerator(self.propertyName, self.data, self.id).updateSpecific()
         db = Database(schema).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -75,7 +75,7 @@ class OfficeModel():
         schema = SchemaGenerator(self.propertyName, None, self.id).deleteSpecific()
         print(schema)
         db = Database(schema).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -92,7 +92,7 @@ class OfficeModel():
             return valid["data"]
         schema = SchemaGenerator("candidates", self.data).insterInto()
         db = Database(schema).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -102,7 +102,7 @@ class OfficeModel():
     def officeResults(self):
         schema = SchemaGenerator("votes", None, self.id).selectSpecificOfficeResult()
         db = Database(schema, True).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]

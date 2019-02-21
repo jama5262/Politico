@@ -15,7 +15,7 @@ class PetitionModel():
             return valid["data"]
         schema = SchemaGenerator(self.propertyName, self.data).insterInto()
         db = Database(schema).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
@@ -25,7 +25,7 @@ class PetitionModel():
     def getAllPetitions(self):
         schema = SchemaGenerator(self.propertyName).selectAll()
         db = Database(schema, True).executeQuery()
-        if db["status"] == 500:
+        if db["status"] == 400:
             return {
                 "status": db["status"],
                 "error": db["error"]
