@@ -33,6 +33,6 @@ class PetitionModel():
         if not db["data"]:
             return {
                 "status": 404,
-                "error": "404 (NotFound), petitions where not found"
+                "error": "Petitions where not found"
             }
         return returnMessages.success(200, db["data"])

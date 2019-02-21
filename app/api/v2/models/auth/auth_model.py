@@ -41,7 +41,7 @@ class AuthModel():
         if not db["data"]:
             return {
                 "status": 401,
-                "error": "401 (Unauthorized), Wrong login credentials"
+                "error": "Wrong login credentials"
             }
         db["data"][0].pop("password")
         return returnMessages.success(200, {

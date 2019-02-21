@@ -73,15 +73,27 @@ class TestParties(unittest.TestCase):
         response = self.get(self.endpoint + "/" + str(self.partyID))
         self.assertEqual(response.status_code, 200)
 
+    def test_get_specific_party_not_found(self):
+        response = self.get(self.endpoint + "/2000")
+        self.assertEqual(response.status_code, 404)
+
     def test_edit_specific_party(self):
         postParty = self.post(self.endpoint, self.data)
         response = self.patch(self.endpoint + "/" + str(self.partyID), self.dataUpdate)
         self.assertEqual(response.status_code, 200)
 
+    def test_edit_specific_party_not_found(self):
+        response = self.patch(self.endpoint + "/2000", self.dataUpdate)
+        self.assertEqual(response.status_code, 404)
+
     def test_delete_specific_party(self):
         postParty = self.post(self.endpoint, self.data)
         response = self.delete(self.endpoint + "/" + str(self.partyID))
         self.assertEqual(response.status_code, 200)
+
+    def test_delete_specific_party_not_found(self):
+        response = self.delete(self.endpoint + "/2000")
+        self.assertEqual(response.status_code, 404)
 
     def test_with_empty_values(self):
         response = self.post(self.endpoint, self.dataEmptyValues)

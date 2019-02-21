@@ -37,7 +37,7 @@ class PartyModel():
         if not db["data"]:
             return {
                 "status": 404,
-                "error": "404 (NotFound), Parties where not found"
+                "error": "Parties where not found"
             }
         return success(200, db["data"])
 
@@ -52,7 +52,7 @@ class PartyModel():
         if not db["data"]:
             return {
                 "status": 404,
-                "error": "404 (NotFound), The party you are lookng for does not exist"
+                "error": "The party you are lookng for does not exist"
             }
         return success(200, db["data"])
 
@@ -68,7 +68,7 @@ class PartyModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return error(404, "404 (Not Found) The party was not found")
+            return error(404, "The party was not found")
         return success(200, self.data)
 
     def deleteSpecificParty(self):
@@ -81,7 +81,7 @@ class PartyModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return error(404, "404 (Not Found) The party was not found")
+            return error(404, "The party was not found")
         return success(200, {
             "message": "data deleted"
         })

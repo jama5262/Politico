@@ -37,7 +37,7 @@ class OfficeModel():
         if not db["data"]:
             return {
                 "status": 400,
-                "error": "400 (NotFound), Offices where not found"
+                "error": "Offices where not found"
             }
         return returnMessages.success(200, db["data"])
 
@@ -51,8 +51,8 @@ class OfficeModel():
             }
         if not db["data"]:
             return {
-                "status": 400,
-                "error": "400 (NotFound), The office does not exist"
+                "status": 404,
+                "error": "The office does not exist"
             }
         return returnMessages.success(200, db["data"])
 
@@ -68,7 +68,7 @@ class OfficeModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return returnMessages.error(400, "400 (Not Found) The office was not found")
+            return returnMessages.error(404, "The office was not found")
         return returnMessages.success(200, self.data)
 
     def deleteSpecificOffice(self):
@@ -81,7 +81,7 @@ class OfficeModel():
                 "error": db["error"]
             }
         if db["data"] < 1:
-            return returnMessages.error(400, "400 (Not Found) The office was not found")
+            return returnMessages.error(404, "The office was not found")
         return returnMessages.success(200, {
             "message": "data deleted"
         })
@@ -109,8 +109,8 @@ class OfficeModel():
             }
         if not db["data"]:
             return {
-                "status": 400,
-                "error": "400 (NotFound), The office you are lookng for does not exist"
+                "status": 404,
+                "error": "The office you are lookng for does not exist"
             }
         candSet = set()
         officeResults = []
