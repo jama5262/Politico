@@ -52,7 +52,7 @@ class TestVotes(unittest.TestCase):
 
     def test_create_duplicate_vote(self):
         response = self.post(self.endpoint, self.dataDuplicate)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 400)
 
     def test_with_empty_values_vote(self):
         response = self.post(self.endpoint, self.dataEmpty)
