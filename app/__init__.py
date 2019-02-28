@@ -38,6 +38,27 @@ def serverError(error):
     })
 
 
+def tokenExpired(error):
+    return jsonify({
+        "status": 401,
+        "error": "401 (Unauthorized), Your session has expired"
+    }), 401
+
+
+def invalidToken(error):
+    return jsonify({
+        "status": 401,
+        "error": "401 (Unauthorized), You have an invalid token, please login or signup to get a valid token"
+    }), 401
+
+
+def missingHeader(error):
+    return jsonify({
+        "status": 401,
+        "error": "401 (Unauthorized), The request does not have an Authorization header"
+    }), 401
+
+
 def createApp(configName):
     app = Flask(__name__, instance_relative_config=True)
     CORS(app)
@@ -45,6 +66,9 @@ def createApp(configName):
     app.config.from_pyfile('config.py')
     app.config['JWT_SECRET_KEY'] = 'secret_key'
     jwt = JWTManager(app)
+    jwt.expired_token_loader(tokenExpired)
+    jwt.invalid_token_loader(invalidToken)
+    jwt.unauthorized_loader(missingHeader)
     app.register_error_handler(404, pageNotFound)
     app.register_error_handler(405, methodNotAllowed)
     app.register_error_handler(400, badRequest)
