@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from instance.config import appConfig
 from app.api.v1.views.view import view
@@ -39,6 +40,7 @@ def serverError(error):
 
 def createApp(configName):
     app = Flask(__name__, instance_relative_config=True)
+    CORS(app)
     app.config.from_object(appConfig[configName])
     app.config.from_pyfile('config.py')
     app.config['JWT_SECRET_KEY'] = 'secret_key'
