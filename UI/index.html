@@ -19,7 +19,8 @@
         <p style="margin: 10px 0">Your vote counts</p>
       </div>
       <div class="login-container">
-        <div style="display: flex; flex-direction: column" class="card-design">
+        <div style="display: flex; flex-direction: column; width: 250px" class="card-design">
+          <p id="errorMessage" style="color: red; display: none; width: 100%"></p>
           <input class="input-design" placeholder="Email" type="email" required name="" id="emailLogin">
           <input class="input-design" placeholder="Password" type="password" required name="" id="passwordLogin">
           <div class="reset-container">
@@ -28,11 +29,8 @@
         </div>
       </div>
       <div class="button-container">
-        <!-- <a href="./users/parties/index.html"><button class="button-design">login</button></a> -->
+          <a id="successLogin" style="display: none" href="./users/parties/index.html"></a>
         <button id="loginBtn" class="button-design">login</button>
-      </div>
-      <div class="button-container-2">
-        <a style="width: 100%;" href="./auth/politicianSignUp.html"><button style="width: 100%;" class="button-design">run for office</button></a>
       </div>
       <div class="link-container">
         <a href="./auth/signup.html"><p>Don't have an account?<br>Create one</p></a>

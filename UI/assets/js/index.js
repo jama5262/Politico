@@ -1,9 +1,19 @@
 window.onload = () => {
   let loginBtn = document.getElementById("loginBtn");
+  let email = document.getElementById("emailLogin");
+  let password = document.getElementById("passwordLogin");
+  let errorMessage = document.getElementById("errorMessage");
+
+  let errorMessageFunc = (text, type) => {
+    errorMessage.style.display = type;
+    errorMessage.innerHTML = text;
+  }
+
   loginBtn.addEventListener("click", () => {
+    errorMessageFunc("", "none");
     userData = {
-      email: "emai1@gmail.com",
-      password: "password1"
+      email: email.value,
+      password: password.value
     }
     performFetch('/auth/login', "POST", userData, false)
     .then((data) => {
@@ -14,14 +24,14 @@ window.onload = () => {
           token: data.data.token
         });
       } else {
-        console.log(data);
+        errorMessageFunc(data.error, "unset");
       }
     })
     .then((data) => {
       if (data != null) {
-        console.log(data);
+        window.location.href = document.getElementById("successLogin").getAttribute("href");
       } else {
-        console.log("not saved")
+        console.log("Authentication error")
       }
     })
     .catch((error) => {
