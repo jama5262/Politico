@@ -9,7 +9,7 @@
 /* INDEX STYLE */
 .party-image-index{
   height: 60px;
-  background-image: url("../../../images/partyImages/kanu.png");
+  background-image: url("../../../assets/images/partyImages/kanu.png");
   background-size: cover;
   border-radius: 7px;
   background-repeat: no-repeat;
@@ -50,7 +50,7 @@ tr:nth-child(even) {
 }
 .party-image{
   height: 100%;
-  background-image: url("../../../images/adminImages/createPartyImage.jpg");
+  background-image: url("../../../assets/images/adminImages/createPartyImage.jpg");
   background-size: cover;
   border-radius: 7px;
   background-repeat: no-repeat;

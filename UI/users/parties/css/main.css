@@ -13,7 +13,7 @@ h6{
 .party-image-holder-index{
   width: 100%;
   height: 100px;
-  background-image: url("../../../images/partyImages/kanu.png");
+  background-image: url("../../../assets/images/partyImages/kanu.png");
   background-size: cover;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
@@ -48,7 +48,7 @@ h6{
 .party-image-holder-party{
   width: 100%;
   height: 200px;
-  background-image: url("../../../images/partyImages/kanu.png");
+  background-image: url("../../../assets/images/partyImages/kanu.png");
   background-size: cover;
   border-radius: 7px;
   background-repeat: no-repeat;
@@ -72,7 +72,7 @@ h6{
 .party-profile-image-holder-party{
   width: 100%;
   height: 150px;
-  background-image: url("../../../images/politicians/politician1.jpg");
+  background-image: url("../../../assets/images/politicians/politician1.jpg");
   background-size: cover;
   border-radius: 7px;
   background-repeat: no-repeat;
