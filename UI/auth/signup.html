@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
-    <script src="../assets/js/main.js"></script>
+    <script src="../api/indexeddb.js"></script>
+    <script src="../api/fetch.js"></script>
+    <script src="./js/main.js"></script>
   </head>
   <body>
     <div class="main-container">
@@ -17,9 +19,12 @@
       </div>
       <div class="sub-container">
         <form action="">
-          <div style="display: flex; flex-direction: column" class="card-design">
-            <input class="input-design" placeholder="Full Names" type="text" required name="" id="fNameSignUp">
-            <input class="input-design" placeholder="ID Number" type="text" required name="" id="idNoSignUp">
+          <div style="display: flex; flex-direction: column; width: 250px" class="card-design">
+            <p id="errorMessage" style="color: red; display: none; width: 100%"></p>
+            <input class="input-design" placeholder="First Names" type="text" required name="" id="fNameSignUp">
+            <input class="input-design" placeholder="Last Name" type="text" required name="" id="lNameSignUp">
+            <input class="input-design" placeholder="Other Name" type="text" required name="" id="oNameSignUp">
+            <input class="input-design" placeholder="Passport Url" type="text" required name="" id="pportSignUp">
             <input class="input-design" placeholder="Phone Number" type="text" required name="" id="phoneSignUp">
             <input class="input-design" placeholder="Email" type="email" required name="" id="emailSignUp">
             <input class="input-design" placeholder="Password" type="password" required name="" id="passwordSignUp">
@@ -27,8 +32,9 @@
         </form>
       </div>
       <div class="button-container">
+        <a id="successSignup" style="display: none" href="../users/parties/index.html"></a>
         <button id="goBack" class="button-design">go back</button>
-        <button class="button-design">sign up</button>
+        <button id="signupBtn" class="button-design">sign up</button>
       </div>
     </div>
   </body>

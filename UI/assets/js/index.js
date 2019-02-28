@@ -2,7 +2,7 @@ window.onload = () => {
   let loginBtn = document.getElementById("loginBtn");
   let email = document.getElementById("emailLogin");
   let password = document.getElementById("passwordLogin");
-  errorMessage = document.getElementById("errorMessage");
+  let errorMessage = document.getElementById("errorMessage");
 
   let errorMessageFunc = (text, type) => {
     errorMessage.style.display = type;
@@ -29,7 +29,7 @@ window.onload = () => {
     })
     .then((data) => {
       if (data != null) {
-        window.open("../../../UI/users/parties/index.html", "_self")
+        window.location.href = document.getElementById("successLogin").getAttribute("href");
       } else {
         console.log("Authentication error")
       }
