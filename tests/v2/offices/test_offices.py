@@ -12,7 +12,7 @@ class TestOffice(unittest.TestCase):
         self.endpoint = "/api/v2/offices"
         self.data = {
           "type": "Legislative",
-          "name": "Office Name 22"
+          "name": "Office Name 1"
         }
         self.dataNoNameProperty = {
             "type": "Legislative",
@@ -22,7 +22,7 @@ class TestOffice(unittest.TestCase):
             "name": ""
         }
         self.dataRegisterCandidate = {
-            "candidate": 4,
+            "candidate": 3,
             "office": 2,
             "party": 2
         }

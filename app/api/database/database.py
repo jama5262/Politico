@@ -27,6 +27,7 @@ class Database():
               "data": cursor.rowcount
             }
         except (Exception, psycopg2.DatabaseError) as error:
+            print(str(error))
             return {
                 "error": "Error, " + re.match(r"[^[]*\[([^]]*)\]", str(error).replace("DETAIL:  Key ", "[").replace("\n", "]").replace('\"', "").replace(')', "").replace('(', "").replace(" in table users", "")).groups()[0],
                 "status": 400

@@ -13,9 +13,9 @@ class TestAuth(unittest.TestCase):
           "first_name": "FirstName4",
           "last_name": "LastName4",
           "other_name": "OtherName4",
-          "email": "email4@gmail.com",
-          "phone_number": "0711111114",
-          "passport_url": "http://passport/url",
+          "email": "email10@gmail.com",
+          "phone_number": "0711111133",
+          "passport_url": "https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png",
           "password": "password3"
         }
         self.signupDataEmpty = {

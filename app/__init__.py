@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+import datetime
 from flask_jwt_extended import JWTManager
 from instance.config import appConfig
 from app.api.v1.views.view import view
@@ -13,49 +14,49 @@ from app.api.v2.views.petitions.petitions_view import petition_view
 def pageNotFound(error):
     return jsonify({
         "status": 404,
-        "error": "404 (Not Found), The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again."
+        "error": "The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again."
     }), 404
 
 
 def badRequest(error):
     return jsonify({
         "status": 400,
-        "error": "400 (Bad Request), Please make sure you have valid syntax"
+        "error": "Please make sure you have valid syntax"
     }), 400
 
 
 def methodNotAllowed(error):
     return jsonify({
       "status": 405,
-      "error": "405 (Method Not Allowed), The method is not allowed for the requested URL"
+      "error": "The method is not allowed for the requested URL"
     })
 
 
 def serverError(error):
     return jsonify({
       "status": 500,
-      "error": "500 (Internal Server Error), There was a server error, please try agin later"
+      "error": "There was a server error, please try agin later"
     })
 
 
 def tokenExpired(error):
     return jsonify({
         "status": 401,
-        "error": "401 (Unauthorized), Your session has expired"
+        "error": "Your session has expired"
     }), 401
 
 
 def invalidToken(error):
     return jsonify({
         "status": 401,
-        "error": "401 (Unauthorized), You have an invalid token, please login or signup to get a valid token"
+        "error": "You have an invalid token, please login or signup to get a valid token"
     }), 401
 
 
 def missingHeader(error):
     return jsonify({
         "status": 401,
-        "error": "401 (Unauthorized), The request does not have an Authorization header"
+        "error": "The request does not have an Authorization header"
     }), 401
 
 
@@ -65,6 +66,7 @@ def createApp(configName):
     app.config.from_object(appConfig[configName])
     app.config.from_pyfile('config.py')
     app.config['JWT_SECRET_KEY'] = 'secret_key'
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(minutes=60)
     jwt = JWTManager(app)
     jwt.expired_token_loader(tokenExpired)
     jwt.invalid_token_loader(invalidToken)

@@ -15,7 +15,7 @@ schema = """
     name VARCHAR (100) UNIQUE NOT NULL,
     abbr VARCHAR (100) NOT NULL,
     hq_Address VARCHAR (100) NOT NULL,
-    logo_Url VARCHAR (100) NOT NULL
+    logo_Url VARCHAR (255) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS offices(
@@ -32,7 +32,7 @@ schema = """
     email VARCHAR (100) UNIQUE NOT NULL,
     password VARCHAR (100) NOT NULL,
     phone_Number VARCHAR (100) UNIQUE NOT NULL,
-    passport_Url VARCHAR (100) NOT NULL,
+    passport_Url VARCHAR (255) NOT NULL,
     is_Admin BOOLEAN DEFAULT 'no'
   );
 
@@ -60,23 +60,45 @@ schema = """
   );
 
   INSERT INTO parties (name, abbr, hq_address, logo_url)
-  VALUES ('Party Name 1', 'PT1', 'Address1', 'Logo1');
+  VALUES ('Kenya African National Union', 'KANU', 'Nairobi', 'https://upload.wikimedia.org/wikipedia/en/7/77/Kenya_African_National_Union.gif');
   INSERT INTO parties (name, abbr, hq_address, logo_url)
-  VALUES ('Party Name 2', 'PT2', 'Address2', 'Logo2');
+  VALUES ('Wiper Democratic Movement', 'WDM', 'Nairobi', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Wiper_kenya_wdm_logo.png/180px-Wiper_kenya_wdm_logo.png');
+  INSERT INTO parties (name, abbr, hq_address, logo_url)
+  VALUES ('Party of National Unity', 'PNU', 'Nairobi', 'https://scontent.fnbo2-1.fna.fbcdn.net/v/t1.0-9/15107266_1641931199440720_3113004755651256116_n.jpg?_nc_cat=101&_nc_ht=scontent.fnbo2-1.fna&oh=dd470a86f4183893c1162706e1cc6657&oe=5D251F27');
+  INSERT INTO parties (name, abbr, hq_address, logo_url)
+  VALUES ('Forum for the Restoration of Democracy', 'FRD', 'Nairobi', 'https://upload.wikimedia.org/wikipedia/en/thumb/1/17/FORD_-_KENYA_logo.png/150px-FORD_-_KENYA_logo.png');
+  INSERT INTO parties (name, abbr, hq_address, logo_url)
+  VALUES ('National Rainbow Coalition', 'NARK', 'Nairobi', 'https://upload.wikimedia.org/wikipedia/en/5/52/Narc_Kenya_logo.jpg');
+  INSERT INTO parties (name, abbr, hq_address, logo_url)
+  VALUES ('Chama Cha Uzalendo', 'CCU', 'Nairobi', 'https://pbs.twimg.com/profile_images/801425724473278464/DC0sw8GL_400x400.jpg');
 
   INSERT INTO offices (name, type)
-  VALUES ('Office Name 1', 'Type1');
+  VALUES ('Ministry of Defence', 'State');
   INSERT INTO offices (name, type)
-  VALUES ('Office Name 2', 'Type2');
-  
+  VALUES ('Ministry of Foreign Affairs', 'State');
+  INSERT INTO offices (name, type)
+  VALUES ('Ministry of Industry, Trade & Co-operatives', 'State');
+  INSERT INTO offices (name, type)
+  VALUES ('Ministry of Health', 'State');
+  INSERT INTO offices (name, type)
+  VALUES ('Ministry of Devolution and the ASALS', 'State');
+  INSERT INTO offices (name, type)
+  VALUES ('Ministry of Education', 'State');
+
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Admin', 'Admin', 'Admin', 'admin@gmail.com', 'adminpass', '0700000000', 'https://passport/url', 'yes');
+  VALUES ('Admin', 'Admin', 'Admin', 'admin@gmail.com', 'adminpass', '0700000000', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'yes');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname1', 'Lname1', 'Oname1', 'email1@gmail.com', 'password1', '0711111111', 'https://passport/url', 'no');
+  VALUES ('Fname1', 'Lname1', 'Oname1', 'email1@gmail.com', 'password1', '0711111111', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname2', 'Lname2', 'Oname2', 'email2@gmail.com', 'password1', '0711111112', 'https://passport/url', 'no');
+  VALUES ('Fname2', 'Lname2', 'Oname2', 'email2@gmail.com', 'password1', '0711111112', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname3', 'Lname3', 'Oname3', 'email3@gmail.com', 'password1', '0711111113', 'https://passport/url', 'no');
+  VALUES ('Fname3', 'Lname3', 'Oname3', 'email3@gmail.com', 'password1', '0711111113', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
+  VALUES ('Fname4', 'Lname4', 'Oname4', 'email4@gmail.com', 'password1', '0711111114', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
+  VALUES ('Fname5', 'Lname5', 'Oname5', 'email5@gmail.com', 'password1', '0711111115', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
+  VALUES ('Fname6', 'Lname6', 'Oname6', 'email6@gmail.com', 'password1', '0711111116', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
 
   INSERT INTO candidates (office, party, candidate)
   VALUES (1, 2, 2);
@@ -86,11 +108,6 @@ schema = """
   INSERT INTO votes (created_by, office, candidate)
   VALUES (1, 1, 2);
   INSERT INTO votes (created_by, office, candidate)
-  VALUES (1, 2, 2);
-
-  INSERT INTO office_results (candidate, office, result)
-  VALUES (1, 2, 2);
-  INSERT INTO office_results (candidate, office, result)
   VALUES (1, 2, 2);
 
   INSERT INTO petitions (created_By, office, text)
