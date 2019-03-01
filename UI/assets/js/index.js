@@ -1,41 +1,50 @@
 window.onload = () => {
   let loginBtn = document.getElementById("loginBtn");
-  let email = document.getElementById("emailLogin");
-  let password = document.getElementById("passwordLogin");
-  let errorMessage = document.getElementById("errorMessage");
 
-  let errorMessageFunc = (text, type) => {
-    errorMessage.style.display = type;
-    errorMessage.innerHTML = text;
+  class Login {
+    constructor() {
+      this.email = document.getElementById("emailLogin");
+      this.password = document.getElementById("passwordLogin");
+      this.errorMessage = document.getElementById("errorMessage");
+    }
+    errorMessageFunc(text, type) {
+      this.errorMessage.style.display = type;
+      this.errorMessage.innerHTML = text;
+    }
+    loading(load) {
+      let instance = new Alert();
+      if (load) {
+        instance.showLoading();
+      } else {
+        instance.dismissAlert()
+      }
+    }
+    async login() {
+      this.loading(true);
+      this.errorMessageFunc("", "none");
+      try {
+        let fetchInstance = new Fetch('/auth/login', "POST", {
+          email: this.email.value,
+          password: this.password.value
+        }, false)
+        let data = await fetchInstance.performFetch();
+        let dbInstance = new Indexeddb();
+        await dbInstance.writeToDatabase({
+          "user": "1",
+          token: data.data.token
+        });
+        this.loading(false);
+        window.location.href = document.getElementById("successLogin").getAttribute("href");
+      } catch (error) {
+        console.log(error);
+        this.errorMessageFunc(error.error || "An error occured, please try again later", "block");
+        this.loading(false)
+      }
+    }
   }
 
   loginBtn.addEventListener("click", () => {
-    errorMessageFunc("", "none");
-    userData = {
-      email: email.value,
-      password: password.value
-    }
-    performFetch('/auth/login', "POST", userData, false)
-    .then((data) => {
-      if (data.status == 200) {
-        console.log(data);
-        return writeToDatabase({
-          user: "1",
-          token: data.data.token
-        });
-      } else {
-        errorMessageFunc(data.error, "unset");
-      }
-    })
-    .then((data) => {
-      if (data != null) {
-        window.location.href = document.getElementById("successLogin").getAttribute("href");
-      } else {
-        console.log("Authentication error")
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+    let instance = new Login();
+    instance.login();
   });
 }

@@ -1,35 +1,3 @@
-window.onload = () => {
-  let goBack = document.getElementById("goBack");
-  if (goBack != null) {
-    goBack.addEventListener("click", () => {
-      window.history.back();
-    })
-  }
-}
-
-let main = {
-  bodyEl: "jama",
-  alert: {
-    elements: {
-      alertEl: `<div id="alert"></div>`,
-      loaderEl: `<div id="loader"></div>`,
-    },
-    states: {
-      success: ``,
-      error: ``
-    },
-    methods: {
-      name: "jama",
-      showLoading: () => {
-        console.log(this.name);
-      },
-      showSatusMessage: () => {
-
-      }
-    }
-  }
-}
-
 class Alert {
   constructor() {
     this.bodyEl = document.body;
