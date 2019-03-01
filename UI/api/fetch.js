@@ -1,34 +1,40 @@
-let baseUrl = "https://politico-andela-37.herokuapp.com/api/v2"
-
-let performFetch = (url, method="GET", data={}, authenticate=true) => {
-  return new Promise(async (resolve, reject) => {
-    let token = "";
-    if (authenticate == true) {
+class Fetch {
+  constructor(url, method="GET", data={}, authenticate=true) {
+    this.baseUrl = "https://politico-andela-37.herokuapp.com/api/v2";
+    this.url = url;
+    this.method = method;
+    this.data = data;
+    this.authenticate = authenticate;
+  }
+  performFetch() {
+    return new Promise(async (resolve, reject) => {
       try {
-        token = await readFromDatabase();
+        let token = "";
+        if (this.authenticate) {
+          token = await readFromDatabase();
+        }
+        let fetchData = {
+          method: this.method,
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + token
+          },
+          body: JSON.stringify(this.data)
+        }
+        if (this.method == "GET" || this.method == "DELETE") {
+          delete fetchData.body;
+        }
+        let response = await fetch(this.baseUrl + this.url, fetchData);
+        let jsonObj = await response.json();
+        if (jsonObj.status != 200) {
+          reject(jsonObj)
+        }
+        resolve(jsonObj)
+        console.log(jsonObj);
       } catch (error) {
         console.log(error);
+        reject(error)
       }
-    }
-    console.log(token);
-    let fetchData = {
-      method: method,
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + token
-      },
-      body: JSON.stringify(data)
-    }
-    if (method == "GET" || method == "DELETE") {
-      delete fetchData.body;
-    }
-    try {
-      let response = await fetch(baseUrl + url, fetchData);
-      let jsonObj = await response.json();
-      resolve(jsonObj)
-    } catch (error) {
-      console.log(error);
-      reject(error)
-    }
-  });
+    });
+  }
 }
