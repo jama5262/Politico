@@ -11,16 +11,16 @@ window.onload = () => {
       this.errorMessage.style.display = type;
       this.errorMessage.innerHTML = text;
     }
-    loading(load) {
-      let instance = new Alert();
+    loading(load=true) {
+      let alertInstance = new Loading();
       if (load) {
-        instance.showLoading();
+        alertInstance.showLoading();
       } else {
-        instance.dismissAlert()
+        alertInstance.dismissAlert()
       }
     }
     async login() {
-      this.loading(true);
+      this.loading();
       this.errorMessageFunc("", "none");
       try {
         let fetchInstance = new Fetch('/auth/login', "POST", {
@@ -28,13 +28,18 @@ window.onload = () => {
           password: this.password.value
         }, false)
         let data = await fetchInstance.performFetch();
+        console.log(data);
         let dbInstance = new Indexeddb();
         await dbInstance.writeToDatabase({
           "user": "1",
           token: data.data.token
         });
         this.loading(false);
-        window.location.href = document.getElementById("successLogin").getAttribute("href");
+        if (data.data.user.is_admin) {
+          window.location.href = document.getElementById("admin").getAttribute("href");
+        } else {
+          window.location.href = document.getElementById("user").getAttribute("href");
+        }
       } catch (error) {
         console.log(error);
         this.errorMessageFunc(error.error || "An error occured, please try again later", "block");
