@@ -195,6 +195,9 @@ nav{
   text-align: center;
   background-color: #FBC02D;
 }
+#alert2{
+  top: 65px;
+}
 #loader{
   height: 20px;
   width: 20px;

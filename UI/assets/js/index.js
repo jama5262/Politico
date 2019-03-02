@@ -11,16 +11,16 @@ window.onload = () => {
       this.errorMessage.style.display = type;
       this.errorMessage.innerHTML = text;
     }
-    loading(load) {
-      let instance = new Alert();
+    loading(load=true) {
+      let alertInstance = new Alert();
       if (load) {
-        instance.showLoading();
+        alertInstance.showLoading();
       } else {
-        instance.dismissAlert()
+        alertInstance.dismissAlert()
       }
     }
     async login() {
-      this.loading(true);
+      this.loading();
       this.errorMessageFunc("", "none");
       try {
         let fetchInstance = new Fetch('/auth/login', "POST", {

@@ -11,7 +11,8 @@ class Fetch {
       try {
         let token = "";
         if (this.authenticate) {
-          token = await readFromDatabase();
+          let indexeddbInstance = new Indexeddb();
+          token = await indexeddbInstance.readFromDatabase();
         }
         let fetchData = {
           method: this.method,
@@ -30,7 +31,6 @@ class Fetch {
           reject(jsonObj)
         }
         resolve(jsonObj)
-        console.log(jsonObj);
       } catch (error) {
         console.log(error);
         reject(error)
