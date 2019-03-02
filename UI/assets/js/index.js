@@ -12,7 +12,7 @@ window.onload = () => {
       this.errorMessage.innerHTML = text;
     }
     loading(load=true) {
-      let alertInstance = new Alert();
+      let alertInstance = new Loading();
       if (load) {
         alertInstance.showLoading();
       } else {
@@ -28,13 +28,18 @@ window.onload = () => {
           password: this.password.value
         }, false)
         let data = await fetchInstance.performFetch();
+        console.log(data);
         let dbInstance = new Indexeddb();
         await dbInstance.writeToDatabase({
           "user": "1",
           token: data.data.token
         });
         this.loading(false);
-        window.location.href = document.getElementById("successLogin").getAttribute("href");
+        if (data.data.user.is_admin) {
+          window.location.href = document.getElementById("admin").getAttribute("href");
+        } else {
+          window.location.href = document.getElementById("user").getAttribute("href");
+        }
       } catch (error) {
         console.log(error);
         this.errorMessageFunc(error.error || "An error occured, please try again later", "block");

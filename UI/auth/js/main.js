@@ -1,5 +1,6 @@
 window.onload = () => {
   let signupBtn = document.getElementById("signupBtn");
+  let goBack = document.getElementById("goBack");
   class SignUp {
     constructor() {
       this.errorMessage = document.getElementById("errorMessage");
@@ -16,7 +17,7 @@ window.onload = () => {
       this.errorMessage.innerHTML = text;
     }
     loading(load) {
-      let instance = new Alert();
+      let instance = new Loading();
       if (load) {
         instance.showLoading();
       } else {
@@ -55,5 +56,9 @@ window.onload = () => {
   signupBtn.addEventListener("click", () => {
     let instance = new SignUp();
     instance.signup();
+  });
+
+  goBack.addEventListener("click", () => {
+    window.history.back();
   })
 }
