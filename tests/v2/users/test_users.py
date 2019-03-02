@@ -8,7 +8,7 @@ class TestUsers(unittest.TestCase):
     def setUp(self):
         self.app = createApp("testing")
         self.client = self.app.test_client()
-        self.userID = 5
+        self.userID = 1
         self.loginData = {
           "email": "admin@gmail.com",
           "password": "adminpass"
