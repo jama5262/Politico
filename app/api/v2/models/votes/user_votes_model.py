@@ -13,7 +13,7 @@ class VoteModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.propertyName, self.data).insterInto()
+        schema = SchemaGenerator(self.propertyName, None, self.data).insterInto()
         db = Database(schema).executeQuery()
         if db["status"] == 400:
             return {

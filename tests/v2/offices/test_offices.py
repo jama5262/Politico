@@ -8,7 +8,7 @@ class TestOffice(unittest.TestCase):
     def setUp(self):
         self.app = createApp("testing")
         self.client = self.app.test_client()
-        self.officeID = 3
+        self.officeID = 6
         self.endpoint = "/api/v2/offices"
         self.data = {
           "type": "Legislative",
@@ -22,7 +22,7 @@ class TestOffice(unittest.TestCase):
             "name": ""
         }
         self.dataRegisterCandidate = {
-            "candidate": 3,
+            "candidate": 6,
             "office": 2,
             "party": 2
         }

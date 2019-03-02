@@ -103,7 +103,11 @@ schema = """
   INSERT INTO candidates (office, party, candidate)
   VALUES (1, 2, 2);
   INSERT INTO candidates (office, party, candidate)
-  VALUES (1, 2, 1);
+  VALUES (2, 1, 5);
+  INSERT INTO candidates (office, party, candidate)
+  VALUES (3, 1, 3);
+  INSERT INTO candidates (office, party, candidate)
+  VALUES (1, 2, 4);
 
   INSERT INTO votes (created_by, office, candidate)
   VALUES (1, 1, 2);

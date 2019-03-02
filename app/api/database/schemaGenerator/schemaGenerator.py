@@ -1,6 +1,7 @@
 class SchemaGenerator():
-    def __init__(self, tableName, data=None, id=None):
+    def __init__(self, tableName, columnName=None, data=None, id=None):
         self.tableName = tableName
+        self.columnName = columnName
         self.data = data
         self.id = id
 
@@ -17,12 +18,7 @@ class SchemaGenerator():
 
     def selectSpecific(self):
         return """
-            SELECT * FROM """ + self.tableName + """ WHERE id = """ + self.id + """
-        """
-
-    def selectSpecificOfficeResult(self):
-        return """
-            SELECT * FROM """ + self.tableName + """ WHERE office = """ + self.id + """
+            SELECT * FROM """ + self.tableName + """ WHERE """ + self.columnName + """ = """ + self.id + """
         """
 
     def selectAll(self):

@@ -16,7 +16,7 @@ class AuthModel():
         valid = validate(self.tableName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.tableName, self.data).insterInto()
+        schema = SchemaGenerator(self.tableName, None, self.data).insterInto()
         db = Database(schema).executeQuery()
         if db["status"] == 400:
             return {
@@ -32,7 +32,7 @@ class AuthModel():
         valid = validate("userLogin", self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.tableName, self.data).userLogin()
+        schema = SchemaGenerator(self.tableName, None, self.data).userLogin()
         db = Database(schema, True).executeQuery()
         if db["status"] == 400:
             return {
