@@ -17,7 +17,7 @@ class OfficeModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.propertyName, self.data).insterInto()
+        schema = SchemaGenerator(self.propertyName, None, self.data).insterInto()
         db = Database(schema).executeQuery()
         if db["status"] == 400:
             return {
@@ -48,7 +48,7 @@ class OfficeModel():
         })
 
     def getSpecificOffice(self):
-        schema = SchemaGenerator(self.propertyName, None, self.id).selectSpecific()
+        schema = SchemaGenerator(self.propertyName, "id", None, self.id).selectSpecific()
         db = Database(schema, True).executeQuery()
         if db["status"] == 400:
             return {
@@ -69,7 +69,7 @@ class OfficeModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.propertyName, self.data, self.id).updateSpecific()
+        schema = SchemaGenerator(self.propertyName, None, self.data, self.id).updateSpecific()
         db = Database(schema).executeQuery()
         if db["status"] == 400:
             return {
@@ -84,7 +84,7 @@ class OfficeModel():
         })
 
     def deleteSpecificOffice(self):
-        schema = SchemaGenerator(self.propertyName, None, self.id).deleteSpecific()
+        schema = SchemaGenerator(self.propertyName, None, None, self.id).deleteSpecific()
         print(schema)
         db = Database(schema).executeQuery()
         if db["status"] == 400:
@@ -102,7 +102,7 @@ class OfficeModel():
         valid = validate("candidates", self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator("candidates", self.data).insterInto()
+        schema = SchemaGenerator("candidates", None, self.data).insterInto()
         db = Database(schema).executeQuery()
         if db["status"] == 400:
             return {
@@ -115,7 +115,7 @@ class OfficeModel():
         })
 
     def officeResults(self):
-        schema = SchemaGenerator("votes", None, self.id).selectSpecificOfficeResult()
+        schema = SchemaGenerator("votes", "office", None, self.id).selectSpecific()
         db = Database(schema, True).executeQuery()
         if db["status"] == 400:
             return {

@@ -17,7 +17,7 @@ class PartyModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.propertyName, self.data).insterInto()
+        schema = SchemaGenerator(self.propertyName, None, self.data).insterInto()
         db = Database(schema).executeQuery()
         if db["status"] == 400:
             return {
@@ -48,7 +48,7 @@ class PartyModel():
         })
 
     def getSpecificParty(self):
-        schema = SchemaGenerator(self.propertyName, None, self.id).selectSpecific()
+        schema = SchemaGenerator(self.propertyName, "id", None, self.id).selectSpecific()
         db = Database(schema, True).executeQuery()
         if db["status"] == 400:
             return {
@@ -69,7 +69,7 @@ class PartyModel():
         valid = validate(self.propertyName, self.data)
         if valid["isValid"] is False:
             return valid["data"]
-        schema = SchemaGenerator(self.propertyName, self.data, self.id).updateSpecific()
+        schema = SchemaGenerator(self.propertyName, None, self.data, self.id).updateSpecific()
         db = Database(schema).executeQuery()
         if db["status"] == 400:
             return {
@@ -84,7 +84,7 @@ class PartyModel():
         })
 
     def deleteSpecificParty(self):
-        schema = SchemaGenerator(self.propertyName, None, self.id).deleteSpecific()
+        schema = SchemaGenerator(self.propertyName, None, None, self.id).deleteSpecific()
         print(schema)
         db = Database(schema).executeQuery()
         if db["status"] == 400:
