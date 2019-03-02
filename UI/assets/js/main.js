@@ -51,7 +51,7 @@ class Navigation {
             <img src="${ this.navLinks.profileImage }" alt="" class="profile-image-icon-small">
             <div class="dropdown-content">
               <a href="${ this.navLinks.myVotes }">My Votes</a>
-              <a href="${ this.navLinks.logout }">Logout</a>
+              <a id="logout" href="${ this.navLinks.logout }">Logout</a>
             </div>
           </div>
         </div>
