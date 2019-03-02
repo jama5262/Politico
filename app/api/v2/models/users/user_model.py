@@ -26,7 +26,7 @@ class Users():
         })
 
     def getSpecificCandidate(self):
-        schema = SchemaGenerator("candidates", "candidate", None, self.id).selectSpecific()
+        schema = SchemaGenerator("candidates", "party", None, self.id).selectSpecific()
         db = Database(schema, True).executeQuery()
         if db["status"] == 400:
             return {
@@ -36,7 +36,7 @@ class Users():
         if not db["data"]:
             return {
                 "status": 404,
-                "error": "The candidate was not found"
+                "error": "The candidate in this party was not found"
             }
         return returnMessages.success(200, {
             "data": db["data"],
