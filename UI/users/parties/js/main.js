@@ -2,6 +2,7 @@ window.onload = () => {
   let allParites = document.getElementsByClassName("party-card-holder-index")[0];
   let mainCont = document.getElementsByClassName("main-container")[0]
   let specificParty = document.getElementsByClassName("party-members-holder-party")[0];
+  let navInstance = new Navigation("index.html", "index.html", "index.html", "../../assets/images/profile_image.jpg", "../vote/index.html", "./myVotes/index.html", "../../index.html");
   class Parites {
     constructor() {
       
@@ -15,8 +16,10 @@ window.onload = () => {
       }
     }
     setNav() {
-      let navInstance = new Navigation("index.html", "index.html", "index.html", "../../assets/images/profile_image.jpg", "../vote/index.html", "./myVotes/index.html", "../../index.html");
       navInstance.showNav();
+    }
+    logout() {
+      navInstance.logout();
     }
     populateAllParties(data) {
       for (var i = 0; i < data.length; i++) {
@@ -50,7 +53,6 @@ window.onload = () => {
         </div>
       `
       mainCont.insertAdjacentHTML('afterbegin', partyInfo);
-      console.log(mainCont);
     }
     populateMembers(members) {
       for (var i = 0; i < members.length; i++) {
@@ -90,10 +92,17 @@ window.onload = () => {
         this.loading()
         let fetchInstance = new Fetch("/parties");
         let data = await fetchInstance.performFetch();
+        let alertInstance = new Alert(data.data.msg);
+        alertInstance.showAlertMessage();
         this.populateAllParties(data.data.data);
         this.loading(false);
       } catch (error) {
-        console.log(error.error || error.message);
+        if (error != null && (error == "Your session has expired" || error == "No access token")) {
+          let alertInstance = new Alert(error + ", please login to continue", true);
+          await alertInstance.showAlertMessage();
+          this.logout();
+        }
+        console.log(error);
         this.loading(false);
       }
     }
@@ -110,8 +119,12 @@ window.onload = () => {
         this.loading(false);
       } catch (error) {
         console.log(error.error || error.message);
-        if (error.error != null && error.error == "Your session has expired") {
-          window.location.href = document.getElementById("logout").getAttribute("href");
+        let alertInstance = new Alert(error.error, true);
+        alertInstance.showAlertMessage();
+        if (error.error != null && (error.error == "Your session has expired" || error.error == "No access token")) {
+          let alertInstance = new Alert(error + ", please login to continue", true);
+          await alertInstance.showAlertMessage();
+          this.logout();
         }
         this.loading(false);
       }
@@ -127,4 +140,9 @@ window.onload = () => {
     let partyID = new URL(window.location.href).searchParams.get("partyID");
     partiesInstance.getSpecificParty(partyID);
   }
+
+  let logout = document.getElementById("logout");
+  logout.addEventListener("click", () => {
+    partiesInstance.logout();
+  })
 }

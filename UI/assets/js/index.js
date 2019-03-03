@@ -28,7 +28,6 @@ window.onload = () => {
           password: this.password.value
         }, false)
         let data = await fetchInstance.performFetch();
-        console.log(data);
         let dbInstance = new Indexeddb();
         await dbInstance.writeToDatabase({
           "user": "1",
