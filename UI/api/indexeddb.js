@@ -48,4 +48,15 @@ class Indexeddb {
       }
     });  
   }
+  deleteFromDatabase() {
+    return new Promise(async (resolve, reject) => {
+      let request = await this.openDatabase();
+      request.onsuccess = (event) => {
+        let db = event.target.result;
+        let transaction = db.transaction("userToken", "readwrite");
+        transaction.objectStore("userToken").delete("1")
+        resolve("deleted");
+      }
+    });
+  }
 }
