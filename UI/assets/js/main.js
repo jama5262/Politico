@@ -27,10 +27,12 @@ class Loading {
 }
 
 class Navigation {
-  constructor(home, profileImage, vote, myVotes, logout) {
+  constructor(home, petitions, results, profileImage, vote, myVotes, logout) {
     this.bodyEl = document.body;
     this.navLinks = {
       home: home,
+      petitions: petitions,
+      results: results,
       profileImage: profileImage,
       vote: vote,
       myVotes: myVotes,
@@ -44,6 +46,8 @@ class Navigation {
         </div>
         <div class="link-container-2">
           <a class="a-tag-nav" href="${ this.navLinks.home }">Home</a>
+          <a class="a-tag-nav" href="${ this.navLinks.petitions }">Petitions</a>
+          <a class="a-tag-nav" href="${ this.navLinks.results }">Results</a>
         </div>
         <div class="link-container-3">
           <a href="${ this.navLinks.vote }"><button class="button-design-secondary">vote</button></a>

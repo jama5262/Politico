@@ -15,7 +15,7 @@ window.onload = () => {
       }
     }
     setNav() {
-      let navInstance = new Navigation("index.html", "../../assets/images/profile_image.jpg", "../vote/index.html", "./myVotes/index.html", "../../index.html");
+      let navInstance = new Navigation("index.html", "index.html", "index.html", "../../assets/images/profile_image.jpg", "../vote/index.html", "./myVotes/index.html", "../../index.html");
       navInstance.showNav();
     }
     populateAllParties(data) {
