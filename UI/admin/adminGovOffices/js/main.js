@@ -78,8 +78,7 @@ window.onload = () => {
         let data = await this.main().performFetch(`/offices/${ officeID }`, "DELETE");
         console.log(data);
         this.main().loading(false);
-        document.getElementsByTagName("tbody")[0].remove()
-        this.getAllOffices();
+        location.reload();
       } catch (error) {
         this.main().alertInstance(error.error || "An error occured, please try again later", true);
         this.main().loading(false);
