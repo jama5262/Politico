@@ -60,10 +60,8 @@ window.onload = () => {
         try {
           let users = [];
           for (var i = 0; i < partyMembers.length; i++) {
-            let fetchInstance = new Fetch(`/user/${ partyMembers[i].candidate }`);
-            let user = await fetchInstance.performFetch();
-            fetchInstance = new Fetch(`/offices/${ partyMembers[i].office }`);
-            let office = await fetchInstance.performFetch();
+            let user = await this.main().performFetch(`/user/${ partyMembers[i].candidate }`);
+            let office = await this.main().performFetch(`/offices/${ partyMembers[i].office }`)
             user.data.data[0]["office"] = office.data.data[0]
             users.push(user.data.data[0]);
           }
@@ -75,9 +73,8 @@ window.onload = () => {
     }
     async getAllParites() {
       try {
-        this.main().loading()
-        let fetchInstance = new Fetch("/parties");
-        let data = await fetchInstance.performFetch();
+        this.main().loading();
+        let data = await this.main().performFetch("/parties")
         this.main().alertInstance(data.data.msg);
         this.populateAllParties(data.data.data);
         this.main().loading(false);
@@ -92,12 +89,10 @@ window.onload = () => {
     }
     async getSpecificParty(partyID) {
       try {
-        this.main().loading()
-        let fetchInstance = new Fetch(`/parties/${ partyID }`);
-        let party = await fetchInstance.performFetch();
+        this.main().loading();
+        let party = await this.main().performFetch(`/parties/${ partyID }`);
         this.populateSpecificParty(party.data.data[0]);
-        fetchInstance = new Fetch(`/user/candidate/${ partyID }`);
-        let partyMembers = await fetchInstance.performFetch();
+        let partyMembers = await this.main().performFetch(`/user/candidate/${ partyID }`)
         let users = await this.getPartyMembers(partyMembers.data.data);
         this.populateMembers(users);
         this.main().loading(false);

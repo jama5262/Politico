@@ -158,4 +158,8 @@ class Main {
     let alertInstance = new Alert(message, error);
     return alertInstance.showAlertMessage();
   }
+  performFetch(url, method="GET", data={}, authenticate=true) {
+    let fetchInstance = new Fetch(url, method, data, authenticate);
+    return fetchInstance.performFetch();
+  }
 }
