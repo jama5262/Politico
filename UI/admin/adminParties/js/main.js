@@ -38,7 +38,7 @@ window.onload = () => {
         `
         result = result + tableRow;
       }
-      tableBody.insertAdjacentHTML('beforebegin', result);
+      tableBody.insertAdjacentHTML('afterbegin', result);
     }
     async createParty() {
       try {
