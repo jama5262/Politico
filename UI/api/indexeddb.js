@@ -4,8 +4,8 @@ class Indexeddb {
     request.onupgradeneeded = (event) => {
       let db = event.target.result;
       console.log(db);
-      if (!db.objectStoreNames.contains('userToken')) {
-        db.createObjectStore('userToken', {keyPath: "user"});
+      if (!db.objectStoreNames.contains('userData')) {
+        db.createObjectStore('userData', {keyPath: "user"});
       }
     }
     return request;
@@ -18,8 +18,8 @@ class Indexeddb {
       let request = await this.openDatabase();
       request.onsuccess = (event) => {
         let db = event.target.result;
-        let transaction = db.transaction("userToken", "readwrite");
-        let store = transaction.objectStore("userToken");
+        let transaction = db.transaction("userData", "readwrite");
+        let store = transaction.objectStore("userData");
         store.put(data);
         resolve("token saved")
         transaction.complete = () => {
@@ -34,12 +34,12 @@ class Indexeddb {
       let request = await this.openDatabase();
       request.onsuccess = (event) => {
         let db = event.target.result;
-        let transaction = db.transaction("userToken", "readonly");
-        let store = transaction.objectStore("userToken");
+        let transaction = db.transaction("userData", "readonly");
+        let store = transaction.objectStore("userData");
         let read = store.get("1");
         read.onsuccess = (event) => {
           if (event.target.result != null) {
-            resolve(event.target.result.token);
+            resolve(event.target.result);
           } else {
             console.log("No access token");
             reject("No access token")
@@ -53,8 +53,8 @@ class Indexeddb {
       let request = await this.openDatabase();
       request.onsuccess = (event) => {
         let db = event.target.result;
-        let transaction = db.transaction("userToken", "readwrite");
-        transaction.objectStore("userToken").delete("1")
+        let transaction = db.transaction("userData", "readwrite");
+        transaction.objectStore("userData").delete("1")
         resolve("deleted");
       }
     });

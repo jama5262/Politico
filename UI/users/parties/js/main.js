@@ -109,7 +109,7 @@ window.onload = () => {
   }
 
   let partiesInstance = new Parites();
-  partiesInstance.main().navInstance("index.html", "index.html", "index.html", "../../assets/images/profile_image.jpg", "../vote/index.html", "./myVotes/index.html", "../../index.html").showNav();
+  partiesInstance.main().navInstance("index.html", "../petitions/index.html", "index.html", "../../assets/images/profile_image.jpg", "../vote/index.html", "../myVotes/index.html", "../../index.html").showNav();
 
   if (allParites != null) {
     partiesInstance.getAllParites();
