@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Petitions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../../assets/css/main.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../admin/adminGovOffices/css/main.css"/>
     <script src="./js/main.js"></script>
     <script src="../../api/indexeddb.js"></script>
     <script src="../../api/fetch.js"></script>
@@ -15,21 +16,35 @@
   <body>
     <div class="main-container">
       <div style="margin-top: 45px;">
-        <h2 class="text-color-design-primary">Party Members</h2>
+        <h1 class="text-color-design-primary">Create Petition</h1>
       </div>
-      <div class="party-members-holder-party"></div>
+      <div class="create-party-holder">
+          <form action="">
+            <div style="display: flex; flex-direction: column" class="card-design">
+              <p id="errorMessage" style="color: red; display: none; width: 100%"></p>
+                <div class="choose-party-holder">
+                  <select style="width: 100%;" class="button-design">
+                    <option value="0">Choose Party</option>
+                  </select>
+                </div>
+              <input class="input-design" placeholder="Reason for petition" type="text" required name="" id="text">
+            </div>
+          </form>
+        </div>
+        <div class="button-container">
+          <button id="goBack" class="button-design">go back</button>
+          <button id="createPetition" class="button-design">create petition</button>
+        </div>
     </div>
   </body>
 </html>
 
 <style scoped>
-  .card-design{
-    padding: 20px;
+  .button-design{
+    width: 150px;
   }
-  ul{
-    list-style-type: none;
-  }
-  h4{
-    margin: 0;
+  .create-party-holder{
+    width: 400px;
+    margin: auto;
   }
 </style>
