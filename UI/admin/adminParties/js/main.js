@@ -42,14 +42,13 @@ window.onload = () => {
     }
     async createParty() {
       try {
-        this.main().loading()
-        let fetchInstance = new Fetch("/parties", "POST", {
+        this.main().loading();
+        let data = await this.main().performFetch("/parties", "POST", {
           name: this.name.value,
           abbr: this.abbr.value,
           logo_url: this.logoUrl.value,
           hq_address: this.hqAddress.value
         });
-        let data = await fetchInstance.performFetch();
         this.main().alertInstance(data.data.msg);
         this.main().loading(false);
       } catch (error) {
@@ -64,14 +63,13 @@ window.onload = () => {
     async editParty() {
       try {
         let partyID = new URL(window.location.href).searchParams.get("partyID");
-        this.main().loading()
-        let fetchInstance = new Fetch(`/parties/${ partyID }`, "PATCH", {
+        this.main().loading();
+        let data = await this.main().performFetch(`/parties/${ partyID }`, "PATCH", {
           name: this.name.value,
           abbr: this.abbr.value,
           logo_url: this.logoUrl.value,
           hq_address: this.hqAddress.value
         });
-        let data = await fetchInstance.performFetch();
         this.main().alertInstance(data.data.msg);
         this.main().loading(false);
       } catch (error) {
@@ -86,8 +84,7 @@ window.onload = () => {
     async deleteParty(partyID) {
       try {
         this.main().loading();
-        let fetchInstance = new Fetch(`/parties/${ partyID }`, "DELETE");
-        await fetchInstance.performFetch();
+        await this.main().performFetch(`/parties/${ partyID }`, "DELETE");
         this.main().loading(false);
         document.getElementsByTagName("tbody")[0].remove()
         this.getAllParites();
@@ -100,8 +97,7 @@ window.onload = () => {
       return new Promise(async (resolve, reject) => {
         try {
           this.main().loading();
-          let fetchInstance = new Fetch(`/parties/${ partyID }`);
-          let party = await fetchInstance.performFetch();
+          let party = await this.main().performFetch(`/parties/${ partyID }`);
           resolve(party.data.data[0]);
           this.main().loading(false);
         } catch (error) {
@@ -130,9 +126,8 @@ window.onload = () => {
     }
     async getAllParites() {
       try {
-        this.main().loading()
-        let fetchInstance = new Fetch("/parties");
-        let data = await fetchInstance.performFetch();
+        this.main().loading();
+        let data = await this.main().performFetch("/parties");
         this.main().alertInstance(data.data.msg);
         this.populate(data.data.data);
         this.main().loading(false);
