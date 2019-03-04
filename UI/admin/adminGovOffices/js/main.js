@@ -84,7 +84,7 @@ window.onload = () => {
         this.main().loading(false);
       }
     }
-    async getSpecificParty(partyID) {
+    async getSpecificOffice(partyID) {
       return new Promise(async (resolve, reject) => {
         try {
           this.main().loading();
@@ -106,7 +106,7 @@ window.onload = () => {
     async populateOfficeToInput() {
       try {
         let officeID = new URL(window.location.href).searchParams.get("officeID");
-        let office = await officesInstance.getSpecificParty(officeID)
+        let office = await officesInstance.getSpecificOffice(officeID)
         this.name.value = office.name;
         this.type.value = office.type;
       } catch (error) {

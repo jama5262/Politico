@@ -12,7 +12,8 @@ class Fetch {
         let token = "";
         if (this.authenticate) {
           let indexeddbInstance = new Indexeddb();
-          token = await indexeddbInstance.readFromDatabase();
+          let data = await indexeddbInstance.readFromDatabase();
+          token = data.token;
         }
         let fetchData = {
           method: this.method,

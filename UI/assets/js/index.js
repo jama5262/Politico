@@ -29,9 +29,16 @@ window.onload = () => {
         }, false)
         let data = await fetchInstance.performFetch();
         let dbInstance = new Indexeddb();
+        console.log(data);
         await dbInstance.writeToDatabase({
-          "user": "1",
-          token: data.data.token
+          user: "1",
+          token: data.data.token,
+          id: data.data.user.id,
+          fname: data.data.user.first_name,
+          lname: data.data.user.last_name,
+          url: data.data.user.passport_url,
+          email: data.data.user.email,
+          phone: data.data.user.phone_number,
         });
         this.loading(false);
         if (data.data.user.is_admin) {
