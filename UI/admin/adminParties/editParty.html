@@ -7,28 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../../assets/css/main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+    <script src="./js/main.js"></script>
+    <script src="../../api/indexeddb.js"></script>
+    <script src="../../api/fetch.js"></script>
     <script src="../../assets/js/main.js"></script>
   </head>
   <body>
-    <nav class="background-color-design">
-      <div class="text-color-design-secondary">
-        <h1 class="politico-letter">Politico</h1>
-      </div>
-      <div class="link-container-2">
-        <a class="a-tag-nav" href="index.html">Home</a>
-        <a class="a-tag-nav" href="../adminGovOffices/index.html">Gov Offices</a>
-      </div>
-      <div class="link-container-3">
-        <a href="index.html"><button class="button-design-secondary">vote</button></a>
-        <div class="dropdown">
-          <img src="../../assets/images/profile_image.jpg" alt="" class="profile-image-icon-small">
-          <div class="dropdown-content">
-            <a href="../users/myVotes/index.html">My Votes</a>
-            <a href="../../index.html">Logout</a>
-          </div>
-        </div>
-      </div>
-    </nav>
     <div class="main-container">
       <div>
         <h1 class="text-color-design-primary">Edit Party</h1>
@@ -36,20 +20,17 @@
       <div class="create-party-holder">
         <form action="">
           <div style="display: flex; flex-direction: column" class="card-design">
-            <div class="party-image-holder">
-              <div class="party-image"></div>
-            </div>
-            <input class="input-design" placeholder="Party Name" type="text" required name="" id="pNameCreate">
-            <input class="input-design" placeholder="Abbreviation" type="text" required name="" id="abbCreate">
-            <input class="input-design" placeholder="Email" type="text" required name="" id="emailCreate">
-            <input class="input-design" placeholder="Chairman" type="text" required name="" id="chairmanCreate">
-            <input class="input-design" placeholder="Started In" type="email" required name="" id="startedCreate">
+            <p id="errorMessage" style="color: red; display: none; width: 100%"></p>
+            <input class="input-design" placeholder="Party Name" type="text" required name="" id="pName">
+            <input class="input-design" placeholder="Abbreviation" type="text" required name="" id="abb">
+            <input class="input-design" placeholder="Logo Url" type="text" required name="" id="logUrl">
+            <input class="input-design" placeholder="HQ Address" type="text" required name="" id="hq">
           </div>
         </form>
       </div>
       <div class="button-container">
         <button id="goBack" class="button-design">go back</button>
-        <button class="button-design">edit party</button>
+        <button id="editParty" class="button-design">edit party</button>
       </div>
     </div>
   </body>
