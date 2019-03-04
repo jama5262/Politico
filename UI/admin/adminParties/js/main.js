@@ -1,5 +1,6 @@
 window.onload = () => {
   let partyHolder = document.getElementsByClassName("party-table-holder")[0];
+  let tableBody = document.getElementsByTagName("tbody")[0];
   class AdminParties {
     constructor() {
       this.name = document.getElementById("pName");
@@ -17,7 +18,7 @@ window.onload = () => {
       return mainInstance;
     }
     populate(data) {
-      let tableBody = document.getElementsByTagName("tbody")[0];
+      let result = "";
       for (var i = 0; i < data.length; i++) {
         let tableRow = `
           <tr>
@@ -28,15 +29,16 @@ window.onload = () => {
             <td>${ data[i].abbr }</td>
             <td>${ data[i].hq_address }</td>
             <td>
-              <div style="display: flex">
+              <div id="actions" style="display: flex">
                 <a href="./editParty.html?partyID=${ data[i].id }"><button class="button-design-edit">edit</button></a>
-                <button class="button-design-delete">delete</button>
+                <button id="${ data[i].id }" class="button-design-delete">delete</button>
               </div>
             </td>
           </tr>
         `
-        tableBody.insertAdjacentHTML('afterbegin', tableRow);
+        result = result + tableRow;
       }
+      tableBody.insertAdjacentHTML('beforebegin', result);
     }
     async createParty() {
       try {
@@ -59,10 +61,45 @@ window.onload = () => {
         this.main().loading(false)
       }
     }
+    async editParty() {
+      try {
+        let partyID = new URL(window.location.href).searchParams.get("partyID");
+        this.main().loading()
+        let fetchInstance = new Fetch(`/parties/${ partyID }`, "PATCH", {
+          name: this.name.value,
+          abbr: this.abbr.value,
+          logo_url: this.logoUrl.value,
+          hq_address: this.hqAddress.value
+        });
+        let data = await fetchInstance.performFetch();
+        this.main().alertInstance(data.data.msg);
+        this.main().loading(false);
+      } catch (error) {
+        if (error != null && (error == "Your session has expired" || error == "No access token")) {
+          await this.main().alertInstance(error + ", please login to continue", true);
+          this.main().adminNavInstance().logout();
+        }
+        this.errorMessageFunc(error.error || "An error occured, please try again later", "block");
+        this.main().loading(false)
+      }
+    }
+    async deleteParty(partyID) {
+      try {
+        this.main().loading();
+        let fetchInstance = new Fetch(`/parties/${ partyID }`, "DELETE");
+        await fetchInstance.performFetch();
+        this.main().loading(false);
+        document.getElementsByTagName("tbody")[0].remove()
+        this.getAllParites();
+      } catch (error) {
+        this.main().alertInstance(error.error || "An error occured, please try again later", true);
+        this.main().loading(false);
+      }
+    }
     async getSpecificParty(partyID) {
       return new Promise(async (resolve, reject) => {
         try {
-          this.main().loading()
+          this.main().loading();
           let fetchInstance = new Fetch(`/parties/${ partyID }`);
           let party = await fetchInstance.performFetch();
           resolve(party.data.data[0]);
@@ -91,42 +128,19 @@ window.onload = () => {
         // this.main().alertInstance(error + ", please login to continue", true);
       }
     }
-    async editParty() {
-      try {
-        let partyID = new URL(window.location.href).searchParams.get("partyID");
-        this.main().loading()
-        let fetchInstance = new Fetch(`/parties/${ partyID }`, "PATCH", {
-          name: this.name.value,
-          abbr: this.abbr.value,
-          logo_url: this.logoUrl.value,
-          hq_address: this.hqAddress.value
-        });
-        let data = await fetchInstance.performFetch();
-        this.main().alertInstance(data.data.msg);
-        this.main().loading(false);
-      } catch (error) {
-        if (error != null && (error == "Your session has expired" || error == "No access token")) {
-          await this.main().alertInstance(error + ", please login to continue", true);
-          this.main().adminNavInstance().logout();
-        }
-        this.errorMessageFunc(error.error || "An error occured, please try again later", "block");
-        this.main().loading(false)
-      }
-    }
     async getAllParites() {
       try {
         this.main().loading()
         let fetchInstance = new Fetch("/parties");
         let data = await fetchInstance.performFetch();
         this.main().alertInstance(data.data.msg);
-        console.log(data.data.data);
         this.populate(data.data.data);
         this.main().loading(false);
       } catch (error) {
         console.log(error);
-        if (error == "No access token") {
+        if (error != null && (error == "Your session has expired" || error == "No access token")) {
           await this.main().alertInstance(error + ", please login to continue", true);
-          this.main().adminNavInstance().logout();
+          this.main().navInstance().logout();
         }
         this.main().loading(false);
       }
@@ -135,12 +149,6 @@ window.onload = () => {
 
   let partiesInstance = new AdminParties();
   partiesInstance.main().adminNavInstance("index.html", "../adminGovOffices/index.html", "../../index.html").showNav();
-
-  if (partyHolder != null) {
-    partiesInstance.getAllParites();
-  } else {
-    partiesInstance.populatePartyToInput();
-  }
 
   let logout = document.getElementById("logout");
   logout.addEventListener("click", () => {
@@ -156,9 +164,26 @@ window.onload = () => {
 
   let editParty = document.getElementById("editParty");
   if (editParty != null) {
-    editParty.addEventListener("click", async () => {
+    editParty.addEventListener("click", () => {
       partiesInstance.editParty();
     });
+  }
+  
+  let tableEl = document.getElementsByClassName("party-table-holder")[0];
+  if (tableEl != null) {
+    tableEl.addEventListener("click", (event) => {
+      if (event.target.attributes.id != null) {
+        partiesInstance.deleteParty(event.target.attributes.id.nodeValue)
+      }
+    })
+  }
+
+  if (partyHolder != null) {
+    partiesInstance.getAllParites();
+  } else if (createParty != null) {
+    
+  } else {
+    partiesInstance.populatePartyToInput();
   }
 
   let goBack = document.getElementById("goBack");
