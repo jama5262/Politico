@@ -26,16 +26,15 @@ class Loading {
 }
 
 class Alert {
-  constructor(alertMessage=null, color=false, timer=false) {
+  constructor(alertMessage=null, error=false) {
     this.mainEl = document.getElementsByClassName("main-container")[0];
-    if (color == false) {
-      this.color = "#66BB6A"
+    if (error == false) {
+      this.error = "#66BB6A"
     } else {
-      this.color = "#EF5350"
+      this.error = "#EF5350"
     }
-    this.timer = timer;
     this.alertMessageEl = `
-      <div style='display = none; background-color: ${ this.color };' id="alertMessage" class="card-design">
+      <div style='display = none; background-color: ${ this.error };' id="alertMessage" class="card-design">
         ${ alertMessage }
       </div>
     `
@@ -56,7 +55,7 @@ class Alert {
 }
 
 class Navigation {
-  constructor(home, petitions, results, profileImage, vote, myVotes, logout) {
+  constructor(home=null, petitions=null, results=null, profileImage=null, vote=null, myVotes=null, logout=null) {
     this.bodyEl = document.body;
     this.navLinks = {
       home: home,
@@ -104,7 +103,7 @@ class Navigation {
 }
 
 class AdminNavigation {
-  constructor(home, gov, logout) {
+  constructor(home=null, gov=null, logout=null) {
     this.bodyEl = document.body;
     this.navLinks = {
       home: home,
@@ -135,5 +134,28 @@ class AdminNavigation {
     let dbInstance = new Indexeddb();
     await dbInstance.deleteFromDatabase();
     window.location.href = document.getElementById("logoutUrl").getAttribute("href");
+  }
+}
+
+class Main {
+  loading(load=true) {
+    let alertInstance = new Loading();
+    if (load) {
+      alertInstance.showLoading();
+    } else {
+      alertInstance.dismissAlert()
+    }
+  }
+  navInstance(home, petitions, results, profileImage, vote, myVotes, logout) {
+    let navInstance = new Navigation(home, petitions, results, profileImage, vote, myVotes, logout);
+    return navInstance;
+  }
+  adminNavInstance(home, gov, logout) {
+    let navInstance = new AdminNavigation(home, gov, logout);
+    return navInstance;
+  }
+  alertInstance(message, error=false) {
+    let alertInstance = new Alert(message, error);
+    return alertInstance.showAlertMessage();
   }
 }

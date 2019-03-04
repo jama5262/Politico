@@ -13,19 +13,9 @@ window.onload = () => {
       this.errorMessage.style.display = type;
       this.errorMessage.innerHTML = text;
     }
-    loading(load=true) {
-      let alertInstance = new Loading();
-      if (load) {
-        alertInstance.showLoading();
-      } else {
-        alertInstance.dismissAlert()
-      }
-    }
-    setNav() {
-      navInstance.showNav();
-    }
-    logout() {
-      navInstance.logout();
+    main() {
+      let mainInstance = new Main();
+      return mainInstance;
     }
     populate(data) {
       let tableBody = document.getElementsByTagName("tbody")[0];
@@ -51,7 +41,7 @@ window.onload = () => {
     }
     async createParty() {
       try {
-        this.loading()
+        this.main().loading()
         let fetchInstance = new Fetch("/parties", "POST", {
           name: this.name.value,
           abbr: this.abbr.value,
@@ -59,43 +49,39 @@ window.onload = () => {
           hq_address: this.hqAddress.value
         });
         let data = await fetchInstance.performFetch();
-        let alertInstance = new Alert(data.data.msg);
-        alertInstance.showAlertMessage();
-        this.loading(false);
+        this.main().alertInstance(data.data.msg);
+        this.main().loading(false);
       } catch (error) {
         if (error != null && (error == "Your session has expired" || error == "No access token")) {
-          let alertInstance = new Alert(error + ", please login to continue", true);
-          await alertInstance.showAlertMessage();
-          this.logout();
+          await this.main().alertInstance(error + ", please login to continue", true);
+          this.main().adminNavInstance().logout();
         }
         this.errorMessageFunc(error.error || "An error occured, please try again later", "block");
-        this.loading(false)
+        this.main().loading(false)
       }
     }
     async getAllParites() {
       try {
-        this.loading()
+        this.main().loading()
         let fetchInstance = new Fetch("/parties");
         let data = await fetchInstance.performFetch();
-        let alertInstance = new Alert(data.data.msg);
-        alertInstance.showAlertMessage();
+        this.main().alertInstance(data.data.msg);
         console.log(data.data.msg);
         this.populate(data.data.data);
-        this.loading(false);
+        this.main().loading(false);
       } catch (error) {
         console.log(error);
         if (error == "No access token") {
-          let alertInstance = new Alert(error + ", please login to continue", true);
-          await alertInstance.showAlertMessage();
-          this.logout();
+          await this.main().alertInstance(error + ", please login to continue", true);
+          this.main().adminNavInstance().logout();
         }
-        this.loading(false);
+        this.main().loading(false);
       }
     }
   }
 
   let partiesInstance = new AdminParties();
-  partiesInstance.setNav();
+  partiesInstance.main().adminNavInstance("index.html", "../adminGovOffices/index.html", "../../index.html").showNav();
 
   if (partyHolder != null) {
     partiesInstance.getAllParites();
@@ -103,7 +89,7 @@ window.onload = () => {
 
   let logout = document.getElementById("logout");
   logout.addEventListener("click", () => {
-    partiesInstance.logout();
+    partiesInstance.main().adminNavInstance().logout();
   })
 
   let createParty = document.getElementById("createParty");

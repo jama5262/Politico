@@ -2,24 +2,10 @@ window.onload = () => {
   let allParites = document.getElementsByClassName("party-card-holder-index")[0];
   let mainCont = document.getElementsByClassName("main-container")[0]
   let specificParty = document.getElementsByClassName("party-members-holder-party")[0];
-  let navInstance = new Navigation("index.html", "index.html", "index.html", "../../assets/images/profile_image.jpg", "../vote/index.html", "./myVotes/index.html", "../../index.html");
   class Parites {
-    constructor() {
-      
-    }
-    loading(load=true) {
-      let alertInstance = new Loading();
-      if (load) {
-        alertInstance.showLoading();
-      } else {
-        alertInstance.dismissAlert()
-      }
-    }
-    setNav() {
-      navInstance.showNav();
-    }
-    logout() {
-      navInstance.logout();
+    main() {
+      let mainInstance = new Main();
+      return mainInstance;
     }
     populateAllParties(data) {
       for (var i = 0; i < data.length; i++) {
@@ -89,26 +75,24 @@ window.onload = () => {
     }
     async getAllParites() {
       try {
-        this.loading()
+        this.main().loading()
         let fetchInstance = new Fetch("/parties");
         let data = await fetchInstance.performFetch();
-        let alertInstance = new Alert(data.data.msg);
-        alertInstance.showAlertMessage();
+        this.main().alertInstance(data.data.msg);
         this.populateAllParties(data.data.data);
-        this.loading(false);
+        this.main().loading(false);
       } catch (error) {
         if (error != null && (error == "Your session has expired" || error == "No access token")) {
-          let alertInstance = new Alert(error + ", please login to continue", true);
-          await alertInstance.showAlertMessage();
-          this.logout();
+          await this.main().alertInstance(error + ", please login to continue", true);
+          this.main().navInstance().logout();
         }
         console.log(error);
-        this.loading(false);
+        this.main().loading(false);
       }
     }
     async getSpecificParty(partyID) {
       try {
-        this.loading()
+        this.main().loading()
         let fetchInstance = new Fetch(`/parties/${ partyID }`);
         let party = await fetchInstance.performFetch();
         this.populateSpecificParty(party.data.data[0]);
@@ -116,23 +100,21 @@ window.onload = () => {
         let partyMembers = await fetchInstance.performFetch();
         let users = await this.getPartyMembers(partyMembers.data.data);
         this.populateMembers(users);
-        this.loading(false);
+        this.main().loading(false);
       } catch (error) {
         console.log(error.error || error.message);
-        let alertInstance = new Alert(error.error, true);
-        alertInstance.showAlertMessage();
+        this.main().alertInstance(error.error, true);
         if (error.error != null && (error.error == "Your session has expired" || error.error == "No access token")) {
-          let alertInstance = new Alert(error + ", please login to continue", true);
-          await alertInstance.showAlertMessage();
-          this.logout();
+          await this.main().alertInstance(error + ", please login to continue", true);
+          this.main().navInstance().logout();
         }
-        this.loading(false);
+        this.main().loading(false);
       }
     }
   }
 
   let partiesInstance = new Parites();
-  partiesInstance.setNav();
+  partiesInstance.main().navInstance("index.html", "index.html", "index.html", "../../assets/images/profile_image.jpg", "../vote/index.html", "./myVotes/index.html", "../../index.html").showNav();
 
   if (allParites != null) {
     partiesInstance.getAllParites();
@@ -143,6 +125,6 @@ window.onload = () => {
 
   let logout = document.getElementById("logout");
   logout.addEventListener("click", () => {
-    partiesInstance.logout();
+    partiesInstance.main().navInstance().logout();
   })
 }
