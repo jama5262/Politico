@@ -24,3 +24,21 @@ class VoteModel():
             "data": self.data,
             "msg": "Vote created successfully"
         })
+
+    def getAllVotes(self):
+        schema = SchemaGenerator(self.propertyName).selectAll()
+        db = Database(schema, True).executeQuery()
+        if db["status"] == 400:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        if not db["data"]:
+            return {
+                "status": 404,
+                "error": "Votes where not found"
+            }
+        return success(200, {
+            "data": db["data"],
+            "msg": "All Votes retrieved successfully"
+        })
