@@ -88,17 +88,17 @@ schema = """
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
   VALUES ('Admin', 'Admin', 'Admin', 'admin@gmail.com', 'adminpass', '0700000000', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'yes');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname1', 'Lname1', 'Oname1', 'email1@gmail.com', 'password1', '0711111111', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  VALUES ('Izuku', 'Mydoriya', 'Mha', 'email1@gmail.com', 'password1', '0711111111', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname2', 'Lname2', 'Oname2', 'email2@gmail.com', 'password1', '0711111112', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  VALUES ('Mob', 'Psycho', 'Hundred', 'email2@gmail.com', 'password1', '0711111112', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname3', 'Lname3', 'Oname3', 'email3@gmail.com', 'password1', '0711111113', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  VALUES ('One', 'Punch', 'Man', 'email3@gmail.com', 'password1', '0711111113', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname4', 'Lname4', 'Oname4', 'email4@gmail.com', 'password1', '0711111114', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  VALUES ('Asta', 'Yami', 'Yuno', 'email4@gmail.com', 'password1', '0711111114', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname5', 'Lname5', 'Oname5', 'email5@gmail.com', 'password1', '0711111115', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  VALUES ('All', 'Might', 'PlusUltra', 'email5@gmail.com', 'password1', '0711111115', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Fname6', 'Lname6', 'Oname6', 'email6@gmail.com', 'password1', '0711111116', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  VALUES ('John', 'Doe', 'Okay', 'email6@gmail.com', 'password1', '0711111116', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
 
   INSERT INTO candidates (office, party, candidate)
   VALUES (1, 2, 2);
@@ -117,8 +117,11 @@ schema = """
   INSERT INTO petitions (created_By, office, text)
   VALUES (1, 1, 'Reason 1 here');
   INSERT INTO petitions (created_By, office, text)
-  VALUES (2, 2, 'Reason 2 here');
-
+  VALUES (2, 3, 'Reason 2 here');
+  INSERT INTO petitions (created_By, office, text)
+  VALUES (5, 1, 'Reason 3 here');
+  INSERT INTO petitions (created_By, office, text)
+  VALUES (3, 2, 'Reason 4 here');
 """
 
 
