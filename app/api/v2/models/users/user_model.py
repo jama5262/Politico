@@ -56,7 +56,7 @@ class Users():
         if not db["data"]:
             return {
                 "status": 404,
-                "error": "The candidate in this party was not found"
+                "error": "The candidate was not found"
             }
         return returnMessages.success(200, {
             "data": db["data"],
