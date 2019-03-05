@@ -9,6 +9,7 @@ window.onload = () => {
       return mainInstance;
     }
     populate(data) {
+      this.main().alertInstance("Candidates retrieved");
       for (var i = 0; i < data.length; i++) {
         let officeHolderHead = `
           <div class="gov-office-holder card-design">
@@ -21,7 +22,7 @@ window.onload = () => {
         let officeHolderTail = `
             </div>
             <div>
-              <button class="button-design">vote</button>
+              <button id="vote" office="${ data[i].id }" officeName="${ data[i].name }" class="button-design">vote</button>
             </div>
           </div>
         `
@@ -40,7 +41,7 @@ window.onload = () => {
                   <h4>${ data[i].candidates[j].candidateName }</h4>
                   <h6>${ data[i].candidates[j].partyName }</h6>
                   <div style = "padding-bottom: 10px;" class="vote-for-candidate-index">
-                    <input type="radio" name="name" id="">
+                    <input type="radio" value="${ data[i].candidates[j].candidateName }" name="${ data[i].id }" id="${ data[i].candidates[j].id }">
                   </div>
                 </div>
               </div>        
@@ -51,9 +52,36 @@ window.onload = () => {
         this.officeHolder.insertAdjacentHTML('beforeend', officeHolderHead + candidateHolderBody + officeHolderTail);
       }
     }
+    async vote(office) {
+      let candidate = document.querySelector(`input[name="${ office.officeID }"]:checked`);
+      try {
+        if (candidate == null) {
+          return this.main().alertInstance(`Please choose a candidate to vote for ${ office.officeName }`, true);
+        }
+        this.main().loading();
+        let userId = await this.main().readFromDatabase();
+        let data = await this.main().performFetch("/votes", "POST", {
+          office: parseInt(office.officeID),
+          candidate: parseInt(candidate.id),
+          created_by: parseInt(userId.id)
+        });
+        console.log(data);
+        this.main().loading(false);
+        this.main().alertInstance(`${ data.data.msg }, you have voted for ${ candidate.value }`);
+      } catch (error) {
+        console.log(error);
+        this.main().loading(false);
+        if (error.error.indexOf("already exists") !== -1) {
+          this.main().alertInstance(`You have already voted for ${ candidate.value }`, true);
+        } else {
+          this.main().alertInstance(error.error, true);
+        }
+      }
+    }
     async generateData() {
       try {
         this.main().loading();
+        this.main().alertInstance("Please wait, fetching all candidates");
         let offices = await this.getAllOffices();
         for (var i = 0; i < offices.length; i++) {
           let candidates = await this.getAllCandidates(offices[i].id);
@@ -75,6 +103,7 @@ window.onload = () => {
         this.main().loading(false);
       } catch (error) {
         this.main().loading(false);
+        console.log(error);
       }
     }
     getAllOffices() {
@@ -121,13 +150,28 @@ window.onload = () => {
     }
   }
 
-  let votesInstance = new Votes();
-  votesInstance.main().navInstance("../parties/index.html", "../petitions/index.html", "index.html", "../../assets/images/profile_image.jpg", "index.html", "../myVotes/index.html", "../../index.html").showNav();
+  (async () => {
+    let votesInstance = new Votes();
+    let profile_image = await votesInstance.main().readFromDatabase();
+    votesInstance.main().navInstance("../parties/index.html", "../petitions/index.html", "index.html", profile_image.url, "index.html", "../myVotes/index.html", "../../index.html").showNav();
+      
+    votesInstance.generateData();
 
-  let logout = document.getElementById("logout");
-  logout.addEventListener("click", () => {
-    votesInstance.main().navInstance().logout();
-  });
+    let mainEl = document.getElementsByClassName("main-container")[0];
+    if (mainEl != null) {
+      mainEl.addEventListener("click", (event) => {
+        if (event.target.id == "vote") {
+          votesInstance.vote({
+            officeID: event.target.attributes.office.nodeValue,
+            officeName: event.target.attributes.officeName.nodeValue
+          });
+        }
+      })
+    }
 
-  votesInstance.generateData();
+    let logout = document.getElementById("logout");
+    logout.addEventListener("click", () => {
+      votesInstance.main().navInstance().logout();
+    });
+   })();
 }

@@ -34,8 +34,10 @@ class Alert {
       this.error = "#EF5350"
     }
     this.alertMessageEl = `
-      <div style='display = none; background-color: ${ this.error };' id="alertMessage" class="card-design">
-        ${ alertMessage }
+      <div style='display = none;' id="alertMessageParent">
+        <div style="background-color: ${ this.error };" class="card-design" id="alertMessageChild">
+          ${ alertMessage }
+        </div>
       </div>
     `
   }
@@ -45,9 +47,9 @@ class Alert {
   async showAlertMessage(){
     return new Promise((resolve) => {
       this.addToMain();
-      document.getElementById("alertMessage").style.display = "block";
+      document.getElementById("alertMessageParent").style.display = "block";
       setTimeout(function () {
-        document.getElementById("alertMessage").remove();
+        document.getElementById("alertMessageParent").remove();
         resolve();
       }, 3000);
     });
@@ -148,6 +150,10 @@ class Main {
       alertInstance.dismissAlert()
     }
   }
+  readFromDatabase() {
+    let indexeddbInstance = new Indexeddb();
+    return indexeddbInstance.readFromDatabase();
+  }
   navInstance(home, petitions, results, profileImage, vote, myVotes, logout) {
     let navInstance = new Navigation(home, petitions, results, profileImage, vote, myVotes, logout);
     return navInstance;
@@ -163,9 +169,5 @@ class Main {
   performFetch(url, method="GET", data={}, authenticate=true) {
     let fetchInstance = new Fetch(url, method, data, authenticate);
     return fetchInstance.performFetch();
-  }
-  readFromDatabase() {
-    let indexeddbInstance = new Indexeddb();
-    return indexeddbInstance.readFromDatabase();
   }
 }
