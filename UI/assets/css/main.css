@@ -210,13 +210,16 @@ nav{
   -webkit-animation: rotation 1s infinite linear;
 }
 
-#alertMessage{
+#alertMessageParent{
   position: absolute;
-  right: 10px;
-  padding: 20px;
-  /* background-color: #66BB6A; */
-  background-color: #EF5350;
   color: #FFFFFF;
+  right: 10px;
+  height: 100%;
+}
+#alertMessageChild{
+  position: sticky;
+  padding: 20px;
+  top: 10px;
 }
 
 @-webkit-keyframes rotation {

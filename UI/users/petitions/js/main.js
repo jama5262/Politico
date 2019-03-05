@@ -96,8 +96,9 @@ window.onload = () => {
       try {
         this.main().loading();
         let data = await this.main().performFetch("/petitions");
-        this.main().alertInstance(data.data.msg);
+        this.main().alertInstance("Please wait, getting all petitions");
         let result = await this.populatePetition(data.data.data);
+        this.main().alertInstance(data.data.msg);
         this.populate(result);
         this.main().loading(false);
       } catch (error) {
@@ -111,31 +112,34 @@ window.onload = () => {
     }
   }
 
-  let petitionInstance = new Petitions();
-  petitionInstance.main().navInstance("../parties/index.html", "index.html", "index.html", "../../assets/images/profile_image.jpg", "../vote/index.html", "../myVotes/index.html", "../../index.html").showNav();
-
-  if (petitionHodler != null) {
-    petitionInstance.getAllPetitions();
-  } else {
-    petitionInstance.getAllOffices();
-  }
-
-  let createPetition = document.getElementById("createPetition");
-  if (createPetition != null) {
-    createPetition.addEventListener("click", () => {
-      petitionInstance.createPetition();
+  (async () => {
+    let petitionInstance = new Petitions();
+    let profile_image = await petitionInstance.main().readFromDatabase();
+    petitionInstance.main().navInstance("../parties/index.html", "index.html", "index.html", profile_image.url, "../vote/index.html", "../myVotes/index.html", "../../index.html").showNav();
+  
+    if (petitionHodler != null) {
+      petitionInstance.getAllPetitions();
+    } else {
+      petitionInstance.getAllOffices();
+    }
+  
+    let createPetition = document.getElementById("createPetition");
+    if (createPetition != null) {
+      createPetition.addEventListener("click", () => {
+        petitionInstance.createPetition();
+      });
+    }
+  
+    let logout = document.getElementById("logout");
+    logout.addEventListener("click", () => {
+      petitionInstance.main().navInstance().logout();
     });
-  }
-
-  let logout = document.getElementById("logout");
-  logout.addEventListener("click", () => {
-    petitionInstance.main().navInstance().logout();
-  });
-
-  let goBack = document.getElementById("goBack");
-  if (goBack != null) {
-    goBack.addEventListener("click", () => {
-      window.history.back();
-    });
-  }
+  
+    let goBack = document.getElementById("goBack");
+    if (goBack != null) {
+      goBack.addEventListener("click", () => {
+        window.history.back();
+      });
+    }
+  })()
 }

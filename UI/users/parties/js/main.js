@@ -90,9 +90,10 @@ window.onload = () => {
     async getSpecificParty(partyID) {
       try {
         this.main().loading();
+        this.main().alertInstance("Please wait, fetching all party details");
         let party = await this.main().performFetch(`/parties/${ partyID }`);
         this.populateSpecificParty(party.data.data[0]);
-        let partyMembers = await this.main().performFetch(`/user/candidate/${ partyID }`)
+        let partyMembers = await this.main().performFetch(`/user/candidate/party/${ partyID }`)
         let users = await this.getPartyMembers(partyMembers.data.data);
         this.populateMembers(users);
         this.main().loading(false);
@@ -108,18 +109,21 @@ window.onload = () => {
     }
   }
 
-  let partiesInstance = new Parites();
-  partiesInstance.main().navInstance("index.html", "../petitions/index.html", "index.html", "../../assets/images/profile_image.jpg", "../vote/index.html", "../myVotes/index.html", "../../index.html").showNav();
+  (async () => {
+    let partiesInstance = new Parites();
+    let profile_image = await partiesInstance.main().readFromDatabase();
+    partiesInstance.main().navInstance("index.html", "../petitions/index.html", "index.html", profile_image.url, "../vote/index.html", "../myVotes/index.html", "../../index.html").showNav();
 
-  if (allParites != null) {
-    partiesInstance.getAllParites();
-  } else {
-    let partyID = new URL(window.location.href).searchParams.get("partyID");
-    partiesInstance.getSpecificParty(partyID);
-  }
-
-  let logout = document.getElementById("logout");
-  logout.addEventListener("click", () => {
-    partiesInstance.main().navInstance().logout();
-  })
+    if (allParites != null) {
+      partiesInstance.getAllParites();
+    } else {
+      let partyID = new URL(window.location.href).searchParams.get("partyID");
+      partiesInstance.getSpecificParty(partyID);
+    }
+  
+    let logout = document.getElementById("logout");
+    logout.addEventListener("click", () => {
+      partiesInstance.main().navInstance().logout();
+    })
+  })()
 }
