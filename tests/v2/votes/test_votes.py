@@ -46,8 +46,15 @@ class TestVotes(unittest.TestCase):
     def post(self, path, data):
         return self.client.post(path=path, data=json.dumps(data), content_type='application/json', headers=self.loginUser())
 
+    def get(self, path):
+        return self.client.get(path=path, content_type='application/json', headers=self.loginUser())
+
     def test_create_vote(self):
         response = self.post(self.endpoint, self.data)
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_all_votes(self):
+        response = self.get(self.endpoint)
         self.assertEqual(response.status_code, 200)
 
     def test_create_duplicate_vote(self):

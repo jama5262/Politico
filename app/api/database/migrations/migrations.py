@@ -88,15 +88,15 @@ schema = """
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
   VALUES ('Admin', 'Admin', 'Admin', 'admin@gmail.com', 'adminpass', '0700000000', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'yes');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Izuku', 'Mydoriya', 'Mha', 'email1@gmail.com', 'password1', '0711111111', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  VALUES ('Izuku', 'Mydoriya', 'Mha', 'email1@gmail.com', 'password1', '0711111111', 'https://66.media.tumblr.com/71a49cd9ce18be4882d09e735576cbe6/tumblr_ouiy06T2zb1tm5eijo2_250.png', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Mob', 'Psycho', 'Hundred', 'email2@gmail.com', 'password1', '0711111112', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  VALUES ('Mob', 'Psycho', 'Hundred', 'email2@gmail.com', 'password1', '0711111112', 'https://vignette.wikia.nocookie.net/mob-psycho-100/images/8/8c/Mob_anime.png/revision/latest/scale-to-width-down/250?cb=20160712054631', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('One', 'Punch', 'Man', 'email3@gmail.com', 'password1', '0711111113', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  VALUES ('One', 'Punch', 'Man', 'email3@gmail.com', 'password1', '0711111113', 'https://avatarfiles.alphacoders.com/468/thumb-46807.png', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('Asta', 'Yami', 'Yuno', 'email4@gmail.com', 'password1', '0711111114', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  VALUES ('Asta', 'Yami', 'Yuno', 'email4@gmail.com', 'password1', '0711111114', 'https://art.pixilart.com/34fccbb7c9a83f1.png', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
-  VALUES ('All', 'Might', 'PlusUltra', 'email5@gmail.com', 'password1', '0711111115', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
+  VALUES ('All', 'Might', 'PlusUltra', 'email5@gmail.com', 'password1', '0711111115', 'https://pbs.twimg.com/media/DGRwW3ZUIAAQREF.jpg', 'no');
   INSERT INTO users (first_name, last_name, other_name, email, password, phone_number, passport_url, is_admin)
   VALUES ('John', 'Doe', 'Okay', 'email6@gmail.com', 'password1', '0711111116', 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png', 'no');
 

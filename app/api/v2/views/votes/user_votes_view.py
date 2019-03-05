@@ -10,3 +10,10 @@ user_votes_view = Blueprint("user_votes_view", __name__)
 def createVote():
     response = VoteModel(request.get_json(force=True)).createVote()
     return jsonify(response), response["status"]
+
+
+@user_votes_view.route("", methods=["GET"])
+@jwt_required
+def getAllVotes():
+    response = VoteModel(None).getAllVotes()
+    return jsonify(response), response["status"]
