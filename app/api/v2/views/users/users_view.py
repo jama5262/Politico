@@ -12,7 +12,7 @@ def getSpecificUser(id):
     return jsonify(response), response["status"]
 
 
-@office_view.route("", methods=["GET"])
+@users_view.route("", methods=["GET"])
 @jwt_required
 def getAllUsers():
     response = Users().getAllUsers()

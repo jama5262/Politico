@@ -38,6 +38,7 @@ class Users():
                 "status": 404,
                 "error": "Users where not found"
             }
+        del db["data"][0]
         return returnMessages.success(200, {
             "data": db["data"],
             "msg": "All users retrieved successfully"
