@@ -103,12 +103,11 @@ class Navigation {
 }
 
 class AdminNavigation {
-  constructor(home=null, gov=null, candidate=null, petitions=null, logout=null) {
+  constructor(home=null, gov=null, candidate=null, logout=null) {
     this.bodyEl = document.body;
     this.navLinks = {
       home: home,
       gov: gov,
-      petitions: petitions,
       candidate: candidate,
       logout: logout
     }
@@ -122,7 +121,6 @@ class AdminNavigation {
           <a class="a-tag-nav" href="${ this.navLinks.home }">Home</a>
           <a class="a-tag-nav" href="${ this.navLinks.gov }">Gov Offices</a>
           <a class="a-tag-nav" href="${ this.navLinks.candidate }">Register Candidate</a>
-          <a class="a-tag-nav" href="${ this.navLinks.petitions }">Petitions</a>
         </div>
         <div class="link-container-3">
           <a style="display: none;" id="logoutUrl" href="${ this.navLinks.logout }">Logout</a>
@@ -154,8 +152,8 @@ class Main {
     let navInstance = new Navigation(home, petitions, results, profileImage, vote, myVotes, logout);
     return navInstance;
   }
-  adminNavInstance(home, gov, candidate, petitions, logout) {
-    let navInstance = new AdminNavigation(home, gov, candidate, petitions, logout);
+  adminNavInstance(home, gov, candidate, logout) {
+    let navInstance = new AdminNavigation(home, gov, candidate, logout);
     return navInstance;
   }
   alertInstance(message, error=false) {

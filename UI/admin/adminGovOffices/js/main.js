@@ -132,7 +132,7 @@ window.onload = () => {
   }
 
   let officesInstance = new AdminOffices();
-  officesInstance.main().adminNavInstance("../adminParties/index.html", "index.html", "index.html", "../../users/petitions/index.html", "../../index.html").showNav();
+  officesInstance.main().adminNavInstance("../adminParties/index.html", "index.html", "index.html", "../../index.html").showNav();
 
   let logout = document.getElementById("logout");
   logout.addEventListener("click", () => {
