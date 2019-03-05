@@ -143,7 +143,7 @@ window.onload = () => {
   }
 
   let partiesInstance = new AdminParties();
-  partiesInstance.main().adminNavInstance("index.html", "../adminGovOffices/index.html", "index.html", "../../users/petitions/index.html", "../../index.html").showNav();
+  partiesInstance.main().adminNavInstance("index.html", "../adminGovOffices/index.html", "../adminCandidates/registerCandidate.html", "../../index.html").showNav();
 
   let logout = document.getElementById("logout");
   logout.addEventListener("click", () => {

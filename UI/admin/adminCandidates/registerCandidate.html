@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Create Party</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+    <script src="./js/main.js"></script>
+    <script src="../../api/indexeddb.js"></script>
+    <script src="../../api/fetch.js"></script>
+    <script src="../../assets/js/main.js"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <div>
+        <h1 class="text-color-design-primary">Register Candidate</h1>
+      </div>
+      <div class="create-party-holder">
+        <form action="">
+          <div style="display: flex; flex-direction: column" class="card-design">
+            <p id="errorMessage" style="color: red; display: none; width: 100%"></p>
+            <select style="margin: 5px 0; width: 100%" id="user" style="width: 100%;" class="button-design">
+              <option value="0">Choose User</option>
+            </select>
+            <select style="margin: 5px 0; width: 100%" id="party" style="width: 100%;" class="button-design">
+              <option value="0">Choose Party</option>
+            </select>
+            <select style="margin: 5px 0; width: 100%" id="office" style="width: 100%;" class="button-design">
+              <option value="0">Choose Office</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="button-container">
+        <button id="goBack" class="button-design">go back</button>
+        <button id="registerCandidate" class="button-design">register candidate</button>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  .button-design{
+    width: 160px;
+  }
+</style>
