@@ -62,7 +62,7 @@ class PartyModel():
             }
         return success(200, {
             "data": db["data"],
-            "msg": "Office retrieved successfully"
+            "msg": "Party retrieved successfully"
         })
 
     def editSpecificParty(self):

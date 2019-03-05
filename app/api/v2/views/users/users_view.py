@@ -12,6 +12,12 @@ def getSpecificUser(id):
     return jsonify(response), response["status"]
 
 
+@office_view.route("", methods=["GET"])
+@jwt_required
+def getAllUsers():
+    response = Users().getAllUsers()
+    return jsonify(response), response["status"]
+
 @users_view.route("/candidate/<id>", methods=["GET"])
 @jwt_required
 def getSpecificCandidate(id):

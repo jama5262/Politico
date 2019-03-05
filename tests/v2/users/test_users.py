@@ -31,6 +31,10 @@ class TestUsers(unittest.TestCase):
             response = self.get("/api/v2/user/" + str(self.userID))
             self.assertEqual(response.status_code, 200)
 
+    def test_get_all_users(self):
+        response = self.get("/api/v2/user")
+        self.assertEqual(response.status_code, 200)
+
     def test_get_specific_candidate(self):
             response = self.get("/api/v2/user/candidate/" + str(self.userID))
             self.assertEqual(response.status_code, 200)
