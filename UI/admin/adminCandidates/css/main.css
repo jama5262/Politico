@@ -1,0 +1,67 @@
+/* GLOBAL */
+.main-container{
+  max-width: 900px;
+  padding: 10px;
+  margin: auto;
+  justify-content: center;
+}
+
+/* INDEX STYLE */
+.party-image-index{
+  height: 60px;
+  background-size: cover;
+  border-radius: 7px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+thead{
+  background: #FFB74D;
+  color:  #FFFFFF;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+/* CREATE AND EDIT STYLE */
+.create-party-holder{
+  max-width: 400px;
+  margin: auto;
+}
+.party-image-holder{
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  margin: auto;
+  margin-bottom: 10px;
+  border: 3px solid #FFB74D;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.party-image{
+  height: 100%;
+  background-image: url("../../../assets/images/adminImages/createPartyImage.jpg");
+  background-size: cover;
+  border-radius: 7px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.button-container{
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.input-design{
+  width: 90%;
+}
