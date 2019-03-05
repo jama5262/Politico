@@ -72,7 +72,7 @@ window.onload = () => {
         console.log(error);
         this.main().loading(false);
         if (error.error.indexOf("already exists") !== -1) {
-          this.main().alertInstance(`You have already voted for ${ candidate.value }`, true);
+          this.main().alertInstance("You cannot vote twice for the same candidate or office", true);
         } else {
           this.main().alertInstance(error.error, true);
         }
