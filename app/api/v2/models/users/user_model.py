@@ -4,8 +4,9 @@ from app.api.database.database import Database
 
 
 class Users():
-    def __init__(self, id=None):
+    def __init__(self, id=None, tableName=None):
         self.id = id
+        self.tableName = tableName
 
     def getSpecificUser(self):
         schema = SchemaGenerator("users", "id", None, self.id).selectSpecific()
@@ -45,7 +46,7 @@ class Users():
         })
 
     def getSpecificCandidate(self):
-        schema = SchemaGenerator("candidates", "party", None, self.id).selectSpecific()
+        schema = SchemaGenerator("candidates", self.tableName, None, self.id).selectSpecific()
         db = Database(schema, True).executeQuery()
         if db["status"] == 400:
             return {

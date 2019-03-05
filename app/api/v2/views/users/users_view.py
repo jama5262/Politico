@@ -18,8 +18,9 @@ def getAllUsers():
     response = Users().getAllUsers()
     return jsonify(response), response["status"]
 
-@users_view.route("/candidate/<id>", methods=["GET"])
+
+@users_view.route("/candidate/<tableName>/<id>", methods=["GET"])
 @jwt_required
-def getSpecificCandidate(id):
-    response = Users(id).getSpecificCandidate()
+def getSpecificCandidate(id, tableName):
+    response = Users(id, tableName).getSpecificCandidate()
     return jsonify(response), response["status"]
