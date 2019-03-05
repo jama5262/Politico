@@ -2,7 +2,6 @@ window.onload = () => {
   class Votes {
     constructor() {
       this.officeHolder = document.getElementsByClassName("main-container")[0];
-      // this.candidateHolder = document.getElementsByClassName("candidate-holder-index");
     }
     main() {
       let mainInstance = new Main();
