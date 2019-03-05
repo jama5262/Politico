@@ -92,7 +92,7 @@ window.onload = () => {
         this.main().loading();
         let party = await this.main().performFetch(`/parties/${ partyID }`);
         this.populateSpecificParty(party.data.data[0]);
-        let partyMembers = await this.main().performFetch(`/user/candidate/${ partyID }`)
+        let partyMembers = await this.main().performFetch(`/user/candidate/party/${ partyID }`)
         let users = await this.getPartyMembers(partyMembers.data.data);
         this.populateMembers(users);
         this.main().loading(false);
