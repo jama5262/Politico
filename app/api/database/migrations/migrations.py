@@ -46,7 +46,7 @@ schema = """
   CREATE TABLE IF NOT EXISTS votes(
     created_by INTEGER REFERENCES users(id),
     office INTEGER REFERENCES offices(id),
-    candidate INTEGER REFERENCES candidates(id),
+    candidate INTEGER REFERENCES candidates(candidate),
     created_On DATE NOT NULL DEFAULT NOW(),
     PRIMARY KEY (office, created_By)
   );
