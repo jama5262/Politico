@@ -40,7 +40,7 @@ window.onload = () => {
                   <h4>${ data[i].candidates[j].candidateName }</h4>
                   <h6>${ data[i].candidates[j].partyName }</h6>
                   <div style = "padding-bottom: 10px;" class="vote-for-candidate-index">
-                    <input type="radio" value="${ data[i].candidates[j].candidateName }" name="${ data[i].id }" id="${ data[i].candidates[j].id }">
+                    <input type="radio" value="${ data[i].candidates[j].candidateName }" name="${ data[i].id }" id="${ data[i].candidates[j].candidate }">
                   </div>
                 </div>
               </div>        
@@ -69,6 +69,10 @@ window.onload = () => {
         this.main().alertInstance(`${ data.data.msg }, you have voted for ${ candidate.value }`);
       } catch (error) {
         console.log(error);
+        if (error.error != null && (error.error == "Your session has expired" || error.error == "No access token")) {
+          await this.main().alertInstance(error.error + ", please login to continue", true);
+          this.main().navInstance().logout();
+        }
         this.main().loading(false);
         if (error.error.indexOf("already exists") !== -1) {
           this.main().alertInstance("You cannot vote twice for the same candidate or office", true);
@@ -106,7 +110,7 @@ window.onload = () => {
       }
     }
     getAllOffices() {
-      return new Promise(async (resolve, reject) => {
+      return new Promise(async (resolve) => {
         try {
           let data = await this.main().performFetch("/offices");
           resolve(data.data.data)
@@ -152,7 +156,7 @@ window.onload = () => {
   (async () => {
     let votesInstance = new Votes();
     let profile_image = await votesInstance.main().readFromDatabase();
-    votesInstance.main().navInstance("../parties/index.html", "../petitions/index.html", "index.html", profile_image.url, "index.html", "../myVotes/index.html", "../../index.html").showNav();
+    votesInstance.main().navInstance("../parties/index.html", "../petitions/index.html", "../results/index.html", profile_image.url, "index.html", "../myVotes/index.html", "../../index.html").showNav();
       
     votesInstance.generateData();
 
