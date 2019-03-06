@@ -40,7 +40,7 @@ window.onload = () => {
                   <h4>${ data[i].candidates[j].candidateName }</h4>
                   <h6>${ data[i].candidates[j].partyName }</h6>
                   <div style = "padding-bottom: 10px;" class="vote-for-candidate-index">
-                    <input type="radio" value="${ data[i].candidates[j].candidateName }" name="${ data[i].id }" id="${ data[i].candidates[j].id }">
+                    <input type="radio" value="${ data[i].candidates[j].candidateName }" name="${ data[i].id }" id="${ data[i].candidates[j].candidate }">
                   </div>
                 </div>
               </div>        
