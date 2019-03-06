@@ -17,3 +17,10 @@ def createVote():
 def getAllVotes():
     response = VoteModel(None).getAllVotes()
     return jsonify(response), response["status"]
+
+
+@user_votes_view.route("/<id>", methods=["GET"])
+@jwt_required
+def getSpecificVote(id):
+    response = VoteModel(None, id).getSpecificVote()
+    return jsonify(response), response["status"]
