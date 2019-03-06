@@ -111,8 +111,6 @@ schema = """
 
   INSERT INTO votes (created_by, office, candidate)
   VALUES (1, 1, 2);
-  INSERT INTO votes (created_by, office, candidate)
-  VALUES (1, 2, 2);
 
   INSERT INTO petitions (created_By, office, text)
   VALUES (1, 1, 'Reason 1 here');

@@ -15,7 +15,7 @@ class TestVotes(unittest.TestCase):
           "created_by": 2
         }
         self.dataDuplicate = {
-          "office": 2,
+          "office": 1,
           "candidate": 2,
           "created_by": 1
         }
