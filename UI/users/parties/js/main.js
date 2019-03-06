@@ -99,6 +99,9 @@ window.onload = () => {
         this.main().loading(false);
       } catch (error) {
         console.log(error.error || error.message);
+        if (error.error != null && error.error == "The candidate was not found") {
+          await this.main().alertInstance("No candidates where found", true);
+        }
         this.main().alertInstance(error.error, true);
         if (error.error != null && (error.error == "Your session has expired" || error.error == "No access token")) {
           await this.main().alertInstance(error + ", please login to continue", true);
