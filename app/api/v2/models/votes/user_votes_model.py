@@ -5,9 +5,10 @@ from app.api.database.database import Database
 
 
 class VoteModel():
-    def __init__(self, data):
+    def __init__(self, data, id=None):
         self.data = data
         self.propertyName = "votes"
+        self.id = id
 
     def createVote(self):
         valid = validate(self.propertyName, self.data)
@@ -41,4 +42,22 @@ class VoteModel():
         return success(200, {
             "data": db["data"],
             "msg": "All Votes retrieved successfully"
+        })
+
+    def getSpecificVote(self):
+        schema = SchemaGenerator(self.propertyName, "created_by", None, self.id).selectSpecific()
+        db = Database(schema, True).executeQuery()
+        if db["status"] == 400:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        if not db["data"]:
+            return {
+                "status": 404,
+                "error": "The vote was not found"
+            }
+        return returnMessages.success(200, {
+            "data": db["data"],
+            "msg": "Votes retrieved successfully"
         })

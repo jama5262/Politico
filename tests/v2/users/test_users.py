@@ -25,20 +25,28 @@ class TestUsers(unittest.TestCase):
         }
 
     def get(self, path):
-            return self.client.get(path=path, content_type='application/json', headers=self.loginUser())
+        return self.client.get(path=path, content_type='application/json', headers=self.loginUser())
 
     def test_get_specific_user(self):
-            response = self.get("/api/v2/user/" + str(self.userID))
-            self.assertEqual(response.status_code, 200)
+        response = self.get("/api/v2/user/" + str(self.userID))
+        self.assertEqual(response.status_code, 200)
 
     def test_get_all_users(self):
         response = self.get("/api/v2/user")
         self.assertEqual(response.status_code, 200)
 
     def test_get_specific_candidate_party(self):
-            response = self.get("/api/v2/user/candidate/party/" + str(self.userID))
-            self.assertEqual(response.status_code, 200)
+        response = self.get("/api/v2/user/candidate/party/" + str(self.userID))
+        self.assertEqual(response.status_code, 200)
 
     def test_get_specific_candidate_office(self):
-            response = self.get("/api/v2/user/candidate/office/" + str(self.userID))
-            self.assertEqual(response.status_code, 200)
+        response = self.get("/api/v2/user/candidate/office/" + str(self.userID))
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_specific_candidate_party_not_found(self):
+        response = self.get("/api/v2/user/candidate/party/454545")
+        self.assertEqual(response.status_code, 404)
+
+    def test_get_specific_candidate_office_not_found(self):
+        response = self.get("/api/v2/user/candidate/office/454545")
+        self.assertEqual(response.status_code, 404)
