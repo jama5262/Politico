@@ -57,7 +57,7 @@ class VoteModel():
                 "status": 404,
                 "error": "The vote was not found"
             }
-        return returnMessages.success(200, {
+        return success(200, {
             "data": db["data"],
             "msg": "Votes retrieved successfully"
         })
