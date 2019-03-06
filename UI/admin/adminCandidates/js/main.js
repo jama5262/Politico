@@ -37,7 +37,11 @@ window.onload = () => {
         }
         this.main().loading(false);
       } catch (error) {
-        this.main().alertInstance(error.error, true);
+        if (error.error.indexOf("already exists") !== -1) {
+          this.main().alertInstance("The candidate has already been registered", true);
+        } else {
+          this.main().alertInstance(error.error, true);
+        }
         this.main().loading(false);
       }
     }

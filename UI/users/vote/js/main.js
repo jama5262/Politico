@@ -69,6 +69,10 @@ window.onload = () => {
         this.main().alertInstance(`${ data.data.msg }, you have voted for ${ candidate.value }`);
       } catch (error) {
         console.log(error);
+        if (error.error != null && (error.error == "Your session has expired" || error.error == "No access token")) {
+          await this.main().alertInstance(error.error + ", please login to continue", true);
+          this.main().navInstance().logout();
+        }
         this.main().loading(false);
         if (error.error.indexOf("already exists") !== -1) {
           this.main().alertInstance("You cannot vote twice for the same candidate or office", true);
