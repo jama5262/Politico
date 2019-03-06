@@ -27,26 +27,38 @@ window.onload = () => {
     }
     populateUserVotes(data) {
       for (var i = 0; i < data.length; i++) {
+        let votesEl = `
+          <div class="vote">
+            <h3 class="text-color-design-primary">${ data[i].officeName }</h3>
+            <div class="candidate-index">
+                <div style="background-image: url('${ data[i].candidateUrl }');" class="candidate-profile-image-index"></div>
+                <div class="candidate-info-index">
+                  <h3>${ data[i].candidateName }</h3>
+                </div>
+            </div>
+          </div>
+        `
+        this.votesEl.insertAdjacentHTML("afterbegin", votesEl);
+      }
+    }
+    populateNoUserVotes() {
       let votesEl = `
         <div class="vote">
-          <h3 class="text-color-design-primary">${ data[i].officeName }</h3>
           <div class="candidate-index">
-              <div style="background-image: url('${ data[i].candidateUrl }');" class="candidate-profile-image-index"></div>
               <div class="candidate-info-index">
-                <h3>${ data[i].candidateName }</h3>
+                <h3>You have no votes</h3>
               </div>
           </div>
         </div>
       `
       this.votesEl.insertAdjacentHTML("afterbegin", votesEl);
-      }
     }
     async getUserVotes() {
       try {
         this.main().loading();
         let user = await this.main().readFromDatabase();
         console.log(user.id);
-        let votes = await this.main().performFetch("/votes");
+        let votes = await this.main().performFetch(`/votes/${ user.id }`);
         for (var i = 0; i < votes.data.data.length; i++) {
           if (user.id == votes.data.data[i].created_by) {
             let candidate = await this.main().performFetch(`/user/${ votes.data.data[i].candidate }`)
@@ -61,7 +73,10 @@ window.onload = () => {
         console.log(votes.data.data);
       } catch (error) {
         this.main().loading(false);
-        console.log(error);
+        console.log(error.error);
+        if (error.error != null && error.error == "The vote was not found") {
+          this.populateNoUserVotes();
+        }
       }
     }
     async getUserInfo() {

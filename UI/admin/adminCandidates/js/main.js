@@ -119,7 +119,7 @@ window.onload = () => {
   }
 
   let candidateInstance = new AdminCandidates();
-  candidateInstance.main().adminNavInstance("index.html", "../adminGovOffices/index.html", "index.html", "../../index.html").showNav();
+  candidateInstance.main().adminNavInstance("../adminParties/index.html", "../adminGovOffices/index.html", "index.html", "../../index.html").showNav();
 
   candidateInstance.populate();
 
