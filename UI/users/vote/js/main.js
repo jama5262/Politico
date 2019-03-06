@@ -106,7 +106,7 @@ window.onload = () => {
       }
     }
     getAllOffices() {
-      return new Promise(async (resolve, reject) => {
+      return new Promise(async (resolve) => {
         try {
           let data = await this.main().performFetch("/offices");
           resolve(data.data.data)
@@ -152,7 +152,7 @@ window.onload = () => {
   (async () => {
     let votesInstance = new Votes();
     let profile_image = await votesInstance.main().readFromDatabase();
-    votesInstance.main().navInstance("../parties/index.html", "../petitions/index.html", "index.html", profile_image.url, "index.html", "../myVotes/index.html", "../../index.html").showNav();
+    votesInstance.main().navInstance("../parties/index.html", "../petitions/index.html", "../results/index.html", profile_image.url, "index.html", "../myVotes/index.html", "../../index.html").showNav();
       
     votesInstance.generateData();
 

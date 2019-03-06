@@ -92,7 +92,7 @@ window.onload = () => {
   (async () => {
     let myVotesInstance = new MyVotes();
     let profile_image = await myVotesInstance.main().readFromDatabase();
-    myVotesInstance.main().navInstance("../parties/index.html", "../petitions/index.html", "index.html", profile_image.url, "../vote/index.html", "index.html", "../../index.html").showNav();
+    myVotesInstance.main().navInstance("../parties/index.html", "../petitions/index.html", "../results/index.html", profile_image.url, "../vote/index.html", "index.html", "../../index.html").showNav();
 
     myVotesInstance.getUserInfo();
 

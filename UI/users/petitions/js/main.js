@@ -115,7 +115,7 @@ window.onload = () => {
   (async () => {
     let petitionInstance = new Petitions();
     let profile_image = await petitionInstance.main().readFromDatabase();
-    petitionInstance.main().navInstance("../parties/index.html", "index.html", "index.html", profile_image.url, "../vote/index.html", "../myVotes/index.html", "../../index.html").showNav();
+    petitionInstance.main().navInstance("../parties/index.html", "index.html", "../results/index.html", profile_image.url, "../vote/index.html", "../myVotes/index.html", "../../index.html").showNav();
   
     if (petitionHodler != null) {
       petitionInstance.getAllPetitions();
