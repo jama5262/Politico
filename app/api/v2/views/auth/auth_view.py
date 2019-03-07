@@ -29,3 +29,9 @@ def loginUser():
         response["data"]["token"] = token
         print(response["data"]["user"]["is_admin"])
     return jsonify(response), response["status"]
+
+
+@auth_view.route("/<email>", methods=["GET"])
+def getSpecificUser(email):
+    response = AuthModel(None, email).getSpecificUser()
+    return jsonify(response), response["status"]

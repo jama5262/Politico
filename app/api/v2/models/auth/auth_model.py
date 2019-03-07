@@ -49,3 +49,26 @@ class AuthModel():
             "user": db["data"][0],
             "msg": "Login successfull"
         })
+
+    def getSpecificUser(self):
+        schema = SchemaGenerator(self.tableName, "email", None, "'" + self.id + "'").selectSpecific()
+        db = Database(schema, True).executeQuery()
+        if db["status"] == 400:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        if not db["data"]:
+            return {
+                "status": 404,
+                "error": "The user was not found"
+            }
+        if db["data"][0]["email"] == "admin@gmail.com":
+            return {
+                "status": 401,
+                "error": "You are fobidden to reset admin account"
+            }
+        return returnMessages.success(200, {
+            "data": db["data"],
+            "msg": "User retrieved successfully"
+        })
