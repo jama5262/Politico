@@ -74,7 +74,7 @@ class AuthModel():
         try:
             fullName = user["first_name"] + " " + user["last_name"]
             link = "http://127.0.0.1:8080/UI/auth/reset.html?token=" + self.token + "&id=" + str(user["id"])
-            sg = sendgrid.SendGridAPIClient(apikey="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")
+            sg = sendgrid.SendGridAPIClient(apikey="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")
             from_email = Email("politico-noreply@politico.com")
             to_email = Email(user["email"])
             subject = "Politico Password Reset"
