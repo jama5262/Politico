@@ -154,6 +154,10 @@ class Main {
     let indexeddbInstance = new Indexeddb();
     return indexeddbInstance.readFromDatabase();
   }
+  writeToDatabase(data) {
+    let indexeddbInstance = new Indexeddb();
+    return indexeddbInstance.writeToDatabase(data);
+  }
   navInstance(home, petitions, results, profileImage, vote, myVotes, logout) {
     let navInstance = new Navigation(home, petitions, results, profileImage, vote, myVotes, logout);
     return navInstance;
