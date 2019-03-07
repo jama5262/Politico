@@ -1,6 +1,6 @@
 class Indexeddb {
   openDatabase() {
-    let request = indexedDB.open('politico', 1);
+    let request = indexedDB.open('politico1', 1);
     request.onupgradeneeded = (event) => {
       let db = event.target.result;
       console.log(db);
