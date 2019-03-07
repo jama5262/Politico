@@ -15,6 +15,8 @@ window.onload = () => {
       this.oName = document.getElementById("oNameSignUp");
       this.email = document.getElementById("emailSignUp");
       this.password = document.getElementById("passwordSignUp");
+      this.newPassword = document.getElementById("nPassWordReset");
+      this.ConfPassword = document.getElementById("rPassWordReset");
       this.phoneNumber = document.getElementById("phoneSignUp");
       this.passport = document.getElementById("pportSignUp");
     }
@@ -54,7 +56,11 @@ window.onload = () => {
       try {
         this.main().loading();
         this.errorMessageFunc("", "none");
-        let user = await this.main().performFetch(`/auth/${ this.email.value }`)
+        let user = await this.main().performFetch(`/auth/${ this.email.value }`, "GET", {}, false)
+        await this.main().writeToDatabase({
+          user: "1",
+          id: user.data.data.user.id,
+        });
         this.main().alertInstance(`${ user.data.msg } to ${ user.data.data.email }`);
         this.main().loading(false);
       } catch (error) {
@@ -63,15 +69,29 @@ window.onload = () => {
       }
     }
 
+    validate() {
+      if (this.newPassword.value == "") {
+        this.errorMessageFunc("Please enter your new password")
+      } else if (this.newPassword.value) {
+        
+      }
+    }
     
     async resetPassword(token) {
       try {
         this.main().loading();
         this.errorMessageFunc("", "none");
         await this.main().writeToDatabase({
+          user: "1",
           token: token
         });
-        
+        let user = await this.main().readFromDatabase();
+        console.log(user);
+        if (true) {
+          
+        }
+        let user = this.main().performFetch(`auth/reset/${ user.id }`)
+        lo
       } catch (error) {
         console.log(error.error || error.message);
         this.main().alertInstance(error.error, true);
