@@ -70,6 +70,7 @@ class OfficeModel():
         if valid["isValid"] is False:
             return valid["data"]
         schema = SchemaGenerator(self.propertyName, None, self.data, self.id).updateSpecific()
+        print(schema)
         db = Database(schema).executeQuery()
         if db["status"] == 400:
             return {

@@ -31,6 +31,14 @@ def loginUser():
     return jsonify(response), response["status"]
 
 
+@auth_view.route("/reset/<id>", methods=["PATCH"])
+@jwt_required
+def resetPassword(id):
+    response = AuthModel(request.get_json(force=True), id).resetPassword()
+    print(response)
+    return jsonify(response), response["status"]
+
+
 @auth_view.route("/<email>", methods=["GET"])
 def getSpecificUser(email):
     response = AuthModel(None, email, createToken(email)).getSpecificUser()

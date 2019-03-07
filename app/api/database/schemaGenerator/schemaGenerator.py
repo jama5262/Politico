@@ -29,15 +29,19 @@ class SchemaGenerator():
     def updateSpecific(self):
         string = ""
         result = []
+        count = 0
         for x in self.data:
             col = x
             row = self.data[x]
             string = col + " = '" + row + "'"
             result.append(string)
-
+            count += 1
+        output = str(tuple(result)).replace('"', '').replace('(', '').replace(')', '')
+        if count <= 1:
+            output = output.replace(",", "")
         return """
             UPDATE """ + self.tableName + """ 
-            SET """ + str(tuple(result)).replace('"', '').replace('(', '').replace(')', '') + """
+            SET """ + output + """
             WHERE id = """ + self.id + """
         """
 

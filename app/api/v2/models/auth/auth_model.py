@@ -54,11 +54,26 @@ class AuthModel():
             "msg": "Login successfull"
         })
 
+    def resetPassword(self):
+        schema = SchemaGenerator(self.tableName, None, self.data, self.id).updateSpecific()
+        print(schema)
+        db = Database(schema).executeQuery()
+        if db["status"] == 400:
+            return {
+                "status": db["status"],
+                "error": db["error"]
+            }
+        if db["data"] < 1:
+            return returnMessages.error(404, "The user was not found")
+        return returnMessages.success(200, {
+            "data": self.data,
+            "msg": "Password reset successful"
+        })
+
     def sendResetEmail(self, user):
         try:
             fullName = user["first_name"] + " " + user["last_name"]
-            link = ""
-            print(self.token)
+            link = "http://127.0.0.1:8080/UI/auth/reset.html?token=" + self.token
             sg = sendgrid.SendGridAPIClient(apikey="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")
             from_email = Email("politico-noreply@politico.com")
             to_email = Email("jama3137@gmail.com")
@@ -204,9 +219,9 @@ class AuthModel():
             content = Content("text/html", message)
             mail = Mail(from_email, subject, to_email, content)
             response = sg.client.mail.send.post(request_body=mail.get())
-            print("email sent")
+            return self.token
         except:
-            print("the was an error")
+            return "error"
 
     def getSpecificUser(self):
         schema = SchemaGenerator(self.tableName, "email", None, "'" + self.id + "'").selectSpecific()
@@ -226,8 +241,13 @@ class AuthModel():
                 "status": 401,
                 "error": "You are fobidden to reset admin account"
             }
-        self.sendResetEmail(db["data"][0])
+        emailResponse = self.sendResetEmail(db["data"][0])
+        if emailResponse == "error":
+            return {
+                "status": 401,
+                "error": "The was a problem sending your password reset link"
+            }
         return returnMessages.success(200, {
             "data": db["data"][0],
-            "msg": db["data"][0]["email"]
+            "msg": "Email reset link sent"
         })
