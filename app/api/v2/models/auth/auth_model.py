@@ -73,10 +73,10 @@ class AuthModel():
     def sendResetEmail(self, user):
         try:
             fullName = user["first_name"] + " " + user["last_name"]
-            link = "http://127.0.0.1:8080/UI/auth/reset.html?token=" + self.token
+            link = "http://127.0.0.1:8080/UI/auth/reset.html?token=" + self.token + "&id=" + str(user["id"])
             sg = sendgrid.SendGridAPIClient(apikey="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")
             from_email = Email("politico-noreply@politico.com")
-            to_email = Email("jama3137@gmail.com")
+            to_email = Email(user["email"])
             subject = "Politico Password Reset"
             message = '''
                 <!DOCTYPE html>
@@ -218,7 +218,7 @@ class AuthModel():
             '''
             content = Content("text/html", message)
             mail = Mail(from_email, subject, to_email, content)
-            response = sg.client.mail.send.post(request_body=mail.get())
+            sg.client.mail.send.post(request_body=mail.get())
             return self.token
         except:
             return "error"
