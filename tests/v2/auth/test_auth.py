@@ -81,6 +81,9 @@ class TestAuth(unittest.TestCase):
     def post(self, path, data):
         return self.client.post(path=path, data=json.dumps(data), content_type='application/json')
 
+    def get(self, path):
+        return self.client.get(path=path, content_type='application/json')
+
     def test_register_user(self):
         response = self.post(self.endpoint + "/signup", self.signupData)
         self.assertEqual(response.status_code, 200)
@@ -96,6 +99,18 @@ class TestAuth(unittest.TestCase):
     def test_login(self):
         response = self.post(self.endpoint + "/login", self.loginData)
         self.assertEqual(response.status_code, 200)
+
+    def test_get_user(self):
+        response = self.get(self.endpoint + "/" + self.loginData["email"])
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_user_not_found(self):
+        response = self.get(self.endpoint + "/email20000@gmail.com")
+        self.assertEqual(response.status_code, 404)
+
+    def test_get_admin(self):
+        response = self.get(self.endpoint + "/admin@gmail.com")
+        self.assertEqual(response.status_code, 401)
 
     def test_wrong_login(self):
         response = self.post(self.endpoint + "/login", self.wrongLoginData)
