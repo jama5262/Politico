@@ -97,7 +97,7 @@ class TestOffice(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_specific_office_results(self):
-        response = self.get(self.endpoint + "/2/result")
+        response = self.get(self.endpoint + "/1/result")
         self.assertEqual(response.status_code, 200)
 
     def test_specific_office_results_not_found(self):
