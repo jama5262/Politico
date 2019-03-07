@@ -8,8 +8,12 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../assets/css/main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
     <script src="../assets/js/main.js"></script>
+    <script src="../api/indexeddb.js"></script>
+    <script src="../api/fetch.js"></script>
+    <script src="./js/main.js"></script>
   </head>
   <body>
+    <a href="./reset.html" id="logoutUrl"></a>
     <div class="main-container">
       <div class="title-container">
         <h1 style="font-size: 50px; margin: 0" class="text-color-design-primary">Reset<br> Password</h1>
@@ -17,8 +21,9 @@
       </div>
       <div class="sub-container">
         <div style="display: flex; flex-direction: column" class="card-design">
-          <div id="email-container">
-            <input class="input-design" placeholder="Email" type="email" required name="" id="emailReset">
+          <p id="errorMessage" style="color: red; display: none; width: 100%"></p>
+          <div style="display: none;" id="email-container">
+            <input class="input-design" placeholder="Email" type="email" required name="" id="emailSignUp">
           </div>
           <div style="display: none; flex-direction: column" id="password-container">
             <input class="input-design" placeholder="New Password" type="password" required name="" id="nPassWordReset">
@@ -45,41 +50,3 @@
     justify-content: center;
   }
 </style>
-
-<script>
-  let emailContainer = document.getElementById("email-container");
-  let passwordContainer = document.getElementById("password-container");
-  let submit = document.getElementById("submit");
-  let message = document.getElementById("message");
-  let email = document.getElementById("emailReset");
-  let nPassword = document.getElementById("nPassWordReset");
-  let rPassword = document.getElementById("rPassWordReset");
-
-  let resetEmail = false;
-
-  let messageInfo = (text, color) => {
-    message.style.color = color;
-    message.innerHTML = text;
-  }
-
-  submit.addEventListener("click", () => {
-    if (!resetEmail) {
-      if (email.value == "") {
-        messageInfo("Please fill in your email", "red")
-      }else {
-        resetEmail = true;
-        passwordContainer.style.display = "flex";
-        emailContainer.style.display = "none";
-        submit.innerHTML = "reset password";
-        messageInfo("Enter your new password", "black");
-      }
-    }else {
-      if (nPassword.value == "" || rPassword.value == "") {
-        messageInfo("Please fill in both password fields", "red");
-      }else {
-        messageInfo("Your password has been reset", "green");
-        submit.style.display = "none";
-      }
-    }
-  });
-</script>

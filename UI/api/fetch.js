@@ -1,6 +1,6 @@
 class Fetch {
   constructor(url, method="GET", data={}, authenticate=true) {
-    this.baseUrl = "https://politico-andela-37.herokuapp.com/api/v2";
+    this.baseUrl = "http://127.0.0.1:5000/api/v2";
     this.url = url;
     this.method = method;
     this.data = data;
