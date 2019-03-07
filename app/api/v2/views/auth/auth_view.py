@@ -33,5 +33,5 @@ def loginUser():
 
 @auth_view.route("/<email>", methods=["GET"])
 def getSpecificUser(email):
-    response = AuthModel(None, email).getSpecificUser()
+    response = AuthModel(None, email, createToken(email)).getSpecificUser()
     return jsonify(response), response["status"]

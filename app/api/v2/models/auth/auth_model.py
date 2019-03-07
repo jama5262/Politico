@@ -5,14 +5,16 @@ from app.api.database.schemaGenerator.schemaGenerator import SchemaGenerator
 from app.api.database.database import Database
 import sendgrid
 from sendgrid.helpers.mail import Email, Content, Mail
+from flask_jwt_extended import create_access_token
 
 
 class AuthModel():
-    def __init__(self, data=None, id=None):
+    def __init__(self, data=None, id=None, token=None):
         self.tableName = "users"
         if data is not None:
             self.data = checkIfValuesHaveFirstLetterUpperCase(data)
         self.id = id
+        self.token = token
 
     def registerUser(self):
         valid = validate(self.tableName, self.data)
@@ -56,6 +58,7 @@ class AuthModel():
         try:
             fullName = user["first_name"] + " " + user["last_name"]
             link = ""
+            print(self.token)
             sg = sendgrid.SendGridAPIClient(apikey="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")
             from_email = Email("politico-noreply@politico.com")
             to_email = Email("jama3137@gmail.com")
@@ -201,9 +204,7 @@ class AuthModel():
             content = Content("text/html", message)
             mail = Mail(from_email, subject, to_email, content)
             response = sg.client.mail.send.post(request_body=mail.get())
-            print(response.status_code)
-            print(response.body)
-            print(response.headers)
+            print("email sent")
         except:
             print("the was an error")
 
@@ -228,5 +229,5 @@ class AuthModel():
         self.sendResetEmail(db["data"][0])
         return returnMessages.success(200, {
             "data": db["data"][0],
-            "msg": "User retrieved successfully"
+            "msg": db["data"][0]["email"]
         })
