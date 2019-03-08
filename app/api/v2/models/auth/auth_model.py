@@ -78,7 +78,7 @@ class AuthModel():
             key4 = "ZJ6EH0y2LT5jeOJi"
             key5 = "Tml5O8m0YgPoM"
             fullName = user["first_name"] + " " + user["last_name"]
-            link = "http://127.0.0.1:8080/UI/auth/reset.html?token=" + self.token + "&id=" + str(user["id"])
+            link = "https://jama5262.github.io/Politico/UI/auth/reset.html?token=" + self.token + "&id=" + str(user["id"])
             sg = sendgrid.SendGridAPIClient(apikey=key1+key2+key3+key4+key5)
             from_email = Email("politico-noreply@politico.com")
             to_email = Email(user["email"])
