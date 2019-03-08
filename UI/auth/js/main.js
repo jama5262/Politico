@@ -71,7 +71,7 @@ window.onload = () => {
         this.errorMessageFunc("", "none");
         let user = await this.main().performFetch(`/auth/${ this.email.value }`, "GET", {}, false)
         this.main().alertInstance(`${ user.data.msg } to ${ user.data.data.email }, IF YOU CAN'T FIND IT PLEASE CHECK YOUR SPAM FOLDER`);
-        this.errorMessageFunc(`Password reset link sent to your email, ${ user.data.data.email }, if you can find it please check you spam folder`, "block");
+        this.errorMessageFunc(`Password reset link sent to your email, ${ user.data.data.email }, IF YOU CAN'T FIND IT PLEASE CHECK YOUR SPAM FOLDER`, "block");
         this.main().loading(false);
       } catch (error) {
         this.main().loading(false);
@@ -147,9 +147,6 @@ window.onload = () => {
         });
         emaiEl.style.display = "flex";
         message.innerHTML = "Input your email to reset your password"
-        goBack.addEventListener("click", () => {
-          window.history.back();
-        })
       } else {
         resetBtn.addEventListener("click", () => {
           resetInstance.resetPassword(token, id);
@@ -159,6 +156,10 @@ window.onload = () => {
         message.innerHTML = "Reset you password"
       }
     }
+
+    goBack.addEventListener("click", () => {
+      window.history.back();
+    })
 
   })()
 }

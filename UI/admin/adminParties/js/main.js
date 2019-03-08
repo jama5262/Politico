@@ -87,7 +87,7 @@ window.onload = () => {
         await this.main().performFetch(`/parties/${ partyID }`, "DELETE");
         this.main().loading(false);
         document.getElementsByTagName("tbody")[0].remove()
-        this.getAllParites();
+        location.reload();
       } catch (error) {
         this.main().alertInstance(error.error || "An error occured, please try again later", true);
         this.main().loading(false);

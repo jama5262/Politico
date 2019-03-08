@@ -22,11 +22,11 @@ window.onload = () => {
         let users = parseInt(this.users.options[this.users.selectedIndex].value);
         let parties = parseInt(this.parties.options[this.parties.selectedIndex].value);
         if (users == 0) {
-          this.errorMessageFunc("Please select a user, in which you want to create a petition for", "block")
+          this.errorMessageFunc("Please select a user", "block")
         } else if (parties == 0) {
-          this.errorMessageFunc("Please select a party, in which you want to create a petition for", "block")
+          this.errorMessageFunc("Please select a party", "block")
         } else if (offices == 0) {
-          this.errorMessageFunc("Please select an office, in which you want to create a petition for", "block")
+          this.errorMessageFunc("Please select an office", "block")
         } else {
           let data = await this.main().performFetch("/offices/register", "POST", {
           candidate: users,
