@@ -4,6 +4,7 @@ from app.api.v2.utils.returnMessages import returnMessages
 from app.api.database.schemaGenerator.schemaGenerator import SchemaGenerator
 from app.api.database.database import Database
 import sendgrid
+import os
 from sendgrid.helpers.mail import Email, Content, Mail
 from flask_jwt_extended import create_access_token
 
@@ -72,14 +73,10 @@ class AuthModel():
 
     def sendResetEmail(self, user):
         try:
-            key1 = "SG.wnV4G"
-            key2 = "f3RQm6TPaW1VnguR"
-            key3 = "g.8JXBjKGGKk-4Gg"
-            key4 = "ZJ6EH0y2LT5jeOJi"
-            key5 = "Tml5O8m0YgPoM"
             fullName = user["first_name"] + " " + user["last_name"]
             link = "https://jama5262.github.io/Politico/UI/auth/reset.html?token=" + self.token + "&id=" + str(user["id"])
-            sg = sendgrid.SendGridAPIClient(apikey=key1+key2+key3+key4+key5)
+            print(os.environ.get("SEND_GRID"))
+            sg = sendgrid.SendGridAPIClient(apikey=os.environ.get("SEND_GRID"))
             from_email = Email("politico-noreply@politico.com")
             to_email = Email(user["email"])
             subject = "Politico Password Reset"

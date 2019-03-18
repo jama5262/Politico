@@ -61,10 +61,12 @@ To install packages run the following
 pip install -r requirements.txt
 ```
 ## Create .env file and add the following
+Sign up for SENDGRID and create api key and add to .env file
 ```
 export FLASK_APP="run.py"
 export FLASK_ENV="development"
 export APP_SETTINGS="development"
+export SEND_GRID="YOUR_SEND_GRID_API_KEY"
 ```
 ## Running the app
 
