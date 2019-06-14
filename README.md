@@ -1,4 +1,6 @@
 # Politico
+
+## An Andela Feolloship Project
 [![Build Status](https://travis-ci.org/jama5262/Politico.svg?branch=develop)](https://travis-ci.org/jama5262/Politico)
 [![Coverage Status](https://coveralls.io/repos/github/jama5262/Politico/badge.svg?branch=develop)](https://coveralls.io/github/jama5262/Politico?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/02b9aee071a0230097e2/maintainability)](https://codeclimate.com/github/jama5262/Politico/maintainability)
