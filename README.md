@@ -7,11 +7,15 @@
 
 Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
+## The project was build on no framework as per required, hence the usual HTML, CSS and JS
+
 ## API Documentation
 [API Documentation Link](https://documenter.getpostman.com/view/572556/S11Ex16o)
 
 ## Site Link
 Click here for site link -> [Site Link](https://jama5262.github.io/Politico/UI/)
+
+## For UI repo, change branch to gh-pages
 
 ## Run in postman
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/bccd4c976a5efc9dbbad)
