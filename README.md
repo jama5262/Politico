@@ -9,9 +9,6 @@ Politico enables citizens give their mandate to politicians running for differen
 
 ## The project was build on no framework as per required, hence the usual HTML, CSS and JS
 
-## API Documentation
-[API Documentation Link](https://documenter.getpostman.com/view/572556/S11Ex16o)
-
 ## Site Link
 Click here for site link -> [Site Link](https://jama5262.github.io/Politico/UI/)
 
