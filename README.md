@@ -14,8 +14,6 @@ Click here for site link -> [Site Link](https://jama5262.github.io/Politico/UI/)
 
 ## For UI repo, change branch to gh-pages
 
-## Run in postman
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/bccd4c976a5efc9dbbad)
 
 ## Endpoints
 
