@@ -7,7 +7,7 @@
 
 Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
-## The project was build on no framework as per required, hence the usual HTML, CSS and JS
+## The project was build on no framework as per required, hence the usual HTML, CSS and JS. To view it click [here](https://github.com/jama5262/Politico/tree/gh-pages)
 
 ## Site Link
 Click here for site link -> [Site Link](https://jama5262.github.io/Politico/UI/)
